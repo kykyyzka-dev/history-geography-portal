@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Освітній портал Сергія Мовчана — історія та географія для учнів Дмитрушківського ліцею.">
+  <title>Історія і географія без меж</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero" id="home">
+    <div class="topbar">
+      <a class="brand" href="#home">🌍 Без меж</a>
+      <button class="menu-toggle" aria-label="Відкрити меню" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="Головне меню">
+        <a href="#home">Головна</a>
+        <a href="#subjects">Предмети</a>
+        <a href="#event">Подія дня</a>
+        <a href="#about">Про автора</a>
+        <a href="#contacts">Контакти</a>
+      </nav>
+    </div>
+
+    <div class="hero-content">
+      <span class="eyebrow">Освітній портал</span>
+      <h1>Історія і географія без меж</h1>
+      <p class="lead">
+        Пізнаємо минуле, досліджуємо сучасність, будуємо майбутнє.
+      </p>
+      <p class="teacher">
+        <strong>Сергій Мовчан</strong><br>
+        учитель історії та географії Дмитрушківського ліцею
+        Дмитрушківської сільської ради Уманського району Черкаської області
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#subjects">Перейти до матеріалів</a>
+        <a class="button secondary" href="#about">Про портал</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section intro">
+      <div class="section-heading">
+        <span class="eyebrow">Навчаймося цікаво</span>
+        <h2>Ласкаво просимо!</h2>
+        <p>
+          Тут зібрані навчальні матеріали, карти, презентації, відео,
+          онлайн-тести та цікаві факти з історії й географії.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="subjects">
+      <div class="section-heading">
+        <span class="eyebrow">Основні напрями</span>
+        <h2>Розділи порталу</h2>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="icon">🇺🇦</div>
+          <h3>Історія України</h3>
+          <p>Матеріали, хронології, карти та завдання для 5–11 класів.</p>
+          <a href="#" class="card-link">Відкрити розділ →</a>
+        </article>
+
+        <article class="card">
+          <div class="icon">🏛️</div>
+          <h3>Всесвітня історія</h3>
+          <p>Подорож цивілізаціями від Стародавнього світу до сучасності.</p>
+          <a href="#" class="card-link">Відкрити розділ →</a>
+        </article>
+
+        <article class="card">
+          <div class="icon">🌎</div>
+          <h3>Географія</h3>
+          <p>Материки, океани, країни, населення, природа та дослідження.</p>
+          <a href="#" class="card-link">Відкрити розділ →</a>
+        </article>
+
+        <article class="card">
+          <div class="icon">📝</div>
+          <h3>Онлайн-тести</h3>
+          <p>Перевірка знань після тем і підготовка до контрольних робіт.</p>
+          <a href="#" class="card-link">Розпочати тест →</a>
+        </article>
+
+        <article class="card">
+          <div class="icon">🗺️</div>
+          <h3>Інтерактивні карти</h3>
+          <p>Карти України та світу для роботи на уроці й удома.</p>
+          <a href="#" class="card-link">Переглянути карти →</a>
+        </article>
+
+        <article class="card">
+          <div class="icon">📚</div>
+          <h3>Навчальні матеріали</h3>
+          <p>Презентації, пам’ятки, документи, відео та корисні посилання.</p>
+          <a href="#" class="card-link">Перейти до матеріалів →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section feature" id="event">
+      <div>
+        <span class="eyebrow">Щоденна рубрика</span>
+        <h2>Подія цього дня</h2>
+        <p id="daily-event">
+          Натисніть кнопку, щоб показати історичну подію.
+        </p>
+        <button class="button primary" id="event-button" type="button">
+          Показати подію
+        </button>
+      </div>
+      <div class="feature-visual" aria-hidden="true">📜</div>
+    </section>
+
+    <section class="section about" id="about">
+      <div class="about-badge">👨‍🏫</div>
+      <div>
+        <span class="eyebrow">Про автора</span>
+        <h2>Сергій Мовчан</h2>
+        <p>
+          Я працюю вчителем історії та географії Дмитрушківського ліцею
+          Дмитрушківської сільської ради Уманського району Черкаської області.
+        </p>
+        <p>
+          Мета цього порталу — зробити навчання зрозумілим, сучасним,
+          доступним і цікавим для кожного учня.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacts">
+    <div>
+      <strong>Історія і географія без меж</strong>
+      <p>Авторський освітній портал Сергія Мовчана</p>
+    </div>
+    <div>
+      <p>Дмитрушківський ліцей</p>
+      <p>© <span id="year"></span> Усі права захищені</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
