@@ -3,11 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Повний довідник НМТ (15 пунктів) — Історія і географія БЕЗ МЕЖ</title>
+  <title>Мега-довідник та тести НМТ — Історія і географія БЕЗ МЕЖ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
+  <style>
+    .quiz-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .quiz-question { font-weight: 600; font-size: 15px; color: #1e293b; margin-bottom: 12px; }
+    .quiz-options label { display: block; background: #f8fafc; border: 1px solid #cbd5e1; padding: 10px 14px; border-radius: 6px; margin-bottom: 8px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+    .quiz-options label:hover { background: #f1f5f9; border-color: #94a3b8; }
+    .quiz-options input { margin-right: 10px; }
+    .btn-check { background: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; transition: background 0.2s; }
+    .btn-check:hover { background: #1d4ed8; }
+    .global-test-container { background: #f8fafc; border: 2px solid #2563eb; border-radius: 12px; padding: 25px; margin-top: 40px; margin-bottom: 40px; }
+    .export-container { text-align: center; background: #eff6ff; border: 2px dashed #2563eb; padding: 20px; border-radius: 12px; margin: 30px 0; }
+    .btn-export { background: #059669; color: white; border: none; padding: 14px 28px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background 0.2s; }
+    .btn-export:hover { background: #047857; }
+  </style>
 </head>
 <body>
 
@@ -31,8 +44,8 @@
   <!-- Банер НМТ -->
   <section class="hero-banner" style="background: linear-gradient(180deg, #d97706 0%, #b45309 60%, #1e293b 100%);">
     <div class="hero-text">
-      <h1>МЕГА-ДОВІДНИК <span>НМТ</span></h1>
-      <p class="subtitle">По 15 фундаментальних позицій у кожному блоці з історії та географії</p>
+      <h1>МЕГА-ДОВІДНИК ТА ТЕСТИ <span>НМТ</span></h1>
+      <p class="subtitle">По 15 фундаментальних позицій у довіднику + великі інтерактивні тести з історії та географії</p>
       <p class="quote">“Системність і практика — твій шлях до 200 балів!”</p>
     </div>
     <div class="hero-author">
@@ -40,8 +53,15 @@
     </div>
   </section>
 
-  <!-- Основний контент довідника -->
+  <!-- Основний контент -->
   <main class="main-container">
+
+    <!-- КНОПКА ЕКСПОРТУ ЗБЕРЕЖЕННЯ МАТЕРІАЛУ -->
+    <div class="export-container">
+      <h3 style="color: #1e293b; margin-bottom: 8px;">📥 Збереження навчальних матеріалів</h3>
+      <p style="font-size: 13px; color: #475569; margin-bottom: 15px;">Завантажте всю цю сторінку (мега-довідник і тести) єдиним файлом на свій пристрій:</p>
+      <button class="btn-export" onclick="downloadFullPage()">💾 Зберегти весь матеріал (довідник + тести)</button>
+    </div>
 
     <!-- ================= БЛОК: ІСТОРІЯ ================= -->
     <div class="section-title" style="background: #2563eb; color: white; padding: 10px; border-radius: 8px; text-align: center; margin-top: 20px;">📜 БЛОК 1: ІСТОРІЯ УКРАЇНИ ТА СВІТУ</div>
@@ -100,7 +120,7 @@
         <li><strong>Козацтво</strong> — вільні воїни-землеробці пізньосередньовічної та ранньомодерної України.</li>
         <li><strong>Унія</strong> — об'єднання держав або церков на договірних засадах.</li>
         <li><strong>Магдебурзьке право</strong> — міське право на самоврядування в середньовічній Європі.</li>
-        <li><strong>Геетманщина</strong> — українська козацька держава (Військо Запорозьке) XVII–XVIII ст.</li>
+        <li><strong>Гетьманщина</strong> — українська козацька держава (Військо Запорозьке) XVII–XVIII ст.</li>
         <li><strong>Руїна</strong> — період громадянських війн, розколу та спустошення України у другій половині XVII ст.</li>
         <li><strong>Гайдамаки</strong> — учасники народно-визвольного руху на Правобережній Україні у XVIII ст.</li>
         <li><strong>Національне відродження</strong> — процес пробудження національної самосвідомості народу.</li>
@@ -124,7 +144,7 @@
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Богдан Хмельницький</strong> — гетьман, засновник козацької держави.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Іван Мазепа</strong> — гетьман, меценат бароко, борщівник за автономію України.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Пилип Орлик</strong> — автор першої української Конституції (1710 р.).</div>
-        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Тарас Шевченко</strong> — націона геній, поет, пророк українського народу.</div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Тарас Шевченко</strong> — національний геній, поет, пророк українського народу.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Михайло Грушевський</strong> — історик, голова Центральної Ради УНР.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Симон Петлюра</strong> — головний отаман військ УНР, державний діяч.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Євген Коновалец</strong> — засновник ОУН, військовий діяч.</div>
@@ -143,14 +163,14 @@
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Києво-Печерська лавра</strong> — головний монастирський комплекс, заснований у XI ст.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Спасівська церква в Чернігові</strong> — зразок давньоруської архітектури XI ст.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Успенський собор у Володимирі</strong> — пам'ятка княжої доби Волині (XII ст.).</div>
-        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Церква ПТяга у Львові</strong> — готичний храм XIV ст. (архітектурна спадщина міста).</div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Церква П'ятниці у Львові</strong> — готичний храм XIV ст. (архітектурна спадщина міста).</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Холмська ікона Богородиці</strong> — шедевр візантійсько-українського малярства XI ст.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Пересопницьке Євангеліє</strong> — рукописна книга XVI ст., присяжна книга президентів.</div>
-        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Острозька церква-криниця / замок</strong> — осередки ранньомодерної культури.</div>
-        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Покровська церква в Сулакові / Києві (бароко)</strong> — шедеври козацького бароко XVII–XVIII ст.</div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Острозька замок</strong> — осередок ранньомодерної культури і освіти.</div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Покровська церква в Києві</strong> — шедевр козацького бароко XVII–XVIII ст.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Андріївська церква в Києві</strong> — проєкт Растреллі, перлина українського бароко.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Будинок з химерами в Києві</strong> — архітектурна пам'ятка у стилі модерн (арх. Городецький).</div>
-        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Оперний театр у Одесі / Львові</strong> — зразки європейського неоренесансу.</div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Оперний театр у Львові</strong> — зразок європейського неоренесансу.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Меморіал пам'яті жертв Голодомору</strong> — сучасний національний комплекс у Києві.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #059669; border-radius: 4px;"><strong>Софіївський парк в Умані</strong> — шедевр садово-паркового мистецтва кінця XVIII — поч. XIX ст.</div>
       </div>
@@ -193,7 +213,7 @@
         <li><strong>Повітряні маси</strong> — великі об'єми повітря з однаковими властивостями (температура, вологість).</li>
         <li><strong>Атмосферний тиск</strong> — сила, з якою повітря тисне на земну поверхню.</li>
         <li><strong>Клімат</strong> — багаторічний режим погоди, характерний для певної місцевості.</li>
-        <li><strong>Внутрішні води</strong> — сукупність рік, озер, боліт, підземних вод, льодовиків країни чи регіону.</li>
+        <li><strong>Внутрішні води</strong> — сукупність річок, озер, боліт, підземних вод, льодовиків країни чи регіону.</li>
         <li><strong>Ґрунт</strong> — поверхневий родючий шар земної кори, утворений під дією живих організмів.</li>
         <li><strong>Біосфера</strong> — оболочка Землі, заселена живими організмами.</li>
         <li><strong>Природний комплекс</strong> — взаємозв'язана сукупність компонентів природи на певній території.</li>
@@ -222,21 +242,21 @@
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Жак-Ів Кусто</strong> — дослідник Світового океану, винахідник акваланга.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Альфред Вегенер</strong> — автор гіпотези дрейфу материків.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Володимир Кеппен</strong> — автор класифікації типів клімату Землі.</div>
-        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Отто Шмидт</strong> — видатний дослідник арктичних морів.</div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #ea580c; border-radius: 4px;"><strong>Отто Шмідт</strong> — видатний дослідник арктичних морів.</div>
       </div>
     </div>
 
     <!-- 9. 15 пам'яток / географічних об'єктів (географія) -->
-    <div class="section-title" id="geo-monuments">🗺️ Географія: 15 Видатних Природних та Картографічних Об'єктів (Пам'яток Природи)</div>
-    <div class="info-card" style="margin-bottom: 30px;">
+    <div class="section-title" id="geo-monuments">🗺️ Географія: 15 Видатних Природних та Картографічних Об'єктів</div>
+    <div class="info-card" style="margin-bottom: 35px;">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; font-size: 13px;">
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Говерла</strong> — найвища вершина Українських Карпат (2061 м).</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Олешківські піски</strong> — найбільший піщаний масив (пустеля) в Україні.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Біосферний заповідник «Асканія-Нова»</strong> — унікальний степовий оазис.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Озеро Світязь</strong> — найглибше озеро України в групі Шацьких озер.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Канівські дислокації</strong> — унікальні геологічні утворення біля Дніпра.</div>
-        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Кременчуцьке та інші водосховища</strong> — великі штучні водойми на Дніпровському каскаді.</div>
-        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Український щит</strong> — виступ кристалічного фундаменту давньої платформи, багатий на руди.</div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Дніпровський каскад</strong> — великі штучні водойми на головній річці України.</div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Український щит</strong> — виступ кристалічного фундаменту, багатий на руди.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Маріанський жолоб</strong> — найглибша точка Світового океану (Тихий океан).</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Озеро Байкал</strong> — найглибше прісноводне озеро на планеті.</div>
         <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;"><strong>Річка Амазонка</strong> — найповноводніша річка світу з найбільшим басейном.</div>
@@ -248,7 +268,196 @@
       </div>
     </div>
 
+
+    <!-- ================= БЛОК 3: ІНТЕРАКТИВНИЙ ТЕСТ З ІСТОРІЇ (30 ЗАПИТАНЬ) ================= -->
+    <div class="global-test-container" style="border-color: #2563eb;">
+      <h2 style="color: #2563eb; text-align: center; margin-bottom: 10px;">📜 ІНТЕРАКТИВНИЙ ТЕСТ З ІСТОРІЇ (30 ЗАПИТАНЬ)</h2>
+      <p style="text-align: center; font-size: 14px; color: #475569; margin-bottom: 25px;">Перевірте свої знання за матеріалами довідника</p>
+
+      <div id="history-questions-container"></div>
+
+      <div style="text-align: center; margin-top: 25px;">
+        <button class="btn-check" style="background: #2563eb;" onclick="checkTest('history', 30)">Перевірити тест з історії</button>
+        <div id="history-result" style="margin-top: 15px; font-size: 18px; font-weight: 700;"></div>
+      </div>
+    </div>
+
+
+    <!-- ================= БЛОК 4: ІНТЕРАКТИВНИЙ ТЕСТ З ГЕОГРАФІЇ (30 ЗАПИТАНЬ) ================= -->
+    <div class="global-test-container" style="border-color: #059669;">
+      <h2 style="color: #059669; text-align: center; margin-bottom: 10px;">🌍 ІНТЕРАКТИВНИЙ ТЕСТ З ГЕОГРАФІЇ (30 ЗАПИТАНЬ)</h2>
+      <p style="text-align: center; font-size: 14px; color: #475569; margin-bottom: 25px;">Перевірте свої знання за матеріалами довідника</p>
+
+      <div id="geography-questions-container"></div>
+
+      <div style="text-align: center; margin-top: 25px;">
+        <button class="btn-check" style="background: #059669;" onclick="checkTest('geography', 30)">Перевірити тест з географії</button>
+        <div id="geography-result" style="margin-top: 15px; font-size: 18px; font-weight: 700;"></div>
+      </div>
+    </div>
+
   </main>
+
+  <!-- Скрипти для генерації та перевірки тестів і збереження сторінки -->
+  <script>
+    const historyData = [
+      { q: "1. Коли відбулося хрещення Русі князем Володимиром Великим?", opts: ["988 р.", "1019 р.", "1240 р."], ans: 0 },
+      { q: "2. У який період князював Ярослав Мудрий у Києві?", opts: ["988–1015 рр.", "1019–1054 рр.", "1097–1113 рр."], ans: 1 },
+      { q: "3. Під яким роком вперше згадується назва «Україна» в Київському літописі?", opts: ["988 р.", "1187 р.", "1240 р."], ans: 1 },
+      { q: "4. Коли відбулося захоплення та руйнування Києва монголами хана Батия?", opts: ["1187 р.", "1240 р.", "1385 р."], ans: 1 },
+      { q: "5. Коли було укладено Кревську унію між Великим князівством Литовським та Польщею?", opts: ["1385 р.", "1569 р.", "1596 р."], ans: 0 },
+      { q: "6. Коли Дмитро Вишневецький заснував першу Запорозьку Січ?", opts: ["1556 р.", "1569 р.", "1648 р."], ans: 0 },
+      { q: "7. Коли було підписано Люблінську унію, що утворила Річ Посполиту?", opts: ["1569 р.", "1596 р.", "1709 р."], ans: 0 },
+      { q: "8. У якому році було укладено Берестейську церковну унію?", opts: ["1569 р.", "1596 р.", "1648 р."], ans: 1 },
+      { q: "9. Який рік є початком Національно-визвольної війни під проводом Б. Хмельницького?", opts: ["1648 р.", "1709 р.", "1775 р."], ans: 0 },
+      { q: "10. Коли сталася Полтавська битва та виступ гетьмана Івана Мазепи?", opts: ["1648 р.", "1709 р.", "1775 р."], ans: 1 },
+      { q: "11. Коли була остаточно ліквідована царським урядом Нова Запорозька Січ?", opts: ["1709 р.", "1775 р.", "1917 р."], ans: 1 },
+      { q: "12. Коли було проголошено незалежність УНР IV Універсалом Центральної Ради?", opts: ["1917 р.", "1918 р. (22 січня)", "1919 р. (22 січня)"], ans: 1 },
+      { q: "13. Коли урочисто проголошено Акт Злуки УНР і ЗУНР на Софійському майдані?", opts: ["1918 р. (22 січня)", "1919 р. (22 січня)", "1991 р. (24 серпня)"], ans: 1 },
+      { q: "14. У які роки тривав Голодомор-геноцид українського народу?", opts: ["1921–1923 рр.", "1932–1933 рр.", "1946–1947 рр."], ans: 1 },
+      { q: "15. Коли було прийнято Акт проголошення незалежності України?", opts: ["1990 р. (16 липня)", "1991 р. (24 серпня)", "1991 р. (1 грудня)"], ans: 1 },
+      { q: "16. Який рік вважається початком доби Середньовіччя внаслідок падіння Західної Римської імперії?", opts: ["476 р.", "800 р.", "1054 р."], ans: 0 },
+      { q: "17. Коли відбулася коронація Карла Великого?", opts: ["476 р.", "800 р.", "1453 р."], ans: 1 },
+      { q: "18. Коли стався Великий розкол християнської церкви на західну та східну?", opts: ["800 р.", "1054 р.", "1517 р."], ans: 1 },
+      { q: "19. Коли було прийнято Велику хартію вольностей в Англії?", opts: ["1215 р.", "1492 р.", "1648 р."], ans: 0 },
+      { q: "20. Коли відбулося падіння Константинополя під ударами османів?", opts: ["1215 р.", "1453 р.", "1492 р."], ans: 1 },
+      { q: "21. Коли експедиція Христофора Колумба відкрила Америку?", opts: ["1453 р.", "1492 р.", "1519 р."], ans: 1 },
+      { q: "22. Коли почалася Реформація в Європі (оприлюднення 95 тез Мартина Лютера)?", opts: ["1492 р.", "1517 р.", "1789 р."], ans: 1 },
+      { q: "23. Коли було підписано Вестфальський мир, що завершив Тридцятилітню війну?", opts: ["1648 р.", "1776 р.", "1815 р."], ans: 0 },
+      { q: "24. Коли було прийнято Декларацію незалежності США?", opts: ["1648 р.", "1776 р.", "1789 р."], ans: 1 },
+      { q: "25. У які роки відбувалася Велика французька революція?", opts: ["1776–1783 рр.", "1789–1799 рр.", "1914–1918 рр."], ans: 1 },
+      { q: "26. Коли відбувся Віденський конгрес після розгрому Наполеона?", opts: ["1799 р.", "1815 р.", "1914 р."], ans: 1 },
+      { q: "27. У які роки тривала Перша світова війна?", opts: ["1914–1918 рр.", "1939–1945 рр.", "1939–1941 рр."], ans: 0 },
+      { q: "28. У які роки тривала Друга світова війна?", opts: ["1914–1918 рр.", "1939–1945 рр.", "1941–1945 рр."], ans: 1 },
+      { q: "29. У якому році було створено Організацію Об'єднаних Націй (ООН)?", opts: ["1919 р.", "1945 р.", "1989 р."], ans: 1 },
+      { q: "30. Коли відбулося падіння Берлінського муру?", opts: ["1945 р.", "1989 р.", "1991 р."], ans: 1 }
+    ];
+
+    const geographyData = [
+      { q: "1. Хто в античні часи виміряв розміри Землі та ввів у науку термін «географія»?", opts: ["Ератосфен", "Клавдій Птолемей", "Аристотель"], ans: 0 },
+      { q: "2. Хто створив класичне «Руководство з географії» у II ст. н.е.?", opts: ["Ератосфен", "Клавдій Птолемей", "Страбон"], ans: 1 },
+      { q: "3. У які роки тривала мандрівка Марко Поло до Китаю?", opts: ["1271–1295 рр.", "1492–1498 рр.", "1519–1522 рр."], ans: 0 },
+      { q: "4. Хто першим відкрив мис Доброї Надії у 1488 році?", opts: ["Бартоломеу Діаш", "Васко да Гама", "Христофор Колумб"], ans: 0 },
+      { q: "5. У якому році експедиція Христофора Колумба досягла берегів Америки?", opts: ["1488 р.", "1492 р.", "1498 р."], ans: 1 },
+      { q: "6. Хто відкрив морський шлях до Індії навколо Африки у 1498 році?", opts: ["Христофор Колумб", "Васко да Гама", "Фернан Магеллан"], ans: 1 },
+      { q: "7. У які роки відбулася перша навколосвітня подорож експедиції Фернана Магеллана?", opts: ["1492–1495 рр.", "1519–1522 рр.", "1768–1771 рр."], ans: 1 },
+      { q: "8. У якому році відбулося перше європейське відкриття берегів Австралії?", opts: ["1606 р.", "1648 р.", "1770 р."], ans: 0 },
+      { q: "9. Коли було видано генеральну карту України авторства Гійома де Боплана?", opts: ["1556 р.", "1648 р.", "1775 р."], ans: 1 },
+      { q: "10. У які роки проходили навколосвітні експедиції Джеймса Кука?", opts: ["1606–1610 рр.", "1768–1779 рр.", "1820–1824 рр."], ans: 1 },
+      { q: "11. У якому році експедиція М. Лазарєва та Ф. Беллінсгаузена відкрила Антарктиду?", opts: ["1779 р.", "1820 р.", "1911 р."], ans: 1 },
+      { q: "12. Хто першим досяг Північного полюса у 1909 році?", opts: ["Роберт Пірі", "Руаль Амундсен", "Джеймс Кук"], ans: 0 },
+      { q: "13. Хто першим підкорив Південний полюс у 1911 році?", opts: ["Роберт Пірі", "Руаль Амундсен", "Фернан Магеллан"], ans: 1 },
+      { q: "14. Коли було створено НАН України та започатковано системні географічні дослідження?", opts: ["1918 р.", "1945 р.", "1960 р."], ans: 0 },
+      { q: "15. Коли відбулося занурення батискафа «Триєст» у Маріанський жолоб?", opts: ["1918 р.", "1953 р.", "1960 р."], ans: 2 },
+      { q: "16. Яка гора є найвищою вершиною Українських Карпат?", opts: ["Піп Іван", "Говерла", "Петрос"], ans: 1 },
+      { q: "17. Як називається найбільший піщаний масив (пустеля) в Україні?", opts: ["Олешківські піски", "Кінбурнська коса", "Арабатська стрілка"], ans: 0 },
+      { q: "18. Який біосферний заповідник є унікальним степовим оазисом України?", opts: ["«Асканія-Нова»", "Карпатський", "Поліський"], ans: 0 },
+      { q: "19. Яке озеро є найглибшим в Україні в групі Шацьких озер?", opts: ["Синевир", "Світязь", "Ялпуг"], ans: 1 },
+      { q: "20. Що є головною особливістю Українського щита?", opts: ["Виступ кристалічного фундаменту, багатий на руди", "Осадовий чохол з нафтою", "Область сучасного вулканізму"], ans: 0 },
+      { q: "21. Яка точка є найглибшою у Світовому океані?", opts: ["Зондський жолоб", "Маріанський жолоб", "Пуерто-Рико"], ans: 1 },
+      { q: "22. Яке озеро є найглибшим прісноводним озером на планеті?", opts: ["Вікторія", "Байкал", "Танганьїка"], ans: 1 },
+      { q: "23. Яка річка є найповноводнішою у світі з найбільшим басейном?", opts: ["Ніл", "Амазонка", "Міссісіпі"], ans: 1 },
+      { q: "24. Яка пустеля є найбільшою тропічною пустелею на Землі?", opts: ["Гобі", "Калахарі", "Сахара"], ans: 2 },
+      { q: "25. Яка вершина є найвищою на планеті (у Гімалаях)?", opts: ["Кіліманджаро", "Еверест (Джомолунгма)", "Аконкагуа"], ans: 1 },
+      { q: "26. Хто є автором фундаментальної гіпотези дрейфу материків?", opts: ["Альфред Вегенер", "Володимир Вернадський", "Олександр Гумбольдт"], ans: 0 },
+      { q: "27. Як називається процес зростання ролі міст і міського населення?", opts: ["Міграція", "Урбанізація", "Субурбанізація"], ans: 1 },
+      { q: "28. Хто є основоположником вчення про біосферу і ноосферу?", opts: ["Володимир Вернадський", "Степан Рудницький", "Володимир Кубійович"], ans: 0 },
+      { q: "29. Хто вважається фундатором української наукової географії?", opts: ["Степан Рудницький", "Гійом де Боплан", "Микола Миклухо-Маклай"], ans: 0 },
+      { q: "30. Яка найбільша за площею острівна територія на Землі покрита крижаним щитом?", opts: ["Мадагаскар", "Гренландія", "Нова Гвінея"], ans: 1 }
+    ];
+
+    function renderTests() {
+      const histContainer = document.getElementById('history-questions-container');
+      let histHTML = '';
+      historyData.forEach((item, index) => {
+        histHTML += `<div class="quiz-card"><div class="quiz-question">${item.q}</div><div class="quiz-options">`;
+        item.opts.forEach((opt, oIndex) => {
+          const val = (oIndex === item.ans) ? 'correct' : 'wrong';
+          histHTML += `<label><input type="radio" name="hist_q${index}" value="${val}"> ${opt}</label>`;
+        });
+        histHTML += `</div></div>`;
+      });
+      histContainer.innerHTML = histHTML;
+
+      const geoContainer = document.getElementById('geography-questions-container');
+      let geoHTML = '';
+      geographyData.forEach((item, index) => {
+        geoHTML += `<div class="quiz-card"><div class="quiz-question">${item.q}</div><div class="quiz-options">`;
+        item.opts.forEach((opt, oIndex) => {
+          const val = (oIndex === item.ans) ? 'correct' : 'wrong';
+          geoHTML += `<label><input type="radio" name="geo_q${index}" value="${val}"> ${opt}</label>`;
+        });
+        geoHTML += `</div></div>`;
+      });
+      geoContainer.innerHTML = geoHTML;
+    }
+
+    function checkTest(type, totalCount) {
+      let score = 0;
+      let answeredCount = 0;
+
+      for (let i = 0; i < totalCount; i++) {
+        const selected = document.querySelector(`input[name="${type}_q${i}"]:checked`);
+        if (selected) {
+          answeredCount++;
+          if (selected.value === 'correct') {
+            score++;
+          }
+        }
+      }
+
+      const resDiv = document.getElementById(`${type}-result`);
+
+      if (answeredCount < totalCount) {
+        resDiv.style.color = "#d97706";
+        resDiv.textContent = `⚠️ Ви відповіли лише на ${answeredCount} з ${totalCount} запитань. Дайте відповідь на всі, щоб побачити фінальний бал!`;
+        return;
+      }
+
+      const percentage = Math.round((score / totalCount) * 100);
+      if (score === totalCount) {
+        resDiv.style.color = "#16a34a";
+        resDiv.textContent = `🎉 Фантастично! Ваш результат: ${score} з ${totalCount} (${percentage}%). Ви ідеально готові до НМТ!`;
+      } else if (score >= 22) {
+        resDiv.style.color = "#2563eb";
+        resDiv.textContent = `👍 Чудовий результат! Ваш результат: ${score} з ${totalCount} (${percentage}%). Високий рівень знань!`;
+      } else if (score >= 15) {
+        resDiv.style.color = "#d97706";
+        resDiv.textContent = `⚠️ Задовільно. Ваш результат: ${score} з ${totalCount} (${percentage}%). Варто повторити окремі теми з довідника.`;
+      } else {
+        resDiv.style.color = "#dc2626";
+        resDiv.textContent = `📚 Ваш результат: ${score} з ${totalCount} (${percentage}%). Потрібно ретельніше опрацювати матеріал довідника.`;
+      }
+    }
+
+    function downloadFullPage() {
+      const cloneDoc = document.documentElement.cloneNode(true);
+      const exportBox = cloneDoc.querySelector('.export-container');
+      if (exportBox) exportBox.remove();
+
+      const currentRadios = document.querySelectorAll('input[type="radio"]');
+      const cloneRadios = cloneDoc.querySelectorAll('input[type="radio"]');
+      currentRadios.forEach((rad, idx) => {
+        if (rad.checked && cloneRadios[idx]) {
+          cloneRadios[idx].setAttribute('checked', 'checked');
+        }
+      });
+
+      const fullHTML = "<!DOCTYPE html>\n" + cloneDoc.outerHTML;
+      const blob = new Blob([fullHTML], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'nmt_mega_handbook_and_tests.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    window.onload = renderTests;
+  </script>
 
 </body>
 </html>
