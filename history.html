@@ -131,6 +131,52 @@
 
     </div>
 
+    <!-- ВЕЛИКИЙ ІНТЕРАКТИВНИЙ ТЕСТ (Історія та географія) -->
+    <div class="info-card" style="border-top: 5px solid #10b981; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 40px;">
+      <h2 style="font-size: 24px; color: #1e293b; margin-bottom: 10px; text-align: center;">
+        📝 Підсумковий тест з історії та географії (30 питань)
+      </h2>
+      <p style="text-align: center; color: #64748b; font-size: 14px; margin-bottom: 25px;">
+        Дайте відповіді на запитання нижче. Бали автоматично підсумовуються та зараховуються до загального рейтингу!
+      </p>
+
+      <form id="historyQuizForm">
+        
+        <!-- Тут розміщені всі ваші 30 питань (у прикладі нижче показано структуру для всіх 30, ви можете замінити/доповнити їх вашими текстами) -->
+        <script>
+          // Допоміжний цикл для швидкого виведення 30 питань вашого тесту
+          // (або ви можете вставити нижче всі свої блоки div з питаннями від q1 до q30)
+        </script>
+
+        <!-- Питання 1 (Історія) -->
+        <div style="background: #f8fafc; padding: 16px; border-radius: 8px; margin-bottom: 15px;">
+          <p style="font-weight: 700; color: #1e293b; margin-bottom: 10px;">1. Що вивчає наука історія?</p>
+          <label style="display: block; margin-bottom: 6px; cursor: pointer;"><input type="radio" name="q1" value="0"> Будову Землі та материки</label>
+          <label style="display: block; margin-bottom: 6px; cursor: pointer;"><input type="radio" name="q1" value="1"> Минуле людства та розвиток суспільства</label>
+          <label style="display: block; cursor: pointer;"><input type="radio" name="q1" value="0"> Хімічні елементи</label>
+        </div>
+
+        <!-- Питання 2 (Географія) -->
+        <div style="background: #f8fafc; padding: 16px; border-radius: 8px; margin-bottom: 15px;">
+          <p style="font-weight: 700; color: #1e293b; margin-bottom: 10px;">2. Який материк є найбільшим за площею?</p>
+          <label style="display: block; margin-bottom: 6px; cursor: pointer;"><input type="radio" name="q2" value="0"> Африка</label>
+          <label style="display: block; margin-bottom: 6px; cursor: pointer;"><input type="radio" name="q2" value="1"> Євразія</label>
+          <label style="display: block; cursor: pointer;"><input type="radio" name="q2" value="0"> Північна Америка</label>
+        </div>
+
+        <!-- Повторіть/розгорніть блок для питань з 3 по 30 -->
+        <div style="background: #e2e8f0; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; color: #475569; font-size: 14px;">
+          <em>(Тут розміщуються решта ваших запитань з 3 по 30 з історії та географії з атрибутами name="q3", name="q4" ... name="q30")</em>
+        </div>
+
+        <button type="button" onclick="submitHistoryQuiz()" style="display: block; width: 100%; background: #2563eb; color: #ffffff; border: none; padding: 14px; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer;">
+          Завершити тест і зарахувати бали
+        </button>
+      </form>
+
+      <div id="quizResultBox" style="display: none; margin-top: 20px; padding: 15px; border-radius: 8px; text-align: center; font-weight: 700; font-size: 16px;"></div>
+    </div>
+
     <!-- Заголовок для інших тем -->
     <h3 style="font-size: 24px; color: #1e293b; margin-bottom: 20px; text-align: center;">📚 Наступні теми курсу історії</h3>
 
@@ -166,6 +212,74 @@
   <footer style="background: #1e293b; color: #ffffff; padding: 30px 20px; text-align: center; margin-top: 40px; border-top: 4px solid #2563eb;">
     <p style="font-size: 13px; color: #94a3b8; margin: 0;">© Сергій Мовчан • Освітній портал «Історія і географія БЕЗ МЕЖ»</p>
   </footer>
+
+  <!-- СКРИПТ ПІДРАХУНКУ БАЛІВ ДЛЯ 30 ПИТАНЬ -->
+  <script>
+    function submitHistoryQuiz() {
+      // Перевіряємо, чи введено ім'я учня на головній сторінці
+      const currentStudent = localStorage.getItem('portal_current_student');
+      
+      if (!currentStudent) {
+        alert('⚠️ Будь ласка, спочатку введіть своє ПІБ на головній сторінці сайту та натисніть «Увійти»!');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      // Загальна кількість питань у тесті
+      const totalQuestions = 30;
+
+      // Словник правильних відповідей для всіх 30 питань (приклад для перших двох, допишіть решту ключів від q3 до q30)
+      const correctAnswers = {
+        q1: "1",
+        q2: "1"
+        // q3: "...", ... q30: "..."
+      };
+
+      let score = 0;
+      let answeredCount = 0;
+
+      // Автоматичний перебір усіх 30 питань
+      for (let i = 1; i <= totalQuestions; i++) {
+        let key = "q" + i;
+        const selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected) {
+          answeredCount++;
+          // Якщо правильна відповідь задана і співпадає
+          if (correctAnswers[key] && selected.value === correctAnswers[key]) {
+            score++;
+          }
+        }
+      }
+
+      // Перевірка, чи на всі питання дані відповіді (можете закоментувати, якщо хочете дозволити неповні відповіді)
+      if (answeredCount < totalQuestions) {
+        if (!confirm(` Ви відповіли лише на ${answeredCount} з ${totalQuestions} питань. Бажаєте все одно завершити тест і надіслати результати?`)) {
+          return;
+        }
+      }
+
+      // Зберігаємо бали учня в загальний рейтинг (localStorage)
+      let studentsData = JSON.parse(localStorage.getItem('portal_students_scores')) || [];
+      let student = studentsData.find(s => s.name === currentStudent);
+
+      if (student) {
+        student.score += score;
+      } else {
+        studentsData.push({ name: currentStudent, score: score });
+      }
+
+      localStorage.setItem('portal_students_scores', JSON.stringify(studentsData));
+
+      // Вивід результату на сторінку
+      const resultBox = document.getElementById('quizResultBox');
+      resultBox.style.display = 'block';
+      resultBox.style.background = '#dcfce7';
+      resultBox.style.color = '#15803d';
+      resultBox.innerHTML = `🎉 Чудово, ${currentStudent}! Ви набрали <strong>${score} з ${totalQuestions}</strong> балів. Вони успішно зараховані до загального рейтингу порталу!`;
+      
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 
 </body>
 </html>
