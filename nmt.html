@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -20,26 +20,25 @@
     <nav>
       <ul>
         <li><a href="index.html">Головна</a></li>
-        <li><a href="#">5-11 класи</a></li>
-        <li><a href="#">Історія</a></li>
-        <li><a href="#">Географія</a></li>
+        <li><a href="history.html">Історія</a></li>
+        <li><a href="geography.html">Географія</a></li>
         <li><a href="nmt.html">НМТ</a></li>
         <li><a href="#">Методична скарбничка</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Банер розділу НМТ -->
+  <!-- Банер НМТ -->
   <section class="hero-banner" style="background: linear-gradient(180deg, #d97706 0%, #b45309 60%, #1e293b 100%);">
     <div class="hero-text">
       <h1>ПІДГОТОВКА ДО <span>НМТ</span></h1>
-      <p class="subtitle">Все для успішного складання мультитесту з історії України та географії</p>
+      <p class="subtitle">Практичний інтенсив з Історії України, Всесвітньої історії та Географії</p>
       <p class="quote">“Твій максимальний бал — це результат системної практики!”</p>
       
       <div class="hero-buttons">
-        <a href="#history-nmt" class="btn-card btn-blue">📜 НМТ Історія</a>
-        <a href="#geo-nmt" class="btn-card btn-green">🌍 НМТ Географія</a>
-        <a href="#trainer" class="btn-card btn-purple">⚡ Онлайн-тренажер</a>
+        <a href="#ukraine-history" class="btn-card btn-blue">📜 Історія України</a>
+        <a href="#world-history" class="btn-card btn-purple">🏛️ Всесвітня історія</a>
+        <a href="#maps-and-visuals" class="btn-card btn-green">🗺️ Карти та персоналії</a>
       </div>
     </div>
 
@@ -48,99 +47,86 @@
     </div>
   </section>
 
-  <!-- Основний контент -->
+  <!-- Основний контент НМТ -->
   <main class="main-container">
-    
-    <div class="section-title" id="history-nmt">Історія України — Підготовка до НМТ</div>
-    <div class="grid-3">
-      <div class="info-card">
-        <h4>🏛️ Дати та події</h4>
-        <p>Обов'язкові історичні дати, хронологічні таблиці та періодизація для тестування.</p>
-        <a href="#" class="btn-link">Вивчити дати →</a>
-      </div>
 
-      <div class="info-card">
-        <h4>🖼️ Персоналії та пам'ятки</h4>
-        <p>Портрети історичних діячів, архітектура та образотворче мистецтво в тестах.</p>
-        <a href="#" class="btn-link">Переглянути галерею →</a>
-      </div>
-
-      <div class="info-card">
-        <h4>🗺️ Картосхеми НМТ</h4>
-        <p>Розбір історичних карт, битв, кордонів та територіальних змін.</p>
-        <a href="#" class="btn-link">Працювати з картами →</a>
-      </div>
-    </div>
-
-    <div class="section-title" id="geo-nmt">Географія — Підготовка до НМТ</div>
-    <div class="grid-3">
-      <div class="info-card">
-        <h4>📊 Задачі та розрахунки</h4>
-        <p>Формули, масштаб, поясний час, похил річки, відносна вологість та демографія.</p>
-        <a href="#" class="btn-link">Розв'язати задачі →</a>
-      </div>
-
-      <div class="info-card">
-        <h4>🗺️ Топографічна карта</h4>
-        <p>Практикум з читання топокарт, визначення азимутів та висот.</p>
-        <a href="#" class="btn-link">Пройти практикум →</a>
-      </div>
-
-      <div class="info-card">
-        <h4>🌍 Географія України та світу</h4>
-        <p>Номенклатура, природні ресурси, господарство та економічні зв'язки.</p>
-        <a href="#" class="btn-link">Повторити тему →</a>
-      </div>
-    </div>
-
-    <div class="section-title" id="trainer">Експрес-перевірка знань</div>
-    <div class="info-card" style="margin-bottom: 30px;">
-      <h4>🧠 Міні-тест НМТ (Історія України)</h4>
-      <div style="margin: 15px 0;">
-        <p class="quiz-question">У якому році відбулося підписання Люблінської унії?</p>
-        <div class="quiz-options">
-          <label class="quiz-option"><input type="radio" name="nmt1" value="a"> A) 1385 р.</label>
-          <label class="quiz-option"><input type="radio" name="nmt1" value="b"> Б) 1569 р.</label>
-          <label class="quiz-option"><input type="radio" name="nmt1" value="c"> В) 1596 р.</label>
-          <label class="quiz-option"><input type="radio" name="nmt1" value="d"> Г) 1648 р.</label>
+    <!-- БЛОК 1: ІСТОРІЯ УКРАЇНИ -->
+    <div class="section-title" id="ukraine-history">🇺🇦 Історія України — Дати та Ключові Події</div>
+    <div class="info-card" style="margin-bottom: 25px;">
+      <p style="margin-bottom: 12px; font-size: 14px;">Основні дати програми НМТ для встановлення послідовності та відповідностей:</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; font-size: 13px;">
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;">
+          <strong>988 р.</strong> — Хрещення Русі князем Володимиром Великим
         </div>
-        <button class="quiz-btn" onclick="checkAnswer()">Перевірити відповідь</button>
-        <div id="quiz-result" class="quiz-result"></div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;">
+          <strong>1569 р.</strong> — Люблінська унія, утворення Речі Посполитої
+        </div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;">
+          <strong>1648 р.</strong> — Початок Національно-визвольної війни Богдана Хмельницького
+        </div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;">
+          <strong>1918 р. (22 січня)</strong> — Проголошення незалежності УНР (IV Універсал)
+        </div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;">
+          <strong>1939 р. (23 серпня)</strong> — Пакт Молотова — Ріббентропа
+        </div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #2563eb; border-radius: 4px;">
+          <strong>1991 р. (24 серпня)</strong> — Прийняття Акта проголошення незалежності України
+        </div>
+      </div>
+    </div>
+
+    <!-- БЛОК 2: ВСЕСВІТНЯ ІСТОРІЯ -->
+    <div class="section-title" id="world-history">🌐 Всесвітня Історія — Важливі Віхи та Дати</div>
+    <div class="info-card" style="margin-bottom: 25px;">
+      <p style="margin-bottom: 12px; font-size: 14px;">Ключові процеси світового розвитку, що перетинаються з історією України:</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; font-size: 13px;">
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #7c3aed; border-radius: 4px;">
+          <strong>476 р.</strong> — Падіння Західної Римської імперії (початок Середньовіччя)
+        </div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #7c3aed; border-radius: 4px;">
+          <strong>1492 р.</strong> — Відкриття Америки Христофором Колумбом
+        </div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #7c3aed; border-radius: 4px;">
+          <strong>1517 р.</strong> — Виступ Мартина Лютера («95 тез»), початок Реформації
+        </div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #7c3aed; border-radius: 4px;">
+          <strong>1789–1799 рр.</strong> — Велика французька революція
+        </div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #7c3aed; border-radius: 4px;">
+          <strong>1914–1918 рр.</strong> — Перша світова війна
+        </div>
+        <div style="background: #f8fafc; padding: 10px; border-left: 4px solid #7c3aed; border-radius: 4px;">
+          <strong>1939–1945 рр.</strong> — Друга світова війна
+        </div>
+      </div>
+    </div>
+
+    <!-- БЛОК 3: ПЕРСОНАЛІЇ, ПАМ'ЯТКИ ТА КАРТИ -->
+    <div class="section-title" id="maps-and-visuals">🎨 Персоналії, Пам'ятки та Картосхеми</div>
+    <div class="grid-3" style="margin-bottom: 30px;">
+      <div class="info-card">
+        <h4>👤 Портрети та діячі</h4>
+        <p>Візуальне розпізнавання постатей з історії України та видатних світових лідерів.</p>
+        <button class="btn-link" onclick="alert('Портретний тренажер готується до завантаження!')">Відкрити тренажер →</button>
+      </div>
+
+      <div class="info-card">
+        <h4>🏰 Архітектура та мистецтво</h4>
+        <p>Собори, фортеці, ікони, картини та світові пам'ятки архітектури за програмою тестування.</p>
+        <button class="btn-link" onclick="alert('Галерея пам`яток скоро буде доступна!')">Переглянути пам'ятки →</button>
+      </div>
+
+      <div class="info-card">
+        <h4>🗺️ Картографічний практикум</h4>
+        <p>Аналіз військових походів, територіальних змін та кордонів держав на історичних картах.</p>
+        <button class="btn-link" onclick="alert('Картографічний практикум у розробці!')">Опрацювати карти →</button>
       </div>
     </div>
 
   </main>
 
-  <script>
-    function checkAnswer() {
-      const options = document.getElementsByName('nmt1');
-      const result = document.getElementById('quiz-result');
-      let selected = null;
-
-      for (const option of options) {
-        if (option.checked) {
-          selected = option.value;
-          break;
-        }
-      }
-
-      if (!selected) {
-        result.style.display = 'block';
-        result.className = 'quiz-result incorrect';
-        result.textContent = 'Будь ласка, оберіть варіант відповіді!';
-        return;
-      }
-
-      if (selected === 'b') {
-        result.style.display = 'block';
-        result.className = 'quiz-result correct';
-        result.textContent = 'Правильно! Люблінська унія була підписана у 1569 році.';
-      } else {
-        result.style.display = 'block';
-        result.className = 'quiz-result incorrect';
-        result.textContent = 'Неправильно. Правильна відповідь: Б) 1569 р.';
-      }
-    }
-  </script>
 </body>
 </html>
