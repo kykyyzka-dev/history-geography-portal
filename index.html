@@ -39,7 +39,7 @@
     nav a { text-decoration: none; color: #334155; font-size: 13px; font-weight: 600; transition: color 0.2s; }
     nav a:hover { color: #2563eb; }
 
-    /* Головний банер (Hero Section) */
+    /* Головний банер */
     .hero-banner {
       position: relative;
       background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 40%, #15803d 80%, #166534 100%);
@@ -52,7 +52,6 @@
       min-height: 380px;
     }
     
-    /* Декоративний прапор України праворуч */
     .hero-flag {
       position: absolute;
       right: 5%;
@@ -67,14 +66,12 @@
     .flag-top { height: 50%; background-color: #0057b7; }
     .flag-bottom { height: 50%; background-color: #ffd700; }
 
-    /* Ліва частина банера (Текст) */
     .hero-text { max-width: 500px; z-index: 2; }
     .hero-text h1 { font-size: 32px; font-weight: 900; line-height: 1.1; margin-bottom: 8px; letter-spacing: -0.5px; }
     .hero-text h1 span { color: #facc15; display: block; }
     .hero-text .subtitle { font-size: 14px; color: #f1f5f9; margin-bottom: 12px; font-weight: 500; }
     .hero-text .quote { font-size: 12px; opacity: 0.9; margin-bottom: 24px; font-style: italic; }
 
-    /* Кнопки під текстом */
     .hero-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
     .btn-card {
       padding: 10px 16px;
@@ -95,7 +92,6 @@
     .btn-orange { background-color: #d97706; }
     .btn-purple { background-color: #7c3aed; }
 
-    /* Автор на банері */
     .hero-author {
       position: relative;
       z-index: 2;
@@ -113,7 +109,6 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.25);
     }
 
-    /* Блок привітання справа */
     .author-welcome-card {
       position: absolute;
       right: 3%;
@@ -127,9 +122,8 @@
       font-size: 11px;
       z-index: 3;
     }
-    .author-welcome-card h3 { font-size: 13px; color: #1e293b; margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
 
-    /* Основна сітка вмісту */
+    /* Основна сітка */
     .main-container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
     .section-title { font-size: 12px; font-weight: 800; text-transform: uppercase; color: #64748b; margin-bottom: 15px; letter-spacing: 0.5px; }
 
@@ -137,17 +131,48 @@
     .info-card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
     .info-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
     .info-card p { font-size: 12px; color: #475569; margin-bottom: 12px; }
-    .info-card .date { font-size: 11px; background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-weight: 700; display: inline-block; margin-bottom: 6px; }
-    .btn-link { font-size: 12px; font-weight: 700; color: #2563eb; text-decoration: none; }
+    .btn-link { font-size: 12px; font-weight: 700; color: #2563eb; text-decoration: none; cursor: pointer; border: none; background: none; padding: 0; }
     .btn-link:hover { text-decoration: underline; }
 
-    /* Навчальні розділи */
     .grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; margin-bottom: 30px; }
     .category-card { background: #fff; border-radius: 12px; padding: 15px 10px; text-align: center; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .category-card .icon { font-size: 24px; margin-bottom: 8px; }
     .category-card span { font-size: 11px; font-weight: 700; color: #1e293b; display: block; }
 
-    /* Адаптивність для смартфонів */
+    /* Спливаюче модальне вікно для деталей */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-card {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 550px;
+      width: 90%;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    .modal-card h3 { font-size: 18px; color: #0f172a; margin-bottom: 12px; }
+    .modal-card p { font-size: 14px; color: #334155; line-height: 1.6; margin-bottom: 20px; white-space: pre-line; }
+    .modal-close-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .modal-close-btn:hover { background: #1d4ed8; }
+
     @media (max-width: 900px) {
       .hero-banner { flex-direction: column; text-align: center; padding-top: 40px; }
       .hero-author { margin-right: 0; margin-top: 30px; }
@@ -180,12 +205,9 @@
     </nav>
   </header>
 
-  <!-- Головний банер (Hero) -->
+  <!-- Банер -->
   <section class="hero-banner">
-    <div class="hero-flag">
-      <div class="flag-top"></div>
-      <div class="flag-bottom"></div>
-    </div>
+    <div class="hero-flag"><div class="flag-top"></div><div class="flag-bottom"></div></div>
 
     <div class="hero-text">
       <h1>ІСТОРІЯ І ГЕОГРАФІЯ <span>БЕЗ МЕЖ</span></h1>
@@ -210,23 +232,26 @@
     </div>
   </section>
 
-  <!-- Основний контент сайту -->
+  <!-- Контент -->
   <main class="main-container">
-    
     <div class="section-title">Що цікавого сьогодні</div>
     <div class="grid-3">
-      <div class="info-card" id="event-card">
-        <h4>📅 Подія цього дня</h4>
-        <p id="event-content"><span class="date">Завантаження...</span><br>Отримання історичної події...</p>
-        <a href="event.html" id="event-detail-link" class="btn-link">Детальніше →</a>
+      
+      <!-- Історія -->
+      <div class="info-card">
+        <h4>📜 Історичний факт</h4>
+        <p id="event-content">Завантаження...</p>
+        <button onclick="openModal('event')" class="btn-link">Детальніше →</button>
       </div>
 
+      <!-- Географія -->
       <div class="info-card">
         <h4>🌍 Цікаво про географію</h4>
-        <p>Найбільший океан на Землі — Тихий. Його площа становить більше 170 млн км².</p>
-        <a href="#" class="btn-link">Читати більше →</a>
+        <p id="geo-content">Завантаження...</p>
+        <button onclick="openModal('geo')" class="btn-link">Читати більше →</button>
       </div>
 
+      <!-- Тест -->
       <div class="info-card">
         <h4>🧠 Перевір себе</h4>
         <p>Хто був першим президентом України?<br>А) Михайло Грушевський<br>Б) Леонід Кравчук</p>
@@ -236,83 +261,93 @@
 
     <div class="section-title">Навчальні розділи</div>
     <div class="grid-6">
-      <div class="category-card">
-        <div class="icon">🏰</div>
-        <span>Історія України</span>
-      </div>
-      <div class="category-card">
-        <div class="icon">🏛️</div>
-        <span>Всесвітня історія</span>
-      </div>
-      <div class="category-card">
-        <div class="icon">🌐</div>
-        <span>Географія</span>
-      </div>
-      <div class="category-card">
-        <div class="icon">🗺️</div>
-        <span>Інтерактивні карти</span>
-      </div>
-      <div class="category-card">
-        <div class="icon">📝</div>
-        <span>Онлайн-тести</span>
-      </div>
-      <div class="category-card">
-        <div class="icon">📅</div>
-        <span>Подія цього дня</span>
-      </div>
+      <div class="category-card"><div class="icon">🏰</div><span>Історія України</span></div>
+      <div class="category-card"><div class="icon">🏛️</div><span>Всесвітня історія</span></div>
+      <div class="category-card"><div class="icon">🌐</div><span>Географія</span></div>
+      <div class="category-card"><div class="icon">🗺️</div><span>Інтерактивні карти</span></div>
+      <div class="category-card"><div class="icon">📝</div><span>Онлайн-тести</span></div>
+      <div class="category-card"><div class="icon">📅</div><span>Цікаві факти</span></div>
     </div>
-
   </main>
 
+  <!-- Спливаюче вікно з розширеною інформацією -->
+  <div class="modal-overlay" id="info-modal">
+    <div class="modal-card">
+      <h3 id="modal-title">Заголовок</h3>
+      <p id="modal-text">Детальна інформація...</p>
+      <button class="modal-close-btn" onclick="closeModal()">Зрозуміло</button>
+    </div>
+  </div>
+
   <script>
-    // Масив ключових подій з ідентифікаторами для сторінки event.html
+    // Масив історій з розширеним описом
     const keyEvents = [
-      { id: "01-01", date: "01-01", year: 1909, title: "Народився Степан Бандера", desc: "Провідник ОУН, один із ідеологів українського національного руху." },
-      { id: "01-22", date: "01-22", year: 1919, title: "Акт Злуки УНР та ЗУНР", desc: "Урочисте проголошення соборності українських земель на Софійському майдані." },
-      { id: "01-29", date: "01-29", year: 1918, title: "Бій під Крутами", desc: "Студенти та курсанти стримали наступ більшовицьких військ на Київ." },
-      { id: "02-20", date: "02-20", year: 2014, title: "День Героїв Небесної Сотні", desc: "Вшанування подвигу учасників Революції Гідності." },
-      { id: "02-24", date: "02-24", year: 2022, title: "Повномасштабне вторгнення РФ", desc: "Початок нового етапу боротьби України за незалежність та територіальну цілісність." },
-      { id: "03-09", date: "03-09", year: 1814, title: "День народження Тараса Шевченка", desc: "Народився видатний український поет, художник та Кобзар." },
-      { id: "03-15", date: "03-15", year: 1939, title: "Проголошення незалежності Карпатської України", desc: "Сойм у Хусті проголосив незалежність держави на чолі з Августином Волошиним." },
-      { id: "04-26", date: "04-26", year: 1986, title: "Чорнобильська катастрофа", desc: "Аварія на ЧАЕС — найбільша техногенно-екологічна катастрофа XXI століття." },
-      { id: "05-08", date: "05-08", year: 1945, title: "День пам'яті та перемоги над нацизмом", desc: "Завершення Другої світової війни в Європі." },
-      { id: "05-20", date: "05-20", year: 1682, title: "Народився Іван Мазепа", desc: "Гетьман України, видатний державний діяч та меценат." },
-      { id: "06-28", date: "06-28", year: 1996, title: "Прийняття Конституції України", desc: "Верховна Рада ухвалила Основний Закон України." },
-      { id: "07-16", date: "07-16", year: 1990, title: "Декларація про державний суверенітет", desc: "Ухвалення документа про економічну та політичну самостійність України." },
-      { id: "07-28", date: "07-28", year: 988,  title: "Хрещення Руси-України", desc: "Князь Володимир Великий проголосив християнство державною релігією." },
-      { id: "08-24", date: "08-24", year: 1991, title: "Проголошення Незалежності України", desc: "Верховна Рада прийняла Акт проголошення незалежності України." },
-      { id: "09-02", date: "09-02", year: 1945, title: "Завершення Другої світової війни", desc: "Підписання капітуляції Японії на борту лінкора «Міссурі»." },
-      { id: "10-14", date: "10-14", year: 1942, title: "Створення УПА", desc: "Традиційна дата заснування Української повстанської армії." },
-      { id: "11-01", date: "11-01", year: 1918, title: "Листопадовий чин у Львові", desc: "Український збройний виступ, у результаті якого було створено ЗУНР." },
-      { id: "11-09", date: "11-09", year: 1989, title: "Падіння Берлінського муру", desc: "Символ завершення «Холодної війни» та об'єднання Європи." },
-      { id: "12-01", date: "12-01", year: 1991, title: "Всеукраїнський референдум", desc: "Понад 90% громадян підтвердили Акт проголошення незалежності." }
+      { 
+        title: "Бій під Крутами (1918 рік)", 
+        short: "Студенти та курсанти стримали наступ більшовицьких військ на Київ.",
+        full: "29 січня 1918 року біля залізничної станції Крути близько 500 українських студентів, юнаків та козаків протистояли 4-тисячній більшовицькій армії Муравйова.\n\nЗавдяки цьому затримано наступ ворога на 4 дні, що дало змогу УНР підписати Берестейський мирний договір і отримати міжнародне визнання."
+      },
+      { 
+        title: "Акт Злуки УНР та ЗУНР (1919 рік)", 
+        short: "Урочисте проголошення соборності українських земель на Софійському майдані.",
+        full: "22 січня 1919 року відбулося об'єднання Західноукраїнської Народної Республіки та Української Народної Республіки в єдину якісну державну систему.\n\nЦя подія стала символом віковічного прагнення українців до соборності та єдності."
+      }
     ];
 
-    function displayTodayEvent() {
-      const today = new Date();
-      const month = String(today.getMonth() + 1).padStart(2, '0');
-      const day = String(today.getDate()).padStart(2, '0');
-      const todayKey = `${month}-${day}`;
-
-      // Пошук точної або найближчої наступної події
-      let event = keyEvents.find(e => e.date === todayKey) || keyEvents.find(e => e.date > todayKey) || keyEvents[0];
-
-      const monthsUA = ["січня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"];
-      const [eMonth, eDay] = event.date.split('-').map(Number);
-      const formattedDate = `${eDay} ${monthsUA[eMonth - 1]} ${event.year} року`;
-
-      // Динамічне оновлення текстів у картці
-      const container = document.getElementById('event-content');
-      container.innerHTML = `<span class="date">${formattedDate}</span><br><strong>${event.title}</strong> — ${event.desc}`;
-      
-      // Динамічне оновлення посилання на сторінку детального опису
-      const linkBtn = document.getElementById('event-detail-link');
-      if (linkBtn) {
-        linkBtn.href = `event.html?id=${event.id}`;
+    // Масив географії з розширеним описом
+    const geoFacts = [
+      { 
+        title: "Амазонка — річка без жодного мосту", 
+        short: "Найповноводніша річка планети. Вона не має жодного мосту через свій гігантський розлив.",
+        full: "Амазонка скидає в Атлантичний океан близько 20% усієї прісної води річок планети.\n\nГоловна причина відсутності мостів — густі непрохідні джунглі та масштабні сезонні розливи, під час яких ширина річки збільшується в десятки разів, роблячи будівництво мостів економічно недоцільним."
+      },
+      { 
+        title: "Гора Еверест (Джомолунгма)", 
+        short: "Найвища вершина світу (8848,86 м), яка щороку зростає через рух тектонічних плит.",
+        full: "Еверест розташований у Гімалаях на кордоні Непалу та Китаю.\n\nЧерез постійне зіткнення Індійської та Євразійської тектонічних плит Гімалайські гори продовжують підніматися, а сама вершина зростає приблизно на 4 міліметри на рік."
+      },
+      { 
+        title: "Маріанський жолоб", 
+        short: "Найглибша точка океану — «Безодня Челленджера» (майже 11 000 м).",
+        full: "Тиск у найглибшій точці океану досягає понад 100 МПа, що у 1000 разів більше за атмосферний тиск на рівні моря.\n\nПопри такі екстремальні умови, на дні живуть унікальні безхребетні та бактерії."
       }
+    ];
+
+    let currentEvent = null;
+    let currentGeo = null;
+
+    // Завантаження випадкового тексту в картки
+    function loadCards() {
+      currentEvent = keyEvents[Math.floor(Math.random() * keyEvents.length)];
+      document.getElementById('event-content').innerHTML = `<strong>${currentEvent.title}</strong> — ${currentEvent.short}`;
+
+      currentGeo = geoFacts[Math.floor(Math.random() * geoFacts.length)];
+      document.getElementById('geo-content').innerHTML = `<strong>${currentGeo.title}</strong> — ${currentGeo.short}`;
     }
 
-    document.addEventListener("DOMContentLoaded", displayTodayEvent);
+    // Відкриття спливаючого вікна
+    function openModal(type) {
+      const modal = document.getElementById('info-modal');
+      const title = document.getElementById('modal-title');
+      const text = document.getElementById('modal-text');
+
+      if (type === 'event' && currentEvent) {
+        title.textContent = `📜 ${currentEvent.title}`;
+        text.textContent = currentEvent.full;
+      } else if (type === 'geo' && currentGeo) {
+        title.textContent = `🌍 ${currentGeo.title}`;
+        text.textContent = currentGeo.full;
+      }
+
+      modal.style.display = 'flex';
+    }
+
+    // Закриття спливаючого вікна
+    function closeModal() {
+      document.getElementById('info-modal').style.display = 'none';
+    }
+
+    document.addEventListener("DOMContentLoaded", loadCards);
   </script>
 </body>
 </html>
