@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Підготовка до НМТ — Історія і географія БЕЗ МЕЖ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+  <!-- Навігаційна шапка -->
+  <header>
+    <a href="index.html" class="logo-group">
+      <img src="logo.png" alt="Логотип Освітній Портал" class="logo-img">
+      <div class="logo-text">Історія і географія<span>БЕЗ МЕЖ</span></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Головна</a></li>
+        <li><a href="#">5-11 класи</a></li>
+        <li><a href="#">Історія</a></li>
+        <li><a href="#">Географія</a></li>
+        <li><a href="nmt.html">НМТ</a></li>
+        <li><a href="#">Методична скарбничка</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Банер розділу НМТ -->
+  <section class="hero-banner" style="background: linear-gradient(180deg, #d97706 0%, #b45309 60%, #1e293b 100%);">
+    <div class="hero-text">
+      <h1>ПОДГОТОВКА ДО <span>НМТ 2026</span></h1>
+      <p class="subtitle">Все для успішного складання мультитесту з історії України та географії</p>
+      <p class="quote">“Твій максимальний бал — це результат системної практики!”</p>
+      
+      <div class="hero-buttons">
+        <a href="#history-nmt" class="btn-card btn-blue">📜 НМТ Історія України</a>
+        <a href="#geo-nmt" class="btn-card btn-green">🌍 НМТ Географія</a>
+        <a href="#trainer" class="btn-card btn-purple">⚡ Онлайн-тренажер</a>
+      </div>
+    </div>
+
+    <div class="hero-author">
+      <img src="author-photo.jpeg" alt="Сергій Мовчан">
+    </div>
+  </section>
+
+  <!-- Основний контент -->
+  <main class="main-container">
+    
+    <div class="section-title" id="history-nmt">Історія України — Підготовка до НМТ</div>
+    <div class="grid-3">
+      <div class="info-card">
+        <h4>🏛️ Дати та події</h4>
+        <p>Обов'язкові історичні дати, хронологічні таблиці та періодизація для тестування.</p>
+        <a href="#" class="btn-link">Вивчити дати →</a>
+      </div>
+
+      <div class="info-card">
+        <h4>🖼️ Персоналії та пам'ятки</h4>
+        <p>Портрети історичних діячів, архітектура та образотворче мистецтво в тестах.</p>
+        <a href="#" class="btn-link">Переглянути галерею →</a>
+      </div>
+
+      <div class="info-card">
+        <h4>🗺️ Картосхеми НМТ</h4>
+        <p>Розбір історичних карт, битв, кордонів та територіальних змін.</p>
+        <a href="#" class="btn-link">Працювати з картами →</a>
+      </div>
+    </div>
+
+    <div class="section-title" id="geo-nmt">Географія — Підготовка до НМТ</div>
+    <div class="grid-3">
+      <div class="info-card">
+        <h4>📊 Задачі та розрахунки</h4>
+        <p>Формули, масштаб, поясний час, похил річки, відносна вологість та демографія.</p>
+        <a href="#" class="btn-link">Розв'язати задачі →</a>
+      </div>
+
+      <div class="info-card">
+        <h4>🗺️ Топографічна карта</h4>
+        <p>Практикум з читання топокарт, визначення азимутів та висот.</p>
+        <a href="#" class="btn-link">Пройти практикум →</a>
+      </div>
+
+      <div class="info-card">
+        <h4>🌍 Географія України та світу</h4>
+        <p>Номенклатура, природні ресурси, господарство та економічні зв'язки.</p>
+        <a href="#" class="btn-link">Повторити тему →</a>
+      </div>
+    </div>
+
+    <div class="section-title" id="trainer">Експрес-перевірка знань</div>
+    <div class="info-card" style="margin-bottom: 30px;">
+      <h4>🧠 Міні-тест НМТ (Історія України)</h4>
+      <div style="margin: 15px 0;">
+        <p class="quiz-question">У якому році відбулася підписання Люблінської унії?</p>
+        <div class="quiz-options">
+          <label class="quiz-option"><input type="radio" name="nmt1" value="a"> A) 1385 р.</label>
+          <label class="quiz-option"><input type="radio" name="nmt1" value="b"> Б) 1569 р.</label>
+          <label class="quiz-option"><input type="radio" name="nmt1" value="c"> В) 1596 р.</label>
+          <label class="quiz-option"><input type="radio" name="nmt1" value="d"> Г) 1648 р.</label>
+        </div>
+        <button class="quiz-btn" onclick="checkAnswer()">Перевірити відповідь</button>
+        <div id="quiz-result" class="quiz-result"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function checkAnswer() {
+      const options = document.getElementsByName('nmt1');
+      const result = document.getElementById('quiz-result');
+      let selected = null;
+
+      for (const option of options) {
+        if (option.checked) {
+          selected = option.value;
+          break;
+        }
+      }
+
+      if (!selected) {
+        result.style.display = 'block';
+        result.className = 'quiz-result incorrect';
+        result.textContent = 'Будь ласка, оберіть варіант відповіді!';
+        return;
+      }
+
+      if (selected === 'b') {
+        result.style.display = 'block';
+        result.className = 'quiz-result correct';
+        result.textContent = 'Правильно! Люблінська унія була підписана у 1569 році.';
+      } else {
+        result.style.display = 'block';
+        result.className = 'quiz-result incorrect';
+        result.textContent = 'Неправильно. Правильна відповідь: Б) 1569 р.';
+      }
+    }
+  </script>
+</body>
+</html>
