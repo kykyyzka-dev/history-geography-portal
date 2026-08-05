@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Географія — Освітній портал Сергія Мовчана</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css?v=6">
+  <style>
+    /* Стилі для інтерактивних панелей (акордеона) географії */
+    .accordion-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .accordion-header {
+      padding: 22px 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      transition: background-color 0.2s ease;
+    }
+    .accordion-header:hover {
+      background-color: #f8fafc;
+    }
+    .accordion-header h3 {
+      font-size: 20px;
+      color: #1e293b;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .accordion-icon {
+      font-size: 16px;
+      color: #64748b;
+      transition: transform 0.3s ease;
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+      padding: 0 30px;
+      background: #ffffff;
+    }
+    .accordion-card.active .accordion-content {
+      max-height: 2500px;
+      padding: 0 30px 30px 30px;
+      transition: max-height 0.6s ease-in, padding 0.4s ease-in;
+    }
+    .accordion-card.active .accordion-icon {
+      transform: rotate(180deg);
+      color: #059669;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Навігаційна шапка -->
+  <header>
+    <a href="index.html" class="logo-group">
+      <img src="logo.png" alt="Логотип Освітній Портал" class="logo-img">
+      <div class="logo-text">Історія і географія<span>БЕЗ МЕЖ</span></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Головна</a></li>
+        <li><a href="history.html">Історія</a></li>
+        <li><a href="geography.html" class="active">Географія</a></li>
+        <li><a href="nmt.html">НМТ</a></li>
+        <li><a href="methodology.html">Методична скарбничка</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Основний контент -->
+  <main class="main-container" style="padding: 40px 20px; max-width: 1100px; margin: 0 auto;">
+    
+    <!-- Заголовок сторінки -->
+    <h1 style="text-align: center; font-size: 36px; font-weight: 800; color: #1e293b; margin-bottom: 10px;">
+      🌍 Географія: пізнавай планету, устигай за часом, керуй простором
+    </h1>
+    <p style="color: #64748b; text-align: center; font-size: 16px; margin-bottom: 40px;">
+      Наука про Землю, її природу, населення та господарство. Розгортайте блоки нижче, щоб поринути в системне вивчення фундаментальних тем.
+    </p>
+
+    <!-- ВСТУПНИЙ БЛОК -->
+    <div class="info-card" style="border-top: 5px solid #059669; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 40px;">
+      <h2 style="font-size: 24px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+        <span>🧭</span> Що таке географія та чому без неї не обійтися в реальному житті?
+      </h2>
+      <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+        <strong>Географія</strong> (від грецького <em>geo</em> — Земля і <em>grapho</em> — пишу) — це унікальна наука, яка вивчає географічну оболонку Землі, просторову взаємодію природних і суспільних систем, закономірності розміщення ресурсів, населення та господарської діяльності.
+      </p>
+    </div>
+
+    <!-- 20 ТЕМ -->
+    <div style="margin: 50px 0 25px 0;">
+      <h2 style="font-size: 26px; color: #1e293b; border-bottom: 3px solid #059669; padding-bottom: 10px;">
+        📚 20 найважливіших тем курсів географії
+      </h2>
+    </div>
+
+    <!-- Тема 1 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🗺️</span> Географічна карта як особливий джерело знань про Землю</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Географічна карта є унікальним математично узагальненим зменшеним зображенням земної поверхні на площині за допомогою системи умовних знаків.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 2 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌐</span> Земля як планета Сонячної системи: рухи Землі та їх наслідки</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Осьовий оберт Землі навколо своєї осі триває 24 години, що спричиняє зміну дня і ночі, а обертання навколо Сонця — зміну пір року.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 3 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>⛏️</span> Літосфера та рельєф Землі: тектоніка плит, землетруси, вулканізм</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Літосфера складається з рухомих плит, які дрейфують по астеносфері, формуючи гірські системи, розломи та викликаючи землетруси.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 4 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌦️</span> Атмосфера: тепловий режим, тиск, вітри, погода та клімат</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Атмосфера захищає планету від випромінювання та регулює теплообмін, формуючи мінливу погоду та багаторічний клімат.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 5 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌊</span> Гідросфера: Світовий океан, води суші та кругообіг води</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Світовий океан займає 71% поверхні планети, діючи як термостат і забезпечуючи глобальний кругообіг води в природі.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 6 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌿</span> Біосфера та географічна оболонка: цілісність і зональність</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Біосфера охоплює всі живі організми, які взаємодіють з іншими оболонками Землі за законами цілісності та широтної зональності.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 7 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌍</span> Материки та океани: загальна фізико-географічна характеристика</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Поверхня поділяється на материки та океани, причому суходіл у Північній півкулі переважає над Південною.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 8 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🇺🇦</span> Фізична географія України: тектоніка, рельєф, корисні копалини</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Територія України лежить переважно на платформі, має переважно рівнинний рельєф та багаті поклади рудних і паливних корисних копалин.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 9 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌡️</span> Клімат і водні ресурси України: річки, озера, кліматичні умови</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Клімат помірно континентальний, а густа річкова мережа (з головною артерією Дніпром) забезпечує господарство водними ресурсами.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 10 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌳</span> Природні комплекси України: ландшафти, ґрунти, біорізноманіття</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Ландшафти змінюються від мішаних лісів на півночі до степів на півдні, включаючи унікальні чорноземи та гірські пояси Карпат і Криму.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 11 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>👥</span> Населення України та світу: демографія, міграції, урбанізація</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Суспільна географія вивчає процеси народжуваності, міграцій та зростання ролі міст, що трансформують ринок праці та структуру суспільства.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 12 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🏭</span> Світове господарство: первинний, вторинний і третинний сектори</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Економіка складається з видобутку, промисловості та сфери послуг, яка переважає у постіндустріальних країнах світу.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 13 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>⚡</span> Електроенергетика та промисловість світу й України</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Електроенергетика базується на ТЕС, АЕС, ГЕС та відновлюваних джерелах, утворюючи єдині енергосистеми.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 14 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌾</span> Сільське господарство та агропромисловий комплекс (АПК)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          АПК поєднує рослинництво і тваринництво з переробкою та логістикою, забезпечуючи глобальну продовольчу безпеку.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 15 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🚆</span> Транспорт і міжнародні економічні відносини</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Транспортні мережі об'єднують ринки в умовах глобалізації, забезпечуючи швидку торгівлю та пересування товарів.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 16 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🏛️</span> Політична карта світу: форми правління та організації</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Держави відрізняються формами правління (республіки, монархії) та об'єднуються в міжнародні організації на кшталт ООН та ЄС.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 17 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🇪🇺</span> Регіони світу: Європа та Азія</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Європа є центром інтеграції та послуг, а Азія поєднує високотехнологічні гіганти та нові економічні центри світу.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 18 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌎</span> Америка, Африка та Австралія</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Регіони вирізняються контрастами між розвиненими країнами Півночі та ресурсно-аграрними економіками Півдня.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 19 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>♻️</span> Екологічні проблеми планети та сталий розвиток</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Зміна клімату та забруднення вимагають переходу до сталого розвитку та «зеленої» економіки задля збереження природи.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 20 -->
+    <div class="accordion-card" style="border-top: 4px solid #059669;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🛰️</span> Сучасні геоінформаційні системи (ГІС) та ДЗЗ</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Супутникові технології та ГІС дозволяють аналізувати просторові дані в реальному часі для навігації та екологічного моніторингу.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Футер -->
+  <footer style="background: #1e293b; color: #ffffff; padding: 30px 20px; text-align: center; margin-top: 40px; border-top: 4px solid #059669;">
+    <p style="font-size: 13px; color: #94a3b8; margin: 0;">© Сергій Мовчан • Освітній портал «Історія і географія БЕЗ МЕЖ»</p>
+  </footer>
+
+  <!-- JavaScript для акордеона географії -->
+  <script>
+    function toggleAccordion(header) {
+      const card = header.parentElement;
+      card.classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>
