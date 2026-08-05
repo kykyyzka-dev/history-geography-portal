@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Підключення іконок соцмереж та пошуку -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
   <style>
     /* Плавні анімації появи та ефекти */
     @keyframes fadeInUp {
@@ -374,7 +374,7 @@
       <div class="nmt-results-widget">
         <h3><i class="fas fa-graduation-cap" style="color: #2563eb;"></i> Ваші результати тестування НМТ</h3>
         <div class="nmt-results-grid">
-          <div class="nmt-result-card" id="res-history">📜 Історія України: ще не пройдено</div>
+          <div class="nmt-result-card" id="res-history">📜 Історія: ще не пройдено</div>
           <div class="nmt-result-card" id="res-geography">🌍 Географія: ще не пройдено</div>
         </div>
       </div>
@@ -505,7 +505,7 @@
       const histScore = localStorage.getItem('nmt_history_score');
       const histTotal = localStorage.getItem('nmt_history_total');
       if (histScore !== null) {
-        document.getElementById('res-history').innerHTML = `📜 Історія України: <strong>${histScore} / ${histTotal} балів</strong>`;
+        document.getElementById('res-history').innerHTML = `📜 Історія: <strong>${histScore} / ${histTotal} балів</strong>`;
       }
 
       const geoScore = localStorage.getItem('nmt_geography_score');
