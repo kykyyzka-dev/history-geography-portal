@@ -188,6 +188,37 @@
       font-weight: 700;
       font-size: 13px;
     }
+
+    /* Стилі для карток віртуальних екскурсій */
+    .virtual-tour-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+    .virtual-tour-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.15);
+      border-color: #2563eb;
+    }
+    .virtual-tour-card .icon {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+    .virtual-tour-card span {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+    }
   </style>
 </head>
 <body>
@@ -227,7 +258,7 @@
         <div id="searchResults" class="search-results-dropdown"></div>
       </div>
       
-      <!-- ТАБЛИЦЯ АКТИВНОСТІ УЧНІВ (РЕЙТИНГ ЗАМІСТЬ КНОПОК) -->
+      <!-- ТАБЛИЦЯ АКТИВНОСТІ УЧНІВ (РЕЙТИНГ) -->
       <div class="leaderboard-section">
         <div class="leaderboard-header">
           <h3><i class="fas fa-medal" style="color: #2563eb;"></i> Рейтинг активності учнів</h3>
@@ -279,14 +310,32 @@
       </div>
     </div>
 
-    <div class="section-title">Навчальні розділи</div>
+    <div class="section-title">Віртуальні екскурсії</div>
     <div class="grid-6">
-      <div class="category-card" onclick="addPoints(3)"><div class="icon">🏰</div><span>Історія України</span></div>
-      <div class="category-card" onclick="addPoints(3)"><div class="icon">🏛️</div><span>Всесвітня історія</span></div>
-      <div class="category-card" onclick="addPoints(3)"><div class="icon">🌐</div><span>Географія</span></div>
-      <div class="category-card" onclick="addPoints(3)"><div class="icon">🗺️</div><span>Інтерактивні карти</span></div>
-      <div class="category-card" onclick="addPoints(5)"><div class="icon">📝</div><span>Онлайн-тести</span></div>
-      <div class="category-card" onclick="addPoints(3)"><div class="icon">📅</div><span>Цікаві факти</span></div>
+      <a href="https://vr.theukrainians.org/" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
+        <div class="icon">🏛️</div>
+        <span>Музеї України</span>
+      </a>
+      <a href="https://www.google.com/artsandculture/" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
+        <div class="icon">🌍</div>
+        <span>Світові пам'ятки</span>
+      </a>
+      <a href="https://izi.travel/uk" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
+        <div class="icon">🗺️</div>
+        <span>AUDIO & 3D Тури</span>
+      </a>
+      <a href="https://www.airpano.com/" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
+        <div class="icon">✈️</div>
+        <span>Панорами 360°</span>
+      </a>
+      <a href="https://livi.com.ua/" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
+        <div class="icon">🏰</div>
+        <span>Замки та фортеці</span>
+      </a>
+      <a href="https://sketchfab.com/tags/history" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
+        <div class="icon">🏺</div>
+        <span>3D Артефакти</span>
+      </a>
     </div>
   </main>
 
