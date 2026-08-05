@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Методична скарбничка — Освітній портал Сергія Мовчана</title>
+  <title>Історія і географія БЕЗ МЕЖ — Освітній портал Сергія Мовчана</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Підключення іконок соцмереж -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css?v=3">
 </head>
@@ -20,25 +21,247 @@
     </a>
     <nav>
       <ul>
-        <li><a href="index.html">Головна</a></li>
+        <li><a href="index.html" class="active">Головна</a></li>
         <li><a href="history.html">Історія</a></li>
         <li><a href="geography.html">Географія</a></li>
         <li><a href="nmt.html">НМТ</a></li>
-        <li><a href="methodology.html" class="active">Методична скарбничка</a></li>
+        <li><a href="methodology.html">Методична скарбничка</a></li>
       </ul>
     </nav>
   </header>
 
+  <!-- Головний банер -->
+  <section class="hero-banner">
+    <div class="hero-flag"><div class="flag-top"></div><div class="flag-bottom"></div></div>
+
+    <div class="hero-text">
+      <h1>ІСТОРІЯ І ГЕОГРАФІЯ <span>БЕЗ МЕЖ</span></h1>
+      <p class="subtitle">Авторський освітній портал Сергія Мовчана</p>
+      <p class="quote">“Пізнаємо минуле — будуємо майбутнє!”</p>
+      
+      <div class="hero-buttons">
+        <a href="history.html" class="btn-card btn-blue">📜 Історія</a>
+        <a href="geography.html" class="btn-card btn-green">🌍 Географія</a>
+        <a href="nmt.html" class="btn-card btn-orange">🎓 НМТ</a>
+        <a href="methodology.html" class="btn-card btn-purple">💼 Методична скарбничка</a>
+      </div>
+    </div>
+
+    <div class="hero-author">
+      <img src="author-photo.jpeg" alt="Сергій Мовчан">
+    </div>
+
+    <div class="author-welcome-card">
+      <h3>👋 Вітаю на моєму порталі!</h3>
+      <p>Тут ви знайдете матеріали з історії та географії, інтерактивні завдання та ресурси для успішного навчання.</p>
+    </div>
+  </section>
+
   <!-- Основний контент -->
-  <main class="main-container" style="padding: 40px 20px; text-align: center;">
-    <div class="section-title">💼 Методична скарбничка</div>
-    <p style="color: #64748b; margin-top: 20px;">Матеріали, цифрові сервіси та методичні розробки для уроків історії та географії.</p>
+  <main class="main-container">
+    <div class="section-title">Що цікавого сьогодні</div>
+    <div class="grid-3">
+      <div class="info-card">
+        <h4>📜 Історичний факт</h4>
+        <p id="event-content">Завантаження...</p>
+        <button onclick="openModal('event')" class="btn-link">Детальніше →</button>
+      </div>
+
+      <div class="info-card">
+        <h4>🌍 Цікаво про географію</h4>
+        <p id="geo-content">Завантаження...</p>
+        <button onclick="openModal('geo')" class="btn-link">Читати більше →</button>
+      </div>
+
+      <!-- Динамічний експрес-тест -->
+      <div class="info-card">
+        <h4>🧠 Перевір себе</h4>
+        <p id="quiz-question" class="quiz-question" style="font-weight: 600; margin-bottom: 8px;">Завантаження...</p>
+        <div id="quiz-options" class="quiz-options" style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; font-size: 13px;"></div>
+        <button class="quiz-btn" onclick="checkQuickQuiz()" style="background: #2563eb; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer;">Перевірити</button>
+        <div id="quick-quiz-result" class="quiz-result" style="margin-top: 8px; display: none; font-size: 12px; padding: 6px; border-radius: 6px;"></div>
+      </div>
+    </div>
+
+    <div class="section-title">Навчальні розділи</div>
+    <div class="grid-6">
+      <div class="category-card"><div class="icon">🏰</div><span>Історія України</span></div>
+      <div class="category-card"><div class="icon">🏛️</div><span>Всесвітня історія</span></div>
+      <div class="category-card"><div class="icon">🌐</div><span>Географія</span></div>
+      <div class="category-card"><div class="icon">🗺️</div><span>Інтерактивні карти</span></div>
+      <div class="category-card"><div class="icon">📝</div><span>Онлайн-тести</span></div>
+      <div class="category-card"><div class="icon">📅</div><span>Цікаві факти</span></div>
+    </div>
   </main>
 
-  <!-- Футер -->
+  <!-- Блок соцмереж у самому низу сторінки -->
   <footer style="background: #1e293b; color: #ffffff; padding: 30px 20px; text-align: center; margin-top: 40px; border-top: 4px solid #2563eb;">
+    <h3 style="margin-bottom: 15px; font-size: 18px; font-weight: 700;">Приєднуйтесь до моїх спільнот</h3>
+    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/matilda.poetry?igsh=MXNkeWo5anFmd2k0Nw%3D%3D&utm_source=qr" target="_blank" title="Instagram" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #e1306c; border-radius: 50%; color: #ffffff; text-decoration: none; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s;">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@matilda.poetry?_r=1&_t=ZS-98cZEDGY3ym" target="_blank" title="TikTok" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #000000; border: 1px solid #333333; border-radius: 50%; color: #ffffff; text-decoration: none; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s;">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/share/1ETNyD3yDX/?mibextid=wwXIfr" target="_blank" title="Facebook" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #1877f2; border-radius: 50%; color: #ffffff; text-decoration: none; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s;">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+    </div>
     <p style="font-size: 13px; color: #94a3b8; margin: 0;">© Сергій Мовчан • Освітній портал «Історія і географія БЕЖ МЕЖ»</p>
   </footer>
 
+  <!-- Спливаюче модальне вікно -->
+  <div class="modal-overlay" id="info-modal">
+    <div class="modal-card">
+      <h3 id="modal-title">Заголовок</h3>
+      <p id="modal-text">Детальна інформація...</p>
+      <button class="modal-close-btn" onclick="closeModal()">Зрозуміло</button>
+    </div>
+  </div>
+
+  <script>
+    // Розширений список історичних фактів
+    const keyEvents = [
+      { title: "Бій під Крутами (1918 рік)", short: "Студенти та курсанти стримали наступ більшовицьких військ на Київ.", full: "29 січня 1918 року біля залізничної станції Крути близько 500 українських студентів, юнаків та козаків протистояли 4-тисячній більшовицькій армії Муравйова.\n\nЗавдяки цьому затримано наступ ворога на 4 дні, що дало змогу УНР підписати Берестейський мирний договір." },
+      { title: "Акт Злуки УНР та ЗУНР (1919 рік)", short: "Урочисте проголошення соборності українських земель на Софійському майдані.", full: "22 січня 1919 року відбулося об'єднання Західноукраїнської Народної Республіки та Української Народної Республіки в єдину державну систему." },
+      { title: "Прийняття Конституції України (1996 рік)", short: "Верховна Рада прийняла Основний Закон України після безперервної 24-годинної роботи.", full: "У ніч з 27 на 28 червня 1996 року було прийнято Конституцію України. Вона зафіксувала правові засади незалежної держави, її суверенітет і територіальну цілісність." },
+      { title: "Хрещення Русі (988 рік)", short: "Князь Володимир Великий запровадив християнство як державну релігію Русі.", full: "Масове хрещення киян у водах Дніпра та Почайни започаткувало новий етап культурного, політичного та духовного розвитку Русі-України." }
+    ];
+
+    // Розширений список географічних фактів
+    const geoFacts = [
+      { title: "Амазонка — річка без жодного мосту", short: "Найповноводніша річка планети. Вона не має жодного мосту через свій розлив.", full: "Амазонка скидає в Атлантичний океан близько 20% усієї прісної води річок планети.\n\nГоловна причина відсутності мостів — густі непрохідні джунглі та масштабні сезонні розливи." },
+      { title: "Гора Еверест (Джомолунгма)", short: "Найвища вершина світу (8848,86 м), яка щороку зростає.", full: "Еверест розташований у Гімалаях на кордоні Непалу та Китаю.\n\nЧерез зіткнення тектонічних плит вершина зростає приблизно на 4 міліметри на рік." },
+      { title: "Олешківські піски", short: "Один із найбільших піщаних масивів у Європі, розташований в Україні.", full: "Олешківські піски часто називають українською пустелею. Вони виникли на місці колишнього русла Дніпра внаслідок випасання величезних отар овець у XIX столітті." },
+      { title: "Мертве море", short: "Найнижча точка суші на Землі та найсолоніше озеро світу.", full: "Озеро розташоване на 430 метрів нижче рівня моря. Солоність води сягає 34%, що робить утримання людини на поверхні води природним явищем." }
+    ];
+
+    // Масив інтерактивних швидких тестів
+    const quickQuizzes = [
+      {
+        question: "Хто був першим президентом України?",
+        options: [
+          { text: "A) Михайло Грушевський", correct: false },
+          { text: "Б) Леонід Кравчук", correct: true }
+        ],
+        explanation: "Леонід Кравчук — перший Президент України. Михайло Грушевський очолював Українську Центральну Раду."
+      },
+      {
+        question: "Яка найдовша річка в межах України?",
+        options: [
+          { text: "A) Дністер", correct: false },
+          { text: "Б) Дніпро", correct: true }
+        ],
+        explanation: "Дніпро — найдовша річка України (1057 км у межах країни)."
+      },
+      {
+        question: "У якому році було прийнято Акт проголошення незалежності України?",
+        options: [
+          { text: "A) 1991 рік", correct: true },
+          { text: "Б) 1996 рік", correct: false }
+        ],
+        explanation: "24 серпня 1991 року Верховна Рада УРСР прийняла Акт проголошення незалежності України."
+      },
+      {
+        question: "Яка найвища гора Українських Карпат?",
+        options: [
+          { text: "A) Говерла (2061 м)", correct: true },
+          { text: "Б) Піп Іван (2028 м)", correct: false }
+        ],
+        explanation: "Говерла є найвищою точкою України з висотою 2061 метр."
+      }
+    ];
+
+    let currentEvent = null;
+    let currentGeo = null;
+    let currentQuiz = null;
+
+    function loadCards() {
+      // Рандомний вибір факту з історії
+      currentEvent = keyEvents[Math.floor(Math.random() * keyEvents.length)];
+      document.getElementById('event-content').innerHTML = `<strong>${currentEvent.title}</strong> — ${currentEvent.short}`;
+
+      // Рандомний вибір факту з географії
+      currentGeo = geoFacts[Math.floor(Math.random() * geoFacts.length)];
+      document.getElementById('geo-content').innerHTML = `<strong>${currentGeo.title}</strong> — ${currentGeo.short}`;
+
+      // Рандомний вибір тесту
+      currentQuiz = quickQuizzes[Math.floor(Math.random() * quickQuizzes.length)];
+      document.getElementById('quiz-question').textContent = currentQuiz.question;
+
+      const optionsContainer = document.getElementById('quiz-options');
+      optionsContainer.innerHTML = '';
+      currentQuiz.options.forEach((option, index) => {
+        optionsContainer.innerHTML += `
+          <label class="quiz-option">
+            <input type="radio" name="quick_quiz" value="${index}"> ${option.text}
+          </label>
+        `;
+      });
+
+      // Очищення попереднього результату
+      const result = document.getElementById('quick-quiz-result');
+      result.style.display = 'none';
+    }
+
+    function openModal(type) {
+      const modal = document.getElementById('info-modal');
+      const title = document.getElementById('modal-title');
+      const text = document.getElementById('modal-text');
+
+      if (type === 'event' && currentEvent) {
+        title.textContent = `📜 ${currentEvent.title}`;
+        text.textContent = currentEvent.full;
+      } else if (type === 'geo' && currentGeo) {
+        title.textContent = `🌍 ${currentGeo.title}`;
+        text.textContent = currentGeo.full;
+      }
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('info-modal').style.display = 'none';
+    }
+
+    function checkQuickQuiz() {
+      const options = document.getElementsByName('quick_quiz');
+      const result = document.getElementById('quick-quiz-result');
+      let selectedIndex = null;
+
+      for (const option of options) {
+        if (option.checked) {
+          selectedIndex = parseInt(option.value);
+          break;
+        }
+      }
+
+      if (selectedIndex === null) {
+        result.style.display = 'block';
+        result.style.backgroundColor = '#fee2e2';
+        result.style.color = '#b91c1c';
+        result.textContent = 'Будь ласка, оберіть варіант!';
+        return;
+      }
+
+      const isCorrect = currentQuiz.options[selectedIndex].correct;
+
+      result.style.display = 'block';
+      if (isCorrect) {
+        result.style.backgroundColor = '#dcfce7';
+        result.style.color = '#15803d';
+        result.textContent = `Правильно! ${currentQuiz.explanation}`;
+      } else {
+        result.style.backgroundColor = '#fee2e2';
+        result.style.color = '#b91c1c';
+        result.textContent = `Невірно. ${currentQuiz.explanation}`;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadCards);
+  </script>
 </body>
 </html>
