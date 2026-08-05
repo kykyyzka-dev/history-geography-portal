@@ -9,6 +9,58 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css?v=3">
+  <style>
+    /* Стилі для інтерактивних панелей (акордеона) */
+    .accordion-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .accordion-header {
+      padding: 22px 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      transition: background-color 0.2s ease;
+    }
+    .accordion-header:hover {
+      background-color: #f8fafc;
+    }
+    .accordion-header h3 {
+      font-size: 20px;
+      color: #1e293b;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .accordion-icon {
+      font-size: 16px;
+      color: #64748b;
+      transition: transform 0.3s ease;
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+      padding: 0 30px;
+      background: #ffffff;
+    }
+    .accordion-card.active .accordion-content {
+      max-height: 2500px; /* Достатньо велика висота для розгортання */
+      padding: 0 30px 30px 30px;
+      transition: max-height 0.6s ease-in, padding 0.4s ease-in;
+    }
+    .accordion-card.active .accordion-icon {
+      transform: rotate(180deg);
+      color: #2563eb;
+    }
+  </style>
 </head>
 <body>
 
@@ -37,38 +89,34 @@
       📜 Історія: від теорії до захопливих епох
     </h1>
     <p style="color: #64748b; text-align: center; font-size: 16px; margin-bottom: 40px;">
-      Пізнаємо минуле — будуємо майбутнє! Навчальні матеріали, теорія, практичні завдання та подорож століттями.
+      Пізнаємо минуле — будуємо майбутнє! Навчальні матеріали, глибока теорія, практичні завдання та подорож століттями. Натискайте на теми, щоб розгорнути матеріали.
     </p>
+
+    <!-- БАЗОВІ ТЕОРИТИЧНІ БЛОКИ (Зберігаються незмінними) -->
 
     <!-- Тема 1: Що таке історія, історичний час, історичний простір -->
     <div class="info-card" style="border-top: 5px solid #2563eb; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 40px;">
-      
       <h2 style="font-size: 24px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
         <span>⏳</span> Що таке історія, історичний час, історичний простір
       </h2>
-      
       <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
-        <strong>Історія</strong> — це наука, яка вивчає минуле людства, розвиток суспільства, події та діяльність людей від найдавніших часів до сьогодення. Щоб орієнтуватися в подіях, історики використовують поняття <em>історичного часу</em> та <em>історичного простору</em>.
+        <strong>Історія</strong> — це фундаментальна наука, яка вивчає минуле людства у всьому його різноманітті, еволюцію суспільних відносин, закономірності розвитку цивілізацій, видатні події та діяльність окремих особистостей від найдавніших часів до сьогодення. Щоб науково та системно орієнтуватися у безперервному потоці подій, історики використовують базові категорії — <em>історичний час</em> та <em>історичний простір</em>. Вони дозволяють локалізувати будь-яку подію за принципом «де це сталося?» та «коли це сталося?».
       </p>
-
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
         <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6;">
           <h3 style="font-size: 16px; color: #1e293b; margin-bottom: 8px;">🗺️ Історичний простір</h3>
-          <p style="font-size: 14px; color: #64748b; line-height: 1.5;">Конкретна територія (країна, регіон, місто, континент), на якій розгорталися історичні події та формувалися цивілізації.</p>
+          <p style="font-size: 14px; color: #64748b; line-height: 1.5;">Конкретна географічна територія (регіон, держава, континент або весь світ), у межах якої розгорталися історичні процеси, формувалися етноси, відбувалися міграції та взаємодіяли різні культури.</p>
         </div>
         <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #10b981;">
           <h3 style="font-size: 16px; color: #1e293b; margin-bottom: 8px;">⌛ Історичний час</h3>
-          <p style="font-size: 14px; color: #64748b; line-height: 1.5;">Послідовність подій у часі. Поділяється на роки, десятиліття, століття, тисячоліття та історичні ери.</p>
+          <p style="font-size: 14px; color: #64748b; line-height: 1.5;">Неперервна послідовність історичних подій, об'єднана причинно-наслідковими зв'язками. Вимірюється за допомогою спеціальних одиниць: років, десятиліть, століть (віків), тисячоліть та великих епох.</p>
         </div>
       </div>
-
       <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
-
       <h3 style="font-size: 20px; color: #1e293b; margin-bottom: 15px;">📊 Як влаштована Лінія часу та Ери</h3>
       <p style="font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 20px;">
-        Час вимірюється від умовної точки — народження Ісуса Христа. Час до цієї події — <strong>до нашої ери (до н.е.)</strong>, після — <strong>нашою ерою (н.е.)</strong>.
+        Для зручності відліку часу людство виокремило умовну точку відліку — народження Ісуса Христа. Час, що передував цій події, називається періодом <strong>до нашої ери (до н.е.)</strong>, а час після — <strong>нашою ерою (н.е.)</strong>. Унікальність шкали до нашої ери полягає в тому, що роки відраховуються у зворотному напрямку до нуля (чим більша цифра, тим давніша подія).
       </p>
-
       <div style="background: #f1f5f9; padding: 25px 15px; border-radius: 10px; margin-bottom: 30px; text-align: center;">
         <div style="font-weight: 700; color: #334155; margin-bottom: 15px;">ХРОНОЛОГІЧНА ШКАЛА (ЛІНІЯ ЧАСУ)</div>
         <div style="display: flex; align-items: center; justify-content: space-between; position: relative; margin: 20px 10px; border-top: 4px solid #2563eb;">
@@ -87,229 +135,376 @@
         </div>
         <div style="height: 30px;"></div>
       </div>
-
       <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
-
       <h3 style="font-size: 20px; color: #1e293b; margin-bottom: 15px;">💡 Золоті правила: Як визначити століття за роком?</h3>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
         <div style="background: #eff6ff; padding: 20px; border-radius: 8px; border: 1px solid #bfdbfe;">
           <h4 style="color: #1d4ed8; margin-bottom: 8px; font-size: 15px;">📌 Правило 1 (Закінчується на два нулі)</h4>
-          <p style="font-size: 14px; color: #334155; line-height: 1.5;">Відкиньте останні два нулі (наприклад, 1700 рік = XVII століття).</p>
+          <p style="font-size: 14px; color: #334155; line-height: 1.5;">Якщо рік закінчується двома нулями, просто відкиньте їх, і ви отримаєте номер століття римськими цифрами (наприклад, 1700 рік — XVII століття).</p>
         </div>
         <div style="background: #eff6ff; padding: 20px; border-radius: 8px; border: 1px solid #bfdbfe;">
           <h4 style="color: #1d4ed8; margin-bottom: 8px; font-size: 15px;">📌 Правило 2 (Не закінчується на нулі)</h4>
-          <p style="font-size: 14px; color: #334155; line-height: 1.5;">Відкиньте дві останні цифри і додайте одиницю (+1). Наприклад, 19<b>91</b> -> 19+1 = XX ст.</p>
+          <p style="font-size: 14px; color: #334155; line-height: 1.5;">Якщо в кінці є інші цифри, відкиньте дві останні і до числа, що залишилося, додайте одиницю (+1). Наприклад, 19<b>91</b> рік: відкидаємо 91, залишається 19, додаємо 1 = XX століття.</p>
         </div>
       </div>
-
       <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;">
-
       <h3 style="font-size: 20px; color: #1e293b; margin-bottom: 15px;">🧮 Практикум: Розв'язання історичних задач</h3>
       <div style="background: #f8fafc; padding: 18px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #f59e0b;">
-        <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 6px;">✍️ Задача 1 (Одна ера):</h4>
-        <p style="font-size: 14px; color: #475569; margin-bottom: 6px;"><strong>Умова:</strong> «Апостол» І. Федоровича видано у <strong>1574 році</strong>. Скільки минуло років до 2024 року?</p>
-        <p style="font-size: 14px; color: #1e293b;"><strong>Розв'язання:</strong> 2024 - 1574 = 450 років.</p>
+        <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 6px;">✍️ Задача 1 (В межах однієї ери):</h4>
+        <p style="font-size: 14px; color: #475569; margin-bottom: 6px;"><strong>Умова:</strong> Видатну першу друковану книгу «Апостол» Івана Федоровича було видано у 1574 році. Скільки років минуло відтоді до 2026 року?</p>
+        <p style="font-size: 14px; color: #1e293b;"><strong>Розв'язання:</strong> Оскільки обидві дати належать до однієї ери, віднімаємо від більшого менше: 2026 - 1574 = 452 роки.</p>
       </div>
       <div style="background: #f8fafc; padding: 18px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #f59e0b;">
-        <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 6px;">✍️ Задача 2 (Різні ери):</h4>
-        <p style="font-size: 14px; color: #475569; margin-bottom: 6px;"><strong>Умова:</strong> Рим засновано у <strong>753 р. до н.е.</strong>, а падіння імперії — у <strong>476 р. н.е.</strong> Тривалість?</p>
-        <p style="font-size: 14px; color: #1e293b;"><strong>Розв'язання:</strong> 753 + 476 = 1229 років.</p>
+        <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 6px;">✍️ Задача 2 (Події у різних ерах):</h4>
+        <p style="font-size: 14px; color: #475569; margin-bottom: 6px;"><strong>Умова:</strong> Місто Рим було засноване у 753 році до нашої ери, а падіння Західної Римської імперії відбулося у 476 році нашої ери. Яка тривалість цього проміжку?</p>
+        <p style="font-size: 14px; color: #1e293b;"><strong>Розв'язання:</strong> Оскільки події відбувалися в різних ерах, числа додаються одне до одного: 753 + 476 = 1229 років.</p>
       </div>
-
     </div>
 
     <!-- Тема 2: Джерела історичної пам'яті -->
     <div class="info-card" style="border-top: 5px solid #10b981; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 40px;">
-      
       <h2 style="font-size: 24px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
         <span>🏛️</span> Джерела історичної пам'яті
       </h2>
-      
       <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
-        <strong>Історичні джерела</strong> — це все те, що створене в процесі людської діяльності і збереглося до наших днів; це свідчення про минуле, завдяки яким історики відтворюють картину життя попередніх поколінь.
+        <strong>Історичні джерела</strong> — це матеріальні та духовні сліди минулого, створені людською діяльністю, завдяки яким сучасна наука відтворює об'єктивну картину життя попередніх поколінь. Без джерел історія як наука не могла б існувати, адже вони слугують єдиним доказовим фундаментом для дослідників.
       </p>
-
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px;">
         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-top: 3px solid #2563eb;">
           <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">🏺 Речові джерела</h4>
-          <p style="font-size: 13px; color: #64748b;">Знаряддя праці, зброя, одяг, монети, посуд, залишки жител і споруд, ювелірні вироби.</p>
+          <p style="font-size: 13px; color: #64748b;">Знаряддя праці, зброя, елементи одягу, монети, посуд, руїни фортець, житла, ювелірні вироби та скарби.</p>
         </div>
         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-top: 3px solid #10b981;">
           <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">📜 Писемні джерела</h4>
-          <p style="font-size: 13px; color: #64748b;">Літописи, закони, грамоти, листи, щоденники, газети, книги, документи на папері чи пергаменті.</p>
+          <p style="font-size: 13px; color: #64748b;">Літописи, стародавні закони, державні грамоти, міжнародні договори, приватні листи, щоденники, книги та пергаменти.</p>
         </div>
         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-top: 3px solid #f59e0b;">
           <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">🗣️ Усні джерела</h4>
-          <p style="font-size: 13px; color: #64748b;">Легенди, перекази, пісні, казки, приказки, прислів'я, анекдоти та спогади очевидців.</p>
+          <p style="font-size: 13px; color: #64748b;">Народні пісні, легенди, перекази, думи, казкові мотиви, приказки, прислів'я та живі спогади очевидців подій.</p>
         </div>
         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-top: 3px solid #8b5cf6;">
           <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">🖼️ Візуальні та аудіо</h4>
-          <p style="font-size: 13px; color: #64748b;">Картини, фотографії, плакати, кінофільми, аудіозаписи, карти та схеми минулого.</p>
+          <p style="font-size: 13px; color: #64748b;">Живописні полотна, старі фотографії, плакати епохи, архітектурні макети, кінохроніка та автентичні аудіозаписи.</p>
         </div>
       </div>
-
     </div>
 
     <!-- Тема 3: Історична карта та простір -->
     <div class="info-card" style="border-top: 5px solid #f59e0b; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 40px;">
-      
       <h2 style="font-size: 24px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
         <span>🗺️</span> Історична карта та простір
       </h2>
-      
       <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
-        <strong>Історична карта</strong> — це зменшене у масштабне зображення земної поверхні, на якому показано події, явища чи процеси, що відбувалися в певний історичний період. Вона поєднує географічний простір із плином часу.
+        <strong>Історична карта</strong> — це особливий тип географічної карти, яка за допомогою умовних позначок відображає події, процеси або цілі епохи, що відбувалися на Землі в минулому. Вона виступає своєрідним «мостом» між простором і часом, дозволяючи побачити, як змінювалися кордони держав, де перетиналися інтереси імперій і де пролягали шляхи визвольних рухів.
       </p>
-
       <div style="background: #fffbeb; padding: 20px; border-radius: 8px; border: 1px solid #fde68a; margin-bottom: 20px;">
-        <h4 style="color: #92400e; margin-bottom: 10px; font-size: 16px;">🔍 Основні елементи історичної карти:</h4>
+        <h4 style="color: #92400e; margin-bottom: 10px; font-size: 16px;">🔍 Ключові елементи читання історичної карти:</h4>
         <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #78350f; line-height: 1.6;">
-          <li><strong>Легенда карти:</strong> ключі до умовних позначок (що означають кольори, стрілки, лінії та значки).</li>
-          <li><strong>Масштаб:</strong> показує, у скільки разів відстань на карті менша за реальну відстань на місцевості.</li>
-          <li><strong>Напрямки та орієнтири:</strong> північ, південь, захід, схід (зазвичай верх карти — північ).</li>
-          <li><strong>Стрілки рухів:</strong> показують пересування військ, торговельні шляхи чи міграції народів.</li>
+          <li><strong>Легенда карти:</strong> ключ до всіх використаних символів, кольорів, геометричних фігур та штриховок.</li>
+          <li><strong>Масштабне співвідношення:</strong> показник того, наскільки зменшено реальні земні відстані на площині.</li>
+          <li><strong>Географічні орієнтири:</strong> збережені назви річок, гір та морів, які допомагають співвіднести минуле з сучасністю.</li>
+          <li><strong>Динамічні стрілки:</strong> графічні лінії зі стрілками, що демонструють напрямки військових ударів, походів чи міграцій.</li>
         </ul>
       </div>
-
     </div>
 
     <!-- Тема 4: Дослідники історії та науки-помічниці -->
     <div class="info-card" style="border-top: 5px solid #8b5cf6; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 40px;">
-      
       <h2 style="font-size: 24px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
         <span>👑</span> Дослідники історії та науки-помічниці
       </h2>
-      
       <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
-        Вивчення минулого — це складний і захопливий процес. Головними дослідниками історії є <strong>історики</strong>, які аналізують письмові та усні свідчення, а також <strong>археологи</strong>, які «читають» підземні шари землі наче сторінки давніх книг.
+        Пізнання минулого — це багатогранна праця цілої спільноти фахівців. Головними фігурами тут є <strong>історики</strong>, які досліджують текстові документи, аналізують причини подій та пишуть наукові праці, а також <strong>археологи</strong>, які проводять розкопки та вилучають із культурних шарів землі безмовні свідчення минулих століть.
       </p>
-
       <div style="background: #f5f3ff; padding: 20px; border-radius: 8px; border: 1px solid #ddd6fe; margin-bottom: 25px;">
-        <h4 style="color: #6d28d9; margin-bottom: 8px; font-size: 16px;">🔍 Хто такі історики та як вони працюють?</h4>
+        <h4 style="color: #6d28d9; margin-bottom: 8px; font-size: 16px;">🔍 Як працюють науковці-дослідники?</h4>
         <p style="font-size: 14px; color: #4b5563; line-height: 1.6; margin: 0;">
-          Історик працює в архівах та бібліотеках, зіставляє факти, перевіряє достовірність документів і створює цілісну картину епохи. Археологи ж проводять польові розкопки, обережно очищають кожну знахідку від ґрунту, фіксують її точне положення у просторі та передають на аналіз до лабораторій.
+          Робота історика схожа на розслідування складного детективу: він зіставляє дані з різних архівів, перевіряє їх на справжність та відкидає міфи. Археологи ж діють надзвичайно кропітко — кожна знахідка фіксується за допомогою креслень і координат, щоб не втратити контекст її знаходження.
         </p>
       </div>
-
-      <h3 style="font-size: 18px; color: #1e293b; margin-bottom: 15px;">🧪 Спеціальні науки-помічниці історії:</h3>
-
+      <h3 style="font-size: 18px; color: #1e293b; margin-bottom: 15px;">🧪 Спеціальні історичні науки-помічниці:</h3>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px;">
         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #8b5cf6;">
           <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">⛏️ Археологія</h4>
-          <p style="font-size: 13px; color: #64748b; margin: 0;">Вивчає минуле за матеріальними залишками, знайденими під час розкопок.</p>
+          <p style="font-size: 13px; color: #64748b; margin: 0;">Вивчає речові скарби та культури минулого за допомогою розкопок.</p>
         </div>
         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #8b5cf6;">
           <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">🪙 Нумізматика</h4>
-          <p style="font-size: 13px; color: #64748b; margin: 0;">Досліджує стародавні монети, медалі, скарби та грошові знаки.</p>
+          <p style="font-size: 13px; color: #64748b; margin: 0;">Досліджує стародавні монети, грошові системи та медалі.</p>
         </div>
         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #8b5cf6;">
           <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">🛡️ Геральдика</h4>
-          <p style="font-size: 13px; color: #64748b; margin: 0;">Вивчає герби, родові знаки та емблеми держав, міст і шляхетних родин.</p>
+          <p style="font-size: 13px; color: #64748b; margin: 0;">Аналізує герби, родові знаки та символіку міст і держав.</p>
         </div>
         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #8b5cf6;">
           <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">👥 Етнографія</h4>
-          <p style="font-size: 13px; color: #64748b; margin: 0;">Досліджує побут, культуру, походження, традиції та звичаї народів світу.</p>
+          <p style="font-size: 13px; color: #64748b; margin: 0;">Вивчає побут, традиції, вірування та культуру народів.</p>
         </div>
         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #8b5cf6;">
           <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">📜 Топоніміка</h4>
-          <p style="font-size: 13px; color: #64748b; margin: 0;">Вивчає походження назв географічних об'єктів (міст, сіл, річок).</p>
+          <p style="font-size: 13px; color: #64748b; margin: 0;">Досліджує походження та значення географічних назв.</p>
         </div>
         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #8b5cf6;">
           <h4 style="font-size: 15px; color: #1e293b; margin-bottom: 5px;">⏳ Хронологія</h4>
-          <p style="font-size: 13px; color: #64748b; margin: 0;">Допомагає встановити точну послідовність історичних подій у часі.</p>
+          <p style="font-size: 13px; color: #64748b; margin: 0;">Визначає точну послідовність історичних подій у часі.</p>
         </div>
       </div>
-
     </div>
 
-    <!-- РОЗДІЛ І: ДАВНЯ ТА СЕРЕДНЬОВІЧНА ІСТОРІЯ (5–8 класи) -->
+
+    <!-- ========================================== -->
+    <!-- РОЗДІЛ І: ДАВНЯ ТА СЕРЕДНЬОВІЧНА ІСТОРІЯ (10 тем) -->
+    <!-- ========================================== -->
     <div style="margin: 50px 0 25px 0;">
       <h2 style="font-size: 26px; color: #1e293b; border-bottom: 3px solid #2563eb; padding-bottom: 10px;">
-        🏛️ Давня та Середньовічна історія (5–8 класи)
+        🏛️ Давня та Середньовічна історія
       </h2>
     </div>
 
-    <!-- Тема 5: Вступ та стародавня історія -->
-    <div class="info-card" style="border-top: 5px solid #3b82f6; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 30px;">
-      <h3 style="font-size: 22px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-        <span>🏺</span> Вступ та стародавня історія (5–6 класи)
-      </h3>
-      <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 15px;">
-        Захоплива подорож у світ найдавніших цивілізацій на українських землях. Від виживання первісних людей у печерах до створення неймовірних витворів мистецтва. Особливе місце займає загадкова <strong>трипільська культура</strong> з її унікальною розписною керамікою та величезними протомістами, а також войовничі племена <strong>скіфів</strong>, які залишили по собі легендарні золоті скарби у курганах (як-от пектораль із кургану Товста Могила).
-      </p>
+    <!-- Тема 1 -->
+    <div class="accordion-card" style="border-top: 4px solid #3b82f6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🏺</span> Первісні стоянки та найдавніше населення на українських землях</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Захоплива мандрівка у найдавніші епохи українських земель — від первісних стоянок кам'яного віку (ашель, мустьє) до появи розвинених племінних об'єднань. Дослідження стоянки поблизу села Королево на Закарпатті доводить проживання тут архантропів понад 1 мільйон років тому. Особливо відомою є Кирилівська стоянка в Києві та унікальне поселення мисливців на мамонтів у селі Межиріч на Черкащині, де житла споруджувалися з мамонтів кісток.
+        </p>
+      </div>
     </div>
 
-    <!-- Тема 6: Київська Русь — Україна -->
-    <div class="info-card" style="border-top: 5px solid #10b981; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 30px;">
-      <h3 style="font-size: 22px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-        <span>👑</span> Київська Русь — Україна (9–10 віки)
-      </h3>
-      <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 15px;">
-        Становлення однієї з найпотужніших середньовічних держав Європи. Доба грандіозних перетворень за правління видатних володарів: князя <strong>Володимира Великого</strong>, який у <strong>988 році прийняв християнство</strong>, цивілізаційно об'єднавши країну з європейським світом, та князя <strong>Ярослава Мудрого</strong>, який розбудував величний Київ, заснував першу бібліотеку при Софійському соборі та видав першу збірку законів «Руська Правда».
-      </p>
+    <!-- Тема 2 -->
+    <div class="accordion-card" style="border-top: 4px solid #3b82f6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌾</span> Трипільська культура та її протоміста (V–IV тисячоліття до нашої ери)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Унікальна землеробська цивілізація епохи енеоліту, яка розквітла на межиріччі Дніпра і Дністра. Трипільці створювали грандіозні протоміста-гіганти (як-от Майданецьке чи Талянки на Черкащині), населення яких сягало кількох десятків тисяч осіб. Вони володіли високорозвиненою технологією виготовлення кольорового розписного посуду, будували двоповерхові житла та мали яскраво виражену міфологічну систему з культом Великої Матері-Землі.
+        </p>
+      </div>
     </div>
 
-    <!-- Тема 7: Галицько-Волинська держава -->
-    <div class="info-card" style="border-top: 5px solid #f59e0b; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 30px;">
-      <h3 style="font-size: 22px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-        <span>🛡️</span> Галицько-Волинська держава (12–14 віки)
-      </h3>
-      <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 15px;">Спадкоємиця Київської Русі, яка зуміла зберегти державність та європейський вектор розвитку в буремні часи монгольської навали. Завдяки мудрій політиці князя <strong>Данила Галицького</strong> землі були об'єднані, а його коронація у 1253 році у місті Дорогочин підтвердила високий міжнародний авторитет держави на заході континенту.</p>
+    <!-- Тема 3 -->
+    <div class="accordion-card" style="border-top: 4px solid #3b82f6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🐎</span> Ранні кочовики у Північному Причорномор'ї: кімерійці, скіфи, сармати</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">Протягом І тисячоліття до нашої ери українські степи стали ареною для зміни могутніх кочових племен. Першими зафіксованими у писемних джерелах стали кімерійці, на зміну яким прийшли войовничі скіфи. Скіфське царство вело активну торгівлю з грецькими містами-полісами (Ольвія, Херсонес, Пантікапей) та залишило по собі величні кургани із золотими скарбами, зокрема всесвітньо відому скіфську пектораль із кургану Товста Могила. Пізніше їх витіснили сармати.</p>
+      </div>
     </div>
 
-    <!-- Тема 8: Козацька доба та Національно-визвольна війна -->
-    <div class="info-card" style="border-top: 5px solid #ef4444; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 40px;">
-      <h3 style="font-size: 22px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-        <span>⚔️</span> Козацька доба та Національно-визвольна війна (16–17 століття)
-      </h3>
-      <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 15px;">Феномен українського козацтва та виникнення Запорозької Січі — фортеці волелюбних і незламних людей. Початок грандіозної Національно-визвольної війни 1648–1657 років під проводом гетьмана <strong>Богдана Хмельницького</strong>, яка принесла блискучі перемоги під Жовтими Водами та Корсунем і започаткувала створення нової української козацької держави — Війська Запорозького (Гетьманщини).</p>
+    <!-- Тема 4 -->
+    <div class="accordion-card" style="border-top: 4px solid #3b82f6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🏛️</span> Античні міста-держави Північного Причорномор'я</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">У VII–VI століттях до нашої ери грецькі колоністи з Малої Азії заснували на узбережжі Чорного та Азовського морів видатні поліси: Тіру, Ольвію, Херсонес, Феодосію та Пантікапей (центр Боспорського царства). Ці міста принесли на українські землі високу античну культуру, розвинену архітектуру, карбування власних монет, виноградарство та писемність, ставши важливим містком між античним світом і місцевими племенами.</p>
+      </div>
     </div>
 
-    <!-- РОЗДІЛ ІІ: НОВА ТА НОВІТНЯ ІСТОРІЯ (9–11 класи) -->
+    <!-- Тема 5 -->
+    <div class="accordion-card" style="border-top: 4px solid #3b82f6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>⚔️</span> Велике розселення слов'ян та утворення східнослов'янських племінних союзів</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">Процес етногенезу слов'ян та їхнє масштабне розселення Європою під час Великого переселення народів (V–VII століття). На території України сформувалися потужні племінні союзи: поляни, древляни, сіверяни, волиняни (дуліби), хорвати, тиверці та уличі. Вони займалися орним землеробством, скотарством, ремеслами та створювали укріплені городища, які заклали фундамент майбутніх міст.</p>
+      </div>
+    </div>
+
+    <!-- Тема 6 -->
+    <div class="accordion-card" style="border-top: 4px solid #3b82f6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>👑</span> Утворення Київської Русі та перші князі (IX–X століття)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">Процес об'єднання земель навколо Києва за князювання Аскольда, Олега, Ігоря та княгині Ольги. Формування єдиної централізованої держави на шляху «з варяг у греки». Княгиня Ольга провела перші системні адміністративно-погосподарські реформи (уроки та погости), упорядкувавши збір данини, а її візит до Константинополя заклав підґрунтя для майбутньої європеїзації та християнізації країни.</p>
+      </div>
+    </div>
+
+    <!-- Тема 7 -->
+    <div class="accordion-card" style="border-top: 4px solid #3b82f6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>📜</span> Князювання Володимира Великого та хрещення Русі (980–1015 роки)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">Доба грандіозних державотворчих перетворень за князя Володимира. Успішне об'єднання східнослов'янських земель, розбудова оборонних рубежів проти кочовиків та карбування перших золотих і срібних монет («златників» і «сребреників»). Кульмінацією його політики стало прийняття християнства у <strong>988 році</strong>, що цивілізаційно об'єднало Русь з європейським християнським світом, дало потужний поштовх розвитку писемності, освіти та кам'яної архітектури.</p>
+      </div>
+    </div>
+
+    <!-- Тема 8 -->
+    <div class="accordion-card" style="border-top: 4px solid #3b82f6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>📚</span> Розквіт Київської Русі за Ярослава Мудрого (1019–1054 роки)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">Період максимального політичного піднесення, культурного розквіту та міжнародного авторитету Київської Русі. Ярослав Мудрий остаточно розгромив печенігів у 1036 році (на честь чого збудував величний Софійський собор у Києві), заснував першу державну бібліотеку, сприяв створенню першої писемної збірки законів «Руська Правда» та здійснив династичні шлюби своїх дітей з провідними королівськими дворами Європи.</p>
+      </div>
+    </div>
+
+    <!-- Тема 9 -->
+    <div class="accordion-card" style="border-top: 4px solid #3b82f6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🛡️</span> Галицько-Волинська держава та доба Данила Галицького (XII–XIV століття)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">Пряма спадкоємиця традицій Київської Русі, яка зуміла зберегти державність, економічний потенціал та західноєвропейський політичний вектор в умовах монгольської навали. Завдяки стратегічному хисту і дипломатії князя <strong>Данила Галицького</strong> було подолано феодальну роздробленість, об'єднано землі та здобуто європейське визнання — його історична коронація у <strong>1253 році</strong> в Дорогочині папським легатом закріпила статус Королівства Русі на міжнародній арені.</p>
+      </div>
+    </div>
+
+    <!-- Тема 10 -->
+    <div class="accordion-card" style="border-top: 4px solid #3b82f6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>⚔️</span> Козацька доба та Національно-визвольна війна (XVI–XVII століття)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Унікальний історичний феномен зародження українського козацтва та створення легендарної Запорозької Січі як осередку свободи й військової демократії. Кульмінацією цього періоду стала Національно-визвольна війна <strong>1648–1657 років</strong> під проводом геніального полководця і гетьмана <strong>Богдана Хмельницького</strong>. Блискучі перемоги під Жовтими Водами, Корсунем та Пилявцями зруйнують старий порядок та призведуть до створення суверенної козацької держави — Війська Запорозького (Гетьманщини).
+        </p>
+      </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- РОЗДІЛ ІІ: НОВА ТА НОВІТНЯ ІСТОРІЯ (10 тем) -->
+    <!-- ========================================== -->
     <div style="margin: 50px 0 25px 0;">
       <h2 style="font-size: 26px; color: #1e293b; border-bottom: 3px solid #8b5cf6; padding-bottom: 10px;">
-        🚀 Нова та Новітня історія (9–11 класи)
+        🚀 Нова та Новітня історія
       </h2>
     </div>
 
-    <!-- Тема 9: Українські землі у 18–19 століттях -->
-    <div class="info-card" style="border-top: 5px solid #8b5cf6; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 30px;">
-      <h3 style="font-size: 22px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-        <span>📖</span> Українські землі у 18–19 століттях
-      </h3>
-      <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 15px;">Драматичний період розділу українських земель між імперіями (Російською та Австрійською), ліквідація козацьких вольностей та руйнування у 1775 році останньої Запорозької Січі за наказом Катерини II. Попри імперський гніт, розпочинається потужне національне відродження: діяльність Кирило-Мефодіївського братства та пророче слово <strong>Тараса Шевченка</strong>, чий «Кобзар» став духовним паспортом нації.</p>
+    <!-- Тема 1 -->
+    <div class="accordion-card" style="border-top: 4px solid #8b5cf6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>📖</span> Українські землі у складі сусідніх імперій у XVIII–XIX століттях</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Драматична епоха поступової ліквідації російським самодержавством та австрійським урядом залишків української автономії, скасування гетьманщини та остаточного зруйнування Запорозької Січі за наказом імператриці Катерини II у 1775 році. Розподіл українських територій між двома імперіями приніс жорстокий соціальний та національний гніт, кріпацтво та політику русифікації й полонізації. Проте саме в цей час починається духовне пробудження нації — діяльність Кирило-Мефодіївського братства та пророча творчість <strong>Тараса Шевченка</strong>, чий безсмертний «Кобзар» заклав міцний фундамент для сучасної української національної ідентичності.
+        </p>
+      </div>
     </div>
 
-    <!-- Тема 10: Українська революція -->
-    <div class="info-card" style="border-top: 5px solid #06b6d4; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 30px;">
-      <h3 style="font-size: 22px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-        <span>⭐</span> Українська революція (1917–1921 роки)
-      </h3>
-      <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 15px;">Злет національної свідомості після падіння царської Росії. Створення Української Центральної Ради на чолі з Михайлом Грушевським та проголошення <strong>Української Народної Республіки (УНР)</strong> Універсалами. Буремна доба гетьманату Павла Скоропадського, героїчний бій під Крутами та відчайдушна боротьба за незалежність в умовах агресії більшовицьких військ.</p>
+    <!-- Тема 2 -->
+    <div class="accordion-card" style="border-top: 4px solid #8b5cf6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>⭐</span> Українська революція та доба національного державотворення (1917–1921 роки)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Масштабний державницький злет, спричинений падінням Російської та Австро-Угорської імперій під час Першої світової війни. Утворення Української Центральної Ради під керівництвом Михайла Грушевського та проголошення знаменитих Універсалів, що увінчалися створенням <strong>Української Народної Республіки (УНР)</strong>. Цей період охоплює складні етапи державотворення: буремну добу гетьманату Павла Скоропадського, героїчний чин українського студентства під Крутами, запеклу боротьбу Директорії та трагізм визвольних змагань в умовах жорстокої агресії більшовицьких та білогвардійських військ.
+        </p>
+      </div>
     </div>
 
-    <!-- Тема 11: Україна в роки Другої світової війни -->
-    <div class="info-card" style="border-top: 5px solid #3b82f6; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 30px;">
-      <h3 style="font-size: 22px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-        <span>🌍</span> Україна в роки Другої світової війни (1939–1945 роки)
-      </h3>
-      <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 15px;">Найжорстокосердіша трагедія ХХ століття. Українські землі стали головним ареною кривавого зіткнення двох тоталітарних режимів — нацистського та сталінського. Масовий Голокост, концентраційні табори, розгортання потужного руху опору (ОУН та УПА, радянські партизанські з'єднання) та величезний внесок українського народу у розгром нацизму.</p>
+    <!-- Тема 3 -->
+    <div class="accordion-card" style="border-top: 4px solid #8b5cf6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌾</span> Тоталітарний режим у міжвоєнний період: індустріалізація, колективізація, Голодомор</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">Трагічна доба утвердження радянського тоталітаризму в УСРР у 1920–1930-х роках. Політика «українізації» швидко змінилася жорсткими сталінськими репресіями проти національної інтелігенції («розстріляне відродження»). Насильницька колективізація сільського господарства та штучно організований комуністичним режимом <strong>Голодомор 1932–1933 років</strong> стали страшним геноцидом українського народу, що забрав мільйони безвинних життів українських селян.</p>
+      </div>
     </div>
 
-    <!-- Тема 12: Радянська Україна -->
-    <div class="info-card" style="border-top: 5px solid #64748b; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 30px;">
-      <h3 style="font-size: 22px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-        <span>🏭</span> Радянська Україна (1945–1991 роки)
-      </h3>
-      <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 15px;">Важка післявоєнна відбудова, хрущовська «відлига» та поява мужнього покоління <strong>шістдесятників</strong> (Ліна Костенко, Василь Стус, Алла Горська), які кинули виклик цензурі й русифікації. Чорнобильська катастрофа у квітні 1986 року стала екологічним ударом, що остаточно підірвав довіру до радянської системи та прискорив її крах.</p>
+    <!-- Тема 4 -->
+    <div class="accordion-card" style="border-top: 4px solid #8b5cf6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🌍</span> Україна в роки Другої світової війни та рух опору (1939–1945 роки)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Найбільша геополітична трагедія ХХ століття, під час якої українські землі перетворилися на головну арену кривавого зіткнення двох найдеструктивніших тоталітарних режимів планети — нацистського та сталінського. Мільйонні людські жертви, Голокост та знищення єврейського й ромського населення, масові депортації та примусова праця гастарбайтерів супроводжувалися розгортанням безпрецедентного руху опору. Український народ боровся проти загарбників у лавах антигітлерівської коаліції, створював підрозділи Української повстанської армії (УПА) та організовував підпільну боротьбу, зробивши колосальний вирішальний внесок у розгром нацизму.
+        </p>
+      </div>
     </div>
 
-    <!-- Тема 13: Незалежна Україна -->
-    <div class="info-card" style="border-top: 5px solid #10b981; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 40px;">
-      <h3 style="font-size: 22px; color: #1e293b; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
-        <span>🇺🇦</span> Незалежна Україна (1991–теперішній час)
-      </h3>
-      <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 15px;">Історичне здійснення вікової мрії поколінь — ухвалення Акту проголошення незалежності <strong>24 серпня 1991 року</strong>. Шлях до демократії через визначні віхи: Помаранчеву революцію та Революцію Гідності (2013–2014 рр.). Сьогоднішній день — це героїчне протистояння українського народу повномасштабній російській агресії, утвердження національної ідентичності та незламна боротьба за європейське майбутнє.</p>
+    <!-- Тема 5 -->
+    <div class="accordion-card" style="border-top: 4px solid #8b5cf6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🏭</span> Післявоєнна відбудова та радянська Україна в епоху «відлиги» (1945–1960-ті роки)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Складний період післявоєнної відбудови зруйнованого народного господарства, політичних репресій та поступового пом'якшення тоталітарного режиму під час хрущовської «відлиги». На цьому тлі зароджується мужній дисидентський рух і виникає феномен <strong>шістдесятників</strong> (Василь Стус, Ліна Костенко, Алла Горська, Іван Світличний), які своєю літературною та правозахисною діяльністю кинули виклик ідеологічній цензурі й русифікації. Трагічною кульмінацією кризи комуністичної системи стала екологічна та гуманітарна катастрофа світового масштабу — <strong>аварія на ЧАЕС у квітні 1986 року</strong>, яка остаточно підірвала довіру суспільства до влади та активізувала рух за демонтаж радянської імперії.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 6 -->
+    <div class="accordion-card" style="border-top: 4px solid #8b5cf6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>✊</span> Дисидентський рух та боротьба за права людини в УРСР</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">Правозахисний та національно-визвольний рух 1960–1980-х років проти тоталітарної системи та русифікації. Діяльність Української Гельсінської групи (В'ячеслав Чорновіл, Левко Лук'яненко, Оксана Пахльовська та інші). Попри арешти, політичні табори та психіатричні репресії з боку КГБ, дисиденти зуміли зберегти свободу слова, поширювали самвидав і наближали крах імперії.</p>
+      </div>
+    </div>
+
+    <!-- Тема 7 -->
+    <div class="accordion-card" style="border-top: 4px solid #8b5cf6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>⚡</span> Чорнобильська катастрофа та її наслідки для України та світу (1986 рік)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">Аварія на Чорнобильській АЕС 26 квітня 1986 року стала найбільшою техногенною та екологічною катастрофою в історії людства. Радіоактивне зараження величезних територій України, Білорусі та країн Європи змусило мільйони людей змінити життя. Ця трагедія каталізувала сплеск екологічного та національного руху, остаточно підірвавши довіру до радянського керівництва та прискоривши розпад СРСР.</p>
+      </div>
+    </div>
+
+    <!-- Тема 8 -->
+    <div class="accordion-card" style="border-top: 4px solid #8b5cf6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🇺🇦</span> Відновлення незалежності України та перші кроки державотворення (1991 рік)</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">
+          Історичне втілення багатовікової мрії багатьох поколінь українців про власну державу — ухвалення Верховною Радою Акту проголошення незалежності України <strong>24 серпня 1991 року</strong>, підтверджене всенародним референдумом. Сучасний етап державотворення позначений боротьбою за справжню демократію, європейський цивілізаційний вибір та громадянське суспільство, про що свідчать ключові історичні віхи: Помаранчева революція (2004 рік) та Революція Гідності (2013–2014 роки). Сьогоднішня сторінка історії нашої країни — це героїчний опір та незламна боротьба українського народу проти повномасштабної російської агресії за свободу, суверенітет і європейське майбутнє всього демократичного світу.
+        </p>
+      </div>
+    </div>
+
+    <!-- Тема 9 -->
+    <div class="accordion-card" style="border-top: 4px solid #8b5cf6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🔥</span> Етапи демократичного транзиту: Помаранчева революція та Революція Гідності</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">Боротьба українського громадянського суспільства за демократичні цінності, європейський вектор розвитку та захист виборчих прав. Помаранчева революція (2004 рік) та Революція Гідності (Євромайдан 2013–2014 років) стали ключовими проявами незламності нації, під час яких українці заплатили високу ціну — життя Небесної Сотні — за свій цивілізаційний вибір на користь свободи та демократії.</p>
+      </div>
+    </div>
+
+    <!-- Тема 10 -->
+    <div class="accordion-card" style="border-top: 4px solid #8b5cf6;">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <h3><span>🛡️</span> Сучасна російсько-українська війна та боротьба за європейське майбутнє</h3>
+        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+      </div>
+      <div class="accordion-content">
+        <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 0;">Героїчний спротив українського народу проти російської агресії, що почалася з окупації Криму та частини Донбасу у 2014 році, та переросла у повномасштабне вторгнення. Це доба безпрецедентної мужності Збройних Сил України, волонтерського руху та єдності суспільства, яка визначає новітню геополітичну архітектуру всього демократичного світу та утверджує остаточну незалежність і суб'єктність України.</p>
+      </div>
     </div>
 
   </main>
@@ -318,6 +513,14 @@
   <footer style="background: #1e293b; color: #ffffff; padding: 30px 20px; text-align: center; margin-top: 40px; border-top: 4px solid #2563eb;">
     <p style="font-size: 13px; color: #94a3b8; margin: 0;">© Сергій Мовчан • Освітній портал «Історія і географія БЕЗ МЕЖ»</p>
   </footer>
+
+  <!-- JavaScript для плавного відкриття/закриття тем -->
+  <script>
+    function toggleAccordion(header) {
+      const card = header.parentElement;
+      card.classList.toggle('active');
+    }
+  </script>
 
 </body>
 </html>
