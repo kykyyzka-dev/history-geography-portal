@@ -246,3 +246,28 @@ nav a:hover {
   .grid-6 { grid-template-columns: repeat(2, 1fr); }
   .hero-buttons { justify-content: center; }
 }
+/* Блок соціальних мереж */
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 18px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.social-icon:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+}
