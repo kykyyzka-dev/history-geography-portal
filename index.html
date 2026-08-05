@@ -4,179 +4,203 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Освітній портал Сергія Мовчана — Історія і географія БЕЗ МЕЖ</title>
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="style.css?v=3">
+
   <style>
-    /* Стилі для адаптивності, гамбургер-меню та пошуку */
+    /* Додаткові стилі для розгорнутої структури головної сторінки */
     body {
       font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
       margin: 0;
       padding: 0;
-      background-color: #f1f5f9;
-      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
+
     header {
       background: #ffffff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
       border-bottom: 1px solid #e2e8f0;
       position: sticky;
       top: 0;
       z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
     }
+
     .logo-group {
       display: flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
     }
+
     .logo-img {
-      height: 40px;
+      height: 42px;
+      width: auto;
     }
+
     .logo-text {
+      font-size: 18px;
       font-weight: 800;
       color: #1e293b;
-      font-size: 18px;
     }
+
     .logo-text span {
       color: #2563eb;
     }
-    header nav ul {
+
+    nav ul {
       display: flex;
       list-style: none;
-      gap: 20px;
+      gap: 25px;
       margin: 0;
       padding: 0;
       align-items: center;
     }
-    header nav ul li a {
+
+    nav ul li a {
       text-decoration: none;
       color: #475569;
       font-weight: 600;
-      transition: color 0.2s;
+      font-size: 15px;
+      transition: color 0.2s ease;
     }
-    header nav ul li a:hover,
-    header nav ul li a.active {
+
+    nav ul li a:hover,
+    nav ul li a.active {
       color: #2563eb;
     }
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: #1e293b;
-      cursor: pointer;
-    }
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-      header nav {
-        display: none;
-        width: 100%;
-        background: #ffffff;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-        padding: 20px;
-      }
-      header nav.active {
-        display: block;
-      }
-      header nav ul {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-      }
-    }
+
     .main-container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      flex: 1;
+      width: 100%;
+      box-sizing: border-box;
     }
+
     .hero-banner {
       text-align: center;
-      padding: 50px 20px;
+      padding: 60px 30px;
       background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
       margin-bottom: 40px;
+      border: 1px solid #f1f5f9;
     }
+
     .hero-banner h1 {
-      font-size: 38px;
+      font-size: 42px;
       font-weight: 900;
       color: #1e293b;
       margin-bottom: 15px;
+      letter-spacing: -0.5px;
     }
+
     .hero-banner h1 span {
       color: #2563eb;
     }
+
     .hero-banner p {
       font-size: 18px;
       color: #64748b;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
     }
-    .search-container {
-      max-width: 600px;
-      margin: 0 auto 30px auto;
-      position: relative;
-    }
-    .search-input {
-      width: 100%;
-      padding: 14px 20px 14px 45px;
-      font-size: 16px;
-      border: 2px solid #e2e8f0;
-      border-radius: 10px;
-      outline: none;
-      transition: border-color 0.3s;
-      box-sizing: border-box;
-    }
-    .search-input:focus {
-      border-color: #2563eb;
-    }
-    .search-icon {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #94a3b8;
-      font-size: 18px;
-    }
+
     .hero-buttons {
       display: flex;
       justify-content: center;
       gap: 15px;
       flex-wrap: wrap;
     }
+
     .btn-card {
       color: white;
-      padding: 14px 24px;
-      border-radius: 8px;
+      padding: 14px 28px;
+      border-radius: 10px;
       text-decoration: none;
       font-weight: 600;
-      display: inline-block;
-      transition: transform 0.2s, opacity 0.2s;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
     }
+
     .btn-card:hover {
       transform: translateY(-2px);
-      opacity: 0.95;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
     }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 14px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: border-color 0.2s ease;
+    }
+
+    .feature-card:hover {
+      border-color: #cbd5e1;
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.6;
+      margin: 0;
+    }
+
     footer {
       background: #1e293b;
       color: #ffffff;
-      padding: 30px 20px;
+      padding: 35px 20px;
       text-align: center;
-      margin-top: 60px;
       border-top: 4px solid #2563eb;
+      margin-top: auto;
     }
+
     footer p {
-      font-size: 13px;
+      font-size: 14px;
       color: #94a3b8;
       margin: 0;
     }
@@ -184,19 +208,13 @@
 </head>
 <body>
 
-  <!-- Навігаційна шапка -->
+  <!-- Навігаційна шапка сайту -->
   <header>
     <a href="index.html" class="logo-group">
       <img src="logo.png" alt="Логотип Освітній Портал" class="logo-img">
       <div class="logo-text">Історія і географія <span>БЕЗ МЕЖ</span></div>
     </a>
-    
-    <!-- Кнопка гамбургер для мобільного меню -->
-    <button class="menu-toggle" id="menuToggle" aria-label="Відкрити меню">
-      <i class="fas fa-bars"></i>
-    </button>
-
-    <nav id="mainNav">
+    <nav>
       <ul>
         <li><a href="index.html" class="active">Головна</a></li>
         <li><a href="history.html">Історія</a></li>
@@ -207,60 +225,59 @@
     </nav>
   </header>
 
-  <!-- Головний контент та банер -->
+  <!-- Головний контейнер сторінки -->
   <main class="main-container">
+    
+    <!-- Головний вітальний банер -->
     <section class="hero-banner">
       <h1>ІСТОРІЯ І ГЕОГРАФІЯ <span>БЕЗ МЕЖ</span></h1>
-      <p>Авторський освітній портал для учнів, учителів та підготовки до НМТ.</p>
+      <p>
+        Авторський освітній портал Сергія Мовчана для учнів, учителів та всіх, хто прагне глибоко вивчати минуле нашої планети та географічні простори. Зручні матеріали, теорія та підготовка до НМТ.
+      </p>
 
-      <!-- Поле пошуку по темам та розділах -->
-      <div class="search-container">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" id="searchInput" class="search-input" placeholder="Шукати розділ або тему (напр. Історія, НМТ, Географія)...">
-      </div>
-
-      <!-- Кнопки швидкого переходу -->
-      <div class="hero-buttons" id="cardsContainer">
-        <a href="history.html" class="btn-card searchable-card" data-title="Історія історія України всесвітня історія" style="background: #2563eb;">📜 Історія</a>
-        <a href="geography.html" class="btn-card searchable-card" data-title="Географія материки океани карта" style="background: #10b981;">🌍 Географія</a>
-        <a href="nmt.html" class="btn-card searchable-card" data-title="НМТ тест підготовка екзамен" style="background: #f59e0b;">🎓 НМТ</a>
-        <a href="methodology.html" class="btn-card searchable-card" data-title="Методична скарбничка вчителю матеріали" style="background: #8b5cf6;">💼 Методична скарбничка</a>
+      <!-- Кнопки швидкого переходу по розділах сайту -->
+      <div class="hero-buttons">
+        <a href="history.html" class="btn-card" style="background: #2563eb;">
+          <i class="fas fa-scroll"></i> Історія
+        </a>
+        <a href="geography.html" class="btn-card" style="background: #10b981;">
+          <i class="fas fa-globe-americas"></i> Географія
+        </a>
+        <a href="nmt.html" class="btn-card" style="background: #f59e0b;">
+          <i class="fas fa-graduation-cap"></i> НМТ
+        </a>
+        <a href="methodology.html" class="btn-card" style="background: #8b5cf6;">
+          <i class="fas fa-briefcase"></i> Методична скарбничка
+        </a>
       </div>
     </section>
+
+    <!-- Додаткова інформаційна сітка розділів порталу -->
+    <section class="features-grid">
+      
+      <div class="feature-card">
+        <h3><i class="fas fa-book-open" style="color: #2563eb;"></i> Навчальні матеріали</h3>
+        <p>Повні теоретичні блоки, хронологічні таблиці, карти та структуровані конспекти уроків з історії та географії для повноцінного засвоєння тем.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3><i class="fas fa-tasks" style="color: #10b981;"></i> Інтерактивні задачі</h3>
+        <p>Практикуми з розв'язання хронологічних задач, визначення століть, роботи з масштабом та картами для перевірки власних знань.</p>
+      </div>
+
+      <div class="feature-card">
+        <h3><i class="fas fa-laptop-code" style="color: #8b5cf6;"></i> Цифрові інструменти</h3>
+        <p>Добірка найкращих освітніх сервісів, платформ та гейміфікованих інструментів для організації сучасних та захопливих занять.</p>
+      </div>
+
+    </section>
+
   </main>
 
-  <!-- Футер -->
+  <!-- Футер порталу -->
   <footer>
-    <p>© Сергій Мовчан • Освітній портал «Історія і географія БЕЗ МЕЖ»</p>
+    <p>© Сергій Мовчан • Освітній портал «Історія і географія БЕЗ МЕЖ» • Усі права захищено</p>
   </footer>
-
-  <!-- Скрипт для роботи мобільного меню та живого пошуку -->
-  <script>
-    // Випадаюче мобільне меню (гамбургер)
-    const menuToggle = document.getElementById('menuToggle');
-    const mainNav = document.getElementById('mainNav');
-
-    menuToggle.addEventListener('click', () => {
-      mainNav.classList.toggle('active');
-    });
-
-    // Живий пошук по кнопках/темах на головній сторінці
-    const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.searchable-card');
-
-    searchInput.addEventListener('input', (e) => {
-      const term = e.target.value.toLowerCase().trim();
-      cards.forEach(card => {
-        const title = card.getAttribute('data-title').toLowerCase();
-        const text = card.textContent.toLowerCase();
-        if (title.includes(term) || text.includes(term)) {
-          card.style.display = 'inline-block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  </script>
 
 </body>
 </html>
