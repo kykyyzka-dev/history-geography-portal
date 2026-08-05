@@ -189,7 +189,7 @@
       font-size: 13px;
     }
 
-    /* Виправлені стилі для карток віртуальних екскурсій з гарантованою клікабельністю */
+    /* Стилі для карток віртуальних екскурсій з гарантованою клікабельністю */
     .grid-6 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -322,10 +322,6 @@
 
     <div class="section-title">Віртуальні екскурсії</div>
     <div class="grid-6">
-      <a href="https://vr.theukrainians.org/" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
-        <div class="icon">🏛️</div>
-        <span>Музеї України</span>
-      </a>
       <a href="https://www.google.com/artsandculture/" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
         <div class="icon">🌍</div>
         <span>Світові пам'ятки</span>
@@ -337,10 +333,6 @@
       <a href="https://www.airpano.com/" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
         <div class="icon">✈️</div>
         <span>Панорами 360°</span>
-      </a>
-      <a href="https://livi.com.ua/" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
-        <div class="icon">🏰</div>
-        <span>Замки та фортеці</span>
       </a>
       <a href="https://sketchfab.com/tags/history" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
         <div class="icon">🏺</div>
@@ -379,7 +371,6 @@
   </div>
 
   <script>
-    // База даних тем та матеріалів для пошуку по сайту
     const siteSearchDatabase = [
       { title: "📜 Історія", description: "Головна сторінка розділу історії, теорія та практичні завдання.", url: "history.html" },
       { title: "🌍 Географія", description: "Матеріали з географії, материки, океани та цікаві об'єкти.", url: "geography.html" },
@@ -395,7 +386,6 @@
       { title: "Мертве море", description: "Найнижча точка суші на Землі та солоне озеро.", url: "geography.html" }
     ];
 
-    // Симуляція списку учнів та їх балів у localStorage
     let studentsData = JSON.parse(localStorage.getItem('portal_students_scores')) || [
       { name: "Олександр Шевченко", score: 45 },
       { name: "Софія Мельник", score: 38 },
