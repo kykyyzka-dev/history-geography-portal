@@ -71,10 +71,16 @@
         <button onclick="openModal('geo')" class="btn-link">Читати більше →</button>
       </div>
 
+      <!-- Інтерактивний експрес-тест прямо на картці -->
       <div class="info-card">
         <h4>🧠 Перевір себе</h4>
-        <p>Хто був першим президентом України?<br>А) Михайло Грушевський<br>Б) Леонід Кравчук</p>
-        <a href="nmt.html" class="btn-link">Пройти тест →</a>
+        <p class="quiz-question" style="font-weight: 600; margin-bottom: 8px;">Хто був першим президентом України?</p>
+        <div class="quiz-options" style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; font-size: 13px;">
+          <label class="quiz-option"><input type="radio" name="quick_quiz" value="a"> A) Михайло Грушевський</label>
+          <label class="quiz-option"><input type="radio" name="quick_quiz" value="b"> Б) Леонід Кравчук</label>
+        </div>
+        <button class="quiz-btn" onclick="checkQuickQuiz()" style="background: #2563eb; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer;">Перевірити</button>
+        <div id="quick-quiz-result" class="quiz-result" style="margin-top: 8px; display: none; font-size: 12px; padding: 6px; border-radius: 6px;"></div>
       </div>
     </div>
 
@@ -106,7 +112,7 @@
 
     const geoFacts = [
       { title: "Амазонка — річка без жодного мосту", short: "Найповноводніша річка планети. Вона не має жодного мосту через свій розлив.", full: "Амазонка скидає в Атлантичний океан близько 20% усієї прісної води річок планети.\n\nГоловна причина відсутності мостів — густі непрохідні джунглі та масштабні сезонні розливи." },
-      { title: "Гора Еверест (Джомолунгма)", short: "Найвища вершина світу (8848,86 м), яка щороку зростає.", full: "Еверест розташований у Гімалаях на кордоні Непалу та Китаю.\n\nЧерез зіткнення тектонічних плит вершина зростає приблизно на 4 міліметри на рік." }
+      { title: "Гора Еверест (Джомолунгма)", short: "Найвища вершина світу (8848,86 м), яка щороку зростає.", full: "Еверест розташований у Гімалаях на кордоні Непалу та Китаю.\n\nЧерез зіткнення тектонічних плит вершина зростає примерно на 4 міліметри на рік." }
     ];
 
     let currentEvent = null;
@@ -137,6 +143,39 @@
 
     function closeModal() {
       document.getElementById('info-modal').style.display = 'none';
+    }
+
+    function checkQuickQuiz() {
+      const options = document.getElementsByName('quick_quiz');
+      const result = document.getElementById('quick-quiz-result');
+      let selected = null;
+
+      for (const option of options) {
+        if (option.checked) {
+          selected = option.value;
+          break;
+        }
+      }
+
+      if (!selected) {
+        result.style.display = 'block';
+        result.style.backgroundColor = '#fee2e2';
+        result.style.color = '#b91c1c';
+        result.textContent = 'Будь ласка, оберіть варіант!';
+        return;
+      }
+
+      if (selected === 'b') {
+        result.style.display = 'block';
+        result.style.backgroundColor = '#dcfce7';
+        result.style.color = '#15803d';
+        result.textContent = 'Правильно! Леонід Кравчук — перший Президент України.';
+      } else {
+        result.style.display = 'block';
+        result.style.backgroundColor = '#fee2e2';
+        result.style.color = '#b91c1c';
+        result.textContent = 'Невірно. Михайло Грушевський очолював УЦР, а першим Президентом був Леонід Кравчук.';
+      }
     }
 
     document.addEventListener("DOMContentLoaded", loadCards);
