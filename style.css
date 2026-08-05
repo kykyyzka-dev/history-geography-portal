@@ -11,44 +11,59 @@ body {
   line-height: 1.5;
 }
 
-/* Шапка сайту */
+/* Оновлена виразна шапка сайту */
 header {
-  background-color: #ffffff;
-  padding: 12px 5%;
+  background-color: #0f172a !important; /* Темний контрастний фон */
+  padding: 14px 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 2px solid #d97706;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 .logo-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  text-decoration: none;
 }
 
+/* Анімований логотип SM */
 .logo-badge {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: #fff;
-  font-weight: 800;
-  padding: 8px 12px;
+  position: relative;
+  background: linear-gradient(135deg, #f59e0b, #d97706, #ef4444);
+  background-size: 200% 200%;
+  color: #ffffff;
+  font-weight: 900;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  font-size: 14px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+  animation: gradientShift 4s ease infinite, pulseGlow 2s ease-in-out infinite;
+  cursor: pointer;
 }
 
 .logo-text {
   font-weight: 800;
-  font-size: 15px;
-  color: #0f172a;
+  font-size: 16px;
+  color: #ffffff !important;
   line-height: 1.2;
 }
 
 .logo-text span {
-  color: #d97706;
+  color: #facc15 !important;
   display: block;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
 }
 
 nav ul {
@@ -59,15 +74,35 @@ nav ul {
 
 nav a {
   text-decoration: none;
-  color: #334155;
-  font-size: 13px;
+  color: #cbd5e1 !important;
+  font-size: 13.5px;
   font-weight: 600;
-  transition: color 0.2s;
+  transition: all 0.2s ease-in-out;
+  padding: 6px 10px;
+  border-radius: 6px;
 }
 
 nav a:hover {
-  color: #2563eb;
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1);
 }
+
+/* Ключові кадри анімацій */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 22px rgba(245, 158, 11, 0.95);
+  }
 
 /* Головний банер */
 .hero-banner {
