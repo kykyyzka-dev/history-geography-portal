@@ -11,6 +11,42 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css?v=4">
   <style>
+    /* Плавні анімації появи та ефекти */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatIcon {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(3deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+    }
+
+    .hero-text, .hero-author, .info-card, .leaderboard-section, .nmt-results-widget, .virtual-tour-card {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+
+    .virtual-tour-card .icon {
+      animation: floatIcon 3s ease-in-out infinite;
+    }
+
+    .user-login-btn {
+      animation: pulseGlow 2.5s infinite;
+    }
+
     /* Стилі для пошукової панелі та випадаючих результатів */
     .search-wrapper {
       max-width: 600px;
@@ -25,10 +61,12 @@
       border-radius: 12px;
       padding: 4px 15px;
       box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-      transition: border-color 0.3s;
+      transition: border-color 0.3s, transform 0.2s, box-shadow 0.2s;
     }
     .search-bar-box:focus-within {
       border-color: #2563eb;
+      transform: scale(1.01);
+      box-shadow: 0 8px 15px -3px rgba(37, 99, 235, 0.15);
     }
     .search-bar-box i {
       color: #94a3b8;
@@ -58,19 +96,21 @@
       display: none;
       border: 1px solid #e2e8f0;
       text-align: left;
+      animation: fadeInUp 0.3s ease-out;
     }
     .search-result-item {
       padding: 12px 16px;
       border-bottom: 1px solid #f1f5f9;
       text-decoration: none;
       display: block;
-      transition: background 0.2s;
+      transition: background 0.2s, padding-left 0.2s;
     }
     .search-result-item:last-child {
       border-bottom: none;
     }
     .search-result-item:hover {
       background: #f8fafc;
+      padding-left: 20px;
     }
     .search-result-title {
       font-weight: 700;
@@ -99,6 +139,10 @@
       margin: 25px auto 0 auto;
       text-align: left;
       border: 1px solid #e2e8f0;
+      transition: transform 0.3s ease;
+    }
+    .leaderboard-section:hover {
+      transform: translateY(-2px);
     }
     .leaderboard-header {
       display: flex;
@@ -138,6 +182,10 @@
       border-radius: 8px;
       font-size: 14px;
       outline: none;
+      transition: border-color 0.2s;
+    }
+    .user-login-input:focus {
+      border-color: #2563eb;
     }
     .user-login-btn {
       background: #2563eb;
@@ -148,10 +196,11 @@
       font-weight: 700;
       font-size: 13px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.1s;
     }
     .user-login-btn:hover {
       background: #1d4ed8;
+      transform: scale(1.05);
     }
     .leaderboard-list {
       max-height: 250px;
@@ -168,7 +217,11 @@
       background: #f8fafc;
       border-radius: 10px;
       border: 1px solid #e2e8f0;
-      transition: transform 0.2s;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .leaderboard-item:hover {
+      transform: scale(1.01);
+      background: #f1f5f9;
     }
     .leaderboard-item.current-user {
       background: #eff6ff;
@@ -199,6 +252,45 @@
       font-size: 13px;
     }
 
+    /* Стилі для віджета результатів НМТ */
+    .nmt-results-widget {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 20px auto 0 auto;
+      text-align: left;
+      border: 1px solid #e2e8f0;
+    }
+    .nmt-results-widget h3 {
+      font-size: 18px;
+      color: #1e293b;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nmt-results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .nmt-result-card {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #334155;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .nmt-result-card:hover {
+      border-color: #2563eb;
+      transform: translateY(-2px);
+    }
+
     /* Стилі для карток віртуальних екскурсій з гарантованою клікабельністю */
     .grid-3-tours {
       display: grid;
@@ -218,14 +310,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s, border-color 0.2s;
       cursor: pointer;
       position: relative;
       z-index: 10;
     }
     .virtual-tour-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.15);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 14px 20px -4px rgba(37, 99, 235, 0.2);
       border-color: #2563eb;
     }
     .virtual-tour-card .icon {
@@ -278,6 +370,15 @@
         <div id="searchResults" class="search-results-dropdown"></div>
       </div>
       
+      <!-- ВІДЖЕТ РЕЗУЛЬТАТІВ ТЕСТУВАННЯ НМТ -->
+      <div class="nmt-results-widget">
+        <h3><i class="fas fa-graduation-cap" style="color: #2563eb;"></i> Ваші результати тестування НМТ</h3>
+        <div class="nmt-results-grid">
+          <div class="nmt-result-card" id="res-history">📜 Історія України: ще не пройдено</div>
+          <div class="nmt-result-card" id="res-geography">🌍 Географія: ще не пройдено</div>
+        </div>
+      </div>
+
       <!-- ТАБЛИЦЯ АКТИВНОСТІ УЧНІВ (РЕЙТИНГ з автоматичним анулюванням у кінці тижня) -->
       <div class="leaderboard-section">
         <div class="leaderboard-header">
@@ -329,8 +430,8 @@
         </div>
         <div>
           <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-            <button onclick="checkCountryGame(true)" style="flex: 1; background: #16a34a; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;">✅ Правда</button>
-            <button onclick="checkCountryGame(false)" style="flex: 1; background: #dc2626; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;">❌ Брехня</button>
+            <button onclick="checkCountryGame(true)" style="flex: 1; background: #16a34a; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px; transition: transform 0.1s;" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='scale(1)'">✅ Правда</button>
+            <button onclick="checkCountryGame(false)" style="flex: 1; background: #dc2626; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px; transition: transform 0.1s;" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='scale(1)'">❌ Брехня</button>
           </div>
           <div id="country-game-result" style="font-size: 12px; padding: 6px; border-radius: 6px; display: none;"></div>
         </div>
@@ -359,15 +460,15 @@
     <h3 style="margin-bottom: 15px; font-size: 18px; font-weight: 700;">Приєднуйтесь до моїх спільнот</h3>
     <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
       <!-- Instagram -->
-      <a href="https://www.instagram.com/matilda.poetry?igsh=MXNkeWo5anFmd2k0Nw%3D%3D&utm_source=qr" target="_blank" title="Instagram" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #e1306c; border-radius: 50%; color: #ffffff; text-decoration: none; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s;">
+      <a href="https://www.instagram.com/matilda.poetry?igsh=MXNkeWo5anFmd2k0Nw%3D%3D&utm_source=qr" target="_blank" title="Instagram" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #e1306c; border-radius: 50%; color: #ffffff; text-decoration: none; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-4px) rotate(8deg)'" onmouseout="this.style.transform='translateY(0) rotate(0deg)'">
         <i class="fa-brands fa-instagram"></i>
       </a>
       <!-- TikTok -->
-      <a href="https://www.tiktok.com/@matilda.poetry?_r=1&_t=ZS-98cZEDGY3ym" target="_blank" title="TikTok" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #000000; border: 1px solid #333333; border-radius: 50%; color: #ffffff; text-decoration: none; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s;">
+      <a href="https://www.tiktok.com/@matilda.poetry?_r=1&_t=ZS-98cZEDGY3ym" target="_blank" title="TikTok" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #000000; border: 1px solid #333333; border-radius: 50%; color: #ffffff; text-decoration: none; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-4px) rotate(-8deg)'" onmouseout="this.style.transform='translateY(0) rotate(0deg)'">
         <i class="fa-brands fa-tiktok"></i>
       </a>
       <!-- Facebook -->
-      <a href="https://www.facebook.com/share/1ETNyD3yDX/?mibextid=wwXIfr" target="_blank" title="Facebook" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #1877f2; border-radius: 50%; color: #ffffff; text-decoration: none; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s;">
+      <a href="https://www.facebook.com/share/1ETNyD3yDX/?mibextid=wwXIfr" target="_blank" title="Facebook" style="display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #1877f2; border-radius: 50%; color: #ffffff; text-decoration: none; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-4px) rotate(8deg)'" onmouseout="this.style.transform='translateY(0) rotate(0deg)'">
         <i class="fa-brands fa-facebook-f"></i>
       </a>
     </div>
@@ -398,6 +499,21 @@
       { title: "Олешківські піски", description: "Піщаний масив в Україні.", url: "geography.html" },
       { title: "Мертве море", description: "Найнижча точка суші на Землі та солоне озеро.", url: "geography.html" }
     ];
+
+    /* ПІДТЯГУВАННЯ БАЛІВ НМТ З LOCALSTORAGE */
+    function loadNmtResults() {
+      const histScore = localStorage.getItem('nmt_history_score');
+      const histTotal = localStorage.getItem('nmt_history_total');
+      if (histScore !== null) {
+        document.getElementById('res-history').innerHTML = `📜 Історія України: <strong>${histScore} / ${histTotal} балів</strong>`;
+      }
+
+      const geoScore = localStorage.getItem('nmt_geography_score');
+      const geoTotal = localStorage.getItem('nmt_geography_total');
+      if (geoScore !== null) {
+        document.getElementById('res-geography').innerHTML = `🌍 Географія: <strong>${geoScore} / ${geoTotal} балів</strong>`;
+      }
+    }
 
     /* ФУНКЦІОНАЛ АВТОМАТИЧНОГО КИШЕНЬКОВОГО АНУЛЮВАННЯ БАЛІВ У КІНЦІ ТИЖНЯ (Неділя опівночі / Новий тиждень) */
     function checkAndResetWeeklyPoints() {
@@ -577,6 +693,7 @@
 
       loadNewCountryGameQuestion();
       renderLeaderboard();
+      loadNmtResults();
     }
 
     function loadNewCountryGameQuestion() {
