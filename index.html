@@ -1,152 +1,414 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Освітній портал Сергія Мовчана — історія та географія для учнів Дмитрушківського ліцею.">
-  <title>Історія і географія без меж</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Історія і географія без меж — Освітній портал Сергія Мовчана</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary: #d97706;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --hero-bg: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --radius: 16px;
+        }
+
+        [data-theme="dark"] {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Nav */
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--hero-bg);
+            color: white;
+            padding: 60px 0;
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .hero-text span {
+            color: #fbbf24;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-img {
+            width: 100%;
+            max-width: 380px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 4px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Welcome Block */
+        .welcome-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin: 40px 0;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Interactive Section */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .widgets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .widget-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .widget-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .widget-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .widget-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        /* Museum Banner */
+        .museum-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 50px;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 30px 0;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .welcome-card { flex-direction: column; text-align: center; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
 <body>
-  <header class="hero" id="home">
-    <div class="topbar">
-      <a class="brand" href="#home">🌍 Без меж</a>
-      <button class="menu-toggle" aria-label="Відкрити меню" aria-expanded="false">☰</button>
-      <nav class="nav" aria-label="Головне меню">
-        <a href="#home">Головна</a>
-        <a href="#subjects">Предмети</a>
-        <a href="#event">Подія дня</a>
-        <a href="#about">Про автора</a>
-        <a href="#contacts">Контакти</a>
-        <button id="theme-toggle" class="theme-btn" aria-label="Змінити тему">
-    🌙
-</button>
-      </nav>
-    </div>
 
-    <div class="hero-content">
-      <span class="eyebrow">Освітній портал</span>
-      <h1>Історія і географія без меж</h1>
-      <p class="lead">
-        Пізнаємо минуле, досліджуємо сучасність, будуємо майбутнє.
-      </p>
-      <p class="teacher">
-        <strong>Сергій Мовчан</strong><br>
-        учитель історії та географії Дмитрушківського ліцею
-        Дмитрушківської сільської ради Уманського району Черкаської області
-      </p>
-      <div class="hero-actions">
-        <a class="button primary" href="#subjects">Перейти до матеріалів</a>
-        <a class="button secondary" href="#about">Про портал</a>
-      </div>
-    </div>
-  </header>
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-globe"></i> Історія і географія без меж
+            </a>
+            <ul class="nav-links">
+                <li><a href="#subjects">Предмети</a></li>
+                <li><a href="#interactive">Цікаве</a></li>
+                <li><a href="#museum">Віртуальний музей</a></li>
+                <li><a href="#about">Про автора</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle"><i class="fa-solid fa-moon"></i></button>
+        </div>
+    </header>
 
-  <main>
-    <section class="section intro">
-      <div class="section-heading">
-        <span class="eyebrow">Навчаймося цікаво</span>
-        <h2>Ласкаво просимо!</h2>
-        <p>
-          Тут зібрані навчальні матеріали, карти, презентації, відео,
-          онлайн-тести та цікаві факти з історії й географії.
-        </p>
-      </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1>ІСТОРІЯ І ГЕОГРАФІЯ <span>БЕЗ МЕЖ</span></h1>
+                <p>Авторський освітній портал Сергія Мовчана. Пізнаємо минуле, досліджуємо сучасність, будуємо майбутнє!</p>
+                <div class="hero-buttons">
+                    <a href="#subjects" class="btn btn-primary">Перейти до матеріалів</a>
+                    <a href="#museum" class="btn btn-secondary">Віртуальний музей</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="https://kykyyzka-dev.github.io/history-geography-portal/hero-photo.jpg" alt="Сергій Мовчан" class="hero-img" onerror="this.src='https://via.placeholder.com/380x380?text=Сергій+Мовчан'">
+            </div>
+        </div>
     </section>
 
-    <section class="section" id="subjects">
-      <div class="section-heading">
-        <span class="eyebrow">Основні напрями</span>
-        <h2>Розділи порталу</h2>
-      </div>
+    <main class="container">
+        <!-- Welcome Block -->
+        <section class="welcome-card" id="about">
+            <img src="https://kykyyzka-dev.github.io/history-geography-portal/hero-photo.jpg" alt="Сергій Мовчан" class="welcome-avatar" onerror="this.src='https://via.placeholder.com/100'">
+            <div>
+                <h2>👋 Вітаю на моєму освітньому порталі!</h2>
+                <p>Мене звати Сергій Мовчан, я вчитель історії та географії Дмитрушківського ліцею. Тут ви знайдете навчальні матеріали, презентації, карти, тести та багато цікавого. Історію та географію можна вивчати серйозно, але з гарним настроєм! 😊</p>
+            </div>
+        </section>
 
-      <div class="cards">
-        <article class="card">
-          <div class="icon">🇺🇦</div>
-          <h3>Історія України</h3>
-          <p>Матеріали, хронології, карти та завдання для 5–11 класів.</p>
-          <a href="#" class="card-link">Відкрити розділ →</a>
-        </article>
+        <!-- Interactive Section -->
+        <h2 class="section-title" id="interactive">Що цікавого сьогодні?</h2>
+        <section class="widgets-grid">
+            <div class="widget-card">
+                <div class="widget-icon"><i class="fa-solid fa-calendar-day"></i></div>
+                <h3>Подія цього дня</h3>
+                <p id="eventText">Завантаження події...</p>
+                <button class="btn btn-primary" onclick="nextEvent()" style="padding: 6px 12px; font-size: 0.85rem;">Інша подія</button>
+            </div>
 
-        <article class="card">
-          <div class="icon">🏛️</div>
-          <h3>Всесвітня історія</h3>
-          <p>Подорож цивілізаціями від Стародавнього світу до сучасності.</p>
-          <a href="#" class="card-link">Відкрити розділ →</a>
-        </article>
+            <div class="widget-card">
+                <div class="widget-icon"><i class="fa-solid fa-earth-americas"></i></div>
+                <h3>Цікавий факт</h3>
+                <p id="factText">Завантаження факту...</p>
+                <button class="btn btn-primary" onclick="nextFact()" style="padding: 6px 12px; font-size: 0.85rem;">Ще факт</button>
+            </div>
 
-        <article class="card">
-          <div class="icon">🌎</div>
-          <h3>Географія</h3>
-          <p>Материки, океани, країни, населення, природа та дослідження.</p>
-          <a href="#" class="card-link">Відкрити розділ →</a>
-        </article>
+            <div class="widget-card">
+                <div class="widget-icon"><i class="fa-solid fa-brain"></i></div>
+                <h3>Запитання дня</h3>
+                <p id="quizQuestion">Скільки океанів на Землі?</p>
+                <div id="quizOptions" style="display:flex; gap: 5px; margin-bottom: 10px;">
+                    <button class="btn btn-secondary" style="color:var(--text-main); border:1px solid var(--border);" onclick="checkQuiz(this, false)">4</button>
+                    <button class="btn btn-secondary" style="color:var(--text-main); border:1px solid var(--border);" onclick="checkQuiz(this, true)">5</button>
+                </div>
+                <small id="quizResult"></small>
+            </div>
+        </section>
 
-        <article class="card">
-          <div class="icon">📝</div>
-          <h3>Онлайн-тести</h3>
-          <p>Перевірка знань після тем і підготовка до контрольних робіт.</p>
-          <a href="#" class="card-link">Розпочати тест →</a>
-        </article>
+        <!-- Museum Banner -->
+        <section class="museum-banner" id="museum">
+            <h2>🏛️ Віртуальний музей</h2>
+            <p style="margin: 15px 0 25px;">Досліджуйте 3D-артефакти, історичні карти та унікальні пам'ятки архітектури онлайн.</p>
+            <a href="#" class="btn btn-primary">Завітати до музею</a>
+        </section>
+    </main>
 
-        <article class="card">
-          <div class="icon">🗺️</div>
-          <h3>Інтерактивні карти</h3>
-          <p>Карти України та світу для роботи на уроці й удома.</p>
-          <a href="#" class="card-link">Переглянути карти →</a>
-        </article>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>Історія і географія без меж</strong> — Авторський освітній портал Сергія Мовчана</p>
+            <p>© 2026 Дмитрушківський ліцей. Усі права захищені.</p>
+        </div>
+    </footer>
 
-        <article class="card">
-          <div class="icon">📚</div>
-          <h3>Навчальні матеріали</h3>
-          <p>Презентації, пам’ятки, документи, відео та корисні посилання.</p>
-          <a href="#" class="card-link">Перейти до матеріалів →</a>
-        </article>
-      </div>
-    </section>
+    <!-- Interactive Scripts -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            }
+        });
 
-    <section class="section feature" id="event">
-      <div>
-        <span class="eyebrow">Щоденна рубрика</span>
-        <h2>Подія цього дня</h2>
-        <p id="daily-event">
-          Натисніть кнопку, щоб показати історичну подію.
-        </p>
-        <button class="button primary" id="event-button" type="button">
-          Показати подію
-        </button>
-      </div>
-      <div class="feature-visual" aria-hidden="true">📜</div>
-    </section>
+        // Dynamic Content
+        const events = [
+            "20 травня 1862 року — Народився Микола Міхновський, український політичний діяч.",
+            "24 серпня 1991 року — Проголошення незалежності України.",
+            "22 січня 1919 року — Проголошено Акт Злуки УНР та ЗУНР."
+        ];
+        const facts = [
+            "Найвищий вулкан у Сонячній системі знаходиться на Марсі (Олімп, 21.9 км).",
+            "Україна є найбільшою країною, яка повністю розташована в Європі.",
+            "Тихий океан більший за всю сушу Землі разом узяту."
+        ];
 
-    <section class="section about" id="about">
-      <div class="about-badge">👨‍🏫</div>
-      <div>
-        <span class="eyebrow">Про автора</span>
-        <h2>Сергій Мовчан</h2>
-        <p>
-          Я працюю вчителем історії та географії Дмитрушківського ліцею
-          Дмитрушківської сільської ради Уманського району Черкаської області.
-        </p>
-        <p>
-          Мета цього порталу — зробити навчання зрозумілим, сучасним,
-          доступним і цікавим для кожного учня.
-        </p>
-      </div>
-    </section>
-  </main>
+        let eventIdx = 0;
+        let factIdx = 0;
 
-  <footer id="contacts">
-    <div>
-      <strong>Історія і географія без меж</strong>
-      <p>Авторський освітній портал Сергія Мовчана</p>
-    </div>
-    <div>
-      <p>Дмитрушківський ліцей</p>
-      <p>© <span id="year"></span> Усі права захищені</p>
-    </div>
-  </footer>
+        function nextEvent() {
+            eventIdx = (eventIdx + 1) % events.length;
+            document.getElementById('eventText').innerText = events[eventIdx];
+        }
 
-  <script src="script.js"></script>
+        function nextFact() {
+            factIdx = (factIdx + 1) % facts.length;
+            document.getElementById('factText').innerText = facts[factIdx];
+        }
+
+        function checkQuiz(btn, isCorrect) {
+            const res = document.getElementById('quizResult');
+            if(isCorrect) {
+                res.innerText = "Правильно! (Південний океан визнано 5-м)";
+                res.style.color = "green";
+            } else {
+                res.innerText = "Неповно! Офіційно виділяють 5 океанів.";
+                res.style.color = "red";
+            }
+        }
+
+        // Init
+        document.getElementById('eventText').innerText = events[0];
+        document.getElementById('factText').innerText = facts[0];
+    </script>
 </body>
 </html>
