@@ -720,9 +720,14 @@
         return;
       }
 
-      const filtered = siteSearchDatabase.filter(item => 
-        item.title.toLowerCase().includes(query) || item.description.toLowerCase().includes(query)
-      );
+      // Гнучкий пошук: розбиваємо запит на окремі слова
+      const keywords = query.split(/\s+/);
+
+      const filtered = siteSearchDatabase.filter(item => {
+        const itemText = (item.title + " " + item.description).toLowerCase();
+        // Перевіряємо, чи містяться всі введені слова у тексті елемента
+        return keywords.every(kw => itemText.includes(kw));
+      });
 
       if (filtered.length > 0) {
         let html = '';
@@ -738,7 +743,7 @@
         searchResultsDropdown.style.display = 'block';
       } else {
         searchResultsDropdown.innerHTML = `<div class="search-no-results">Нічого не знайдено за вашим запитом</div>`;
-        searchResultsDropdown.style.display = '`block`';
+        searchResultsDropdown.style.display = 'block';
       }
     });
 
