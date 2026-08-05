@@ -89,7 +89,7 @@
       font-size: 14px;
     }
 
-    /* Стилі для інтерактивної таблиці рейтингу учнів замість кнопок */
+    /* Стилі для інтерактивної таблиці рейтингу учнів */
     .leaderboard-section {
       background: #ffffff;
       border-radius: 16px;
@@ -189,21 +189,29 @@
       font-size: 13px;
     }
 
-    /* Стилі для карток віртуальних екскурсій */
+    /* Виправлені стилі для карток віртуальних екскурсій з гарантованою клікабельністю */
+    .grid-6 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
     .virtual-tour-card {
       background: #ffffff;
       border-radius: 16px;
-      padding: 20px;
+      padding: 20px 10px;
       text-align: center;
       box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
       border: 1px solid #e2e8f0;
-      text-decoration: none;
+      text-decoration: none !important;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
       cursor: pointer;
+      position: relative;
+      z-index: 10;
     }
     .virtual-tour-card:hover {
       transform: translateY(-4px);
@@ -213,11 +221,13 @@
     .virtual-tour-card .icon {
       font-size: 38px;
       margin-bottom: 10px;
+      pointer-events: none;
     }
     .virtual-tour-card span {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       color: #1e293b;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -396,7 +406,6 @@
     let currentStudent = localStorage.getItem('portal_current_student') || null;
 
     function renderLeaderboard() {
-      // Сортування за балами від найбільшого до найменшого
       studentsData.sort((a, b) => b.score - a.score);
       
       const listContainer = document.getElementById('leaderboardList');
@@ -421,7 +430,6 @@
         `;
       });
 
-      // Зміна панелі авторизації, якщо учень вже увійшов
       const authBox = document.getElementById('authBox');
       if (currentStudent) {
         authBox.innerHTML = `
@@ -442,10 +450,9 @@
       currentStudent = name;
       localStorage.setItem('portal_current_student', currentStudent);
 
-      // Перевіряємо, чи є вже такий учень у списку
       let existing = studentsData.find(s => s.name === currentStudent);
       if (!existing) {
-        studentsData.push({ name: currentStudent, score: 5 }); // Бонус за вхід
+        studentsData.push({ name: currentStudent, score: 5 });
       }
       localStorage.setItem('portal_students_scores', JSON.stringify(studentsData));
       renderLeaderboard();
@@ -473,7 +480,6 @@
       renderLeaderboard();
     }
 
-    // Розширений список історичних фактів
     const keyEvents = [
       { title: "Бій під Крутами (1918 рік)", short: "Студенти та курсанти стримали наступ більшовицьких військ на Київ.", full: "29 січня 1918 року біля залізничної станції Крути близько 500 українських студентів, юнаків та козаків протистояли 4-тисячній більшовицькій армії Муравйова.\n\nЗавдяки цьому затримано наступ ворога на 4 дні, що дало змогу УНР підписати Берестейський мирний договір." },
       { title: "Акт Злуки УНР та ЗУНР (1919 рік)", short: "Урочисте проголошення соборності українських земель на Софійському майдані.", full: "22 січня 1919 року відбулося об'єднання Західноукраїнської Народної Республіки та Української Народної Республіки в єдину державну систему." },
@@ -481,7 +487,6 @@
       { title: "Хрещення Русі (988 рік)", short: "Князь Володимир Великий запровадив християнство як державну релігію Русі.", full: "Масове хрещення киян у водах Дніпра та Почайни започаткувало новий етап культурного, політичного та духовного розвитку Русі-України." }
     ];
 
-    // Розширений список географічних фактів
     const geoFacts = [
       { title: "Амазонка — річка без жодного мосту", short: "Найповноводніша річка планети. Вона не має жодного мосту через свій розлив.", full: "Амазонка скидає в Атлантичний океан близько 20% усієї прісної води річок планети.\n\nГоловна причина відсутності мостів — густі непрохідні джунглі та масштабні сезонні розливи." },
       { title: "Гора Еверест (Джомолунгма)", short: "Найвища вершина світу (8848,86 м), яка щороку зростає.", full: "Еверест розташований у Гімалаях на кордоні Непалу та Китаю.\n\nЧерез зіткнення тектонічних плит вершина зростає приблизно на 4 міліметри на рік." },
@@ -489,7 +494,6 @@
       { title: "Мертве море", short: "Найнижча точка суші на Землі та найсолоніше озеро світу.", full: "Озеро розташоване на 430 метрів нижче рівня моря. Солоність води сягає 34%, що робить утримання людини на поверхні води природним явищем." }
     ];
 
-    // Масив інтерактивних швидких тестів
     const quickQuizzes = [
       {
         question: "Хто був першим президентом України?",
@@ -600,7 +604,7 @@
         result.style.backgroundColor = '#dcfce7';
         result.style.color = '#15803d';
         result.textContent = `Правильно! ${currentQuiz.explanation}`;
-        addPoints(10); // Нагорода за правильний тест
+        addPoints(10);
       } else {
         result.style.backgroundColor = '#fee2e2';
         result.style.color = '#b91c1c';
@@ -608,7 +612,6 @@
       }
     }
 
-    // Живий пошук по сайту
     const searchInput = document.getElementById('siteSearchInput');
     const searchResultsDropdown = document.getElementById('searchResults');
 
