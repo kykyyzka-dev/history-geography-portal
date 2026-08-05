@@ -298,7 +298,7 @@
 
   </main>
 
-  <!-- Скрипти для генерації, перевірки тестів, збереження балів та експорту -->
+  <!-- Скрипти для генерації, перемішування, перевірки тестів та експорту -->
   <script>
     const historyData = [
       { q: "1. Коли відбулося хрещення Русі князем Володимиром Великим?", opts: ["988 р.", "1019 р.", "1240 р."], ans: 0 },
@@ -366,26 +366,52 @@
       { q: "30. Яка найбільша за площею острівна територія на Землі покрита крижаним щитом?", opts: ["Мадагаскар", "Гренландія", "Нова Гвінея"], ans: 1 }
     ];
 
+    // Функція для перемішування масиву (алгоритм Фішера-Єйтса)
+    function shuffleArray(array) {
+      let arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
     function renderTests() {
+      // Перемішуємо самі запитання випадковим чином
+      const shuffledHistory = shuffleArray(historyData);
       const histContainer = document.getElementById('history-questions-container');
       let histHTML = '';
-      historyData.forEach((item, index) => {
-        histHTML += `<div class="quiz-card"><div class="quiz-question">${item.q}</div><div class="quiz-options">`;
-        item.opts.forEach((opt, oIndex) => {
-          const val = (oIndex === item.ans) ? 'correct' : 'wrong';
-          histHTML += `<label><input type="radio" name="hist_q${index}" value="${val}"> ${opt}</label>`;
+      
+      shuffledHistory.forEach((item, index) => {
+        // Збираємо варіанти відповідей разом із їхнім індексом, щоб відстежити правильну
+        let optionsWithMeta = item.opts.map((opt, oIdx) => ({ text: opt, isCorrect: oIdx === item.ans }));
+        // Перемішуємо варіанти відповідей всередині питання
+        optionsWithMeta = shuffleArray(optionsWithMeta);
+
+        histHTML += `<div class="quiz-card"><div class="quiz-question">${index + 1}. ${item.q.replace(/^\d+\.\s*/, '')}</div><div class="quiz-options">`;
+        
+        optionsWithMeta.forEach((optObj) => {
+          const val = optObj.isCorrect ? 'correct' : 'wrong';
+          histHTML += `<label><input type="radio" name="hist_q${index}" value="${val}"> ${optObj.text}</label>`;
         });
         histHTML += `</div></div>`;
       });
       histContainer.innerHTML = histHTML;
 
+      // Те ж саме робимо для географії
+      const shuffledGeography = shuffleArray(geographyData);
       const geoContainer = document.getElementById('geography-questions-container');
       let geoHTML = '';
-      geographyData.forEach((item, index) => {
-        geoHTML += `<div class="quiz-card"><div class="quiz-question">${item.q}</div><div class="quiz-options">`;
-        item.opts.forEach((opt, oIndex) => {
-          const val = (oIndex === item.ans) ? 'correct' : 'wrong';
-          geoHTML += `<label><input type="radio" name="geo_q${index}" value="${val}"> ${opt}</label>`;
+      
+      shuffledGeography.forEach((item, index) => {
+        let optionsWithMeta = item.opts.map((opt, oIdx) => ({ text: opt, isCorrect: oIdx === item.ans }));
+        optionsWithMeta = shuffleArray(optionsWithMeta);
+
+        geoHTML += `<div class="quiz-card"><div class="quiz-question">${index + 1}. ${item.q.replace(/^\d+\.\s*/, '')}</div><div class="quiz-options">`;
+        
+        optionsWithMeta.forEach((optObj) => {
+          const val = optObj.isCorrect ? 'correct' : 'wrong';
+          geoHTML += `<label><input type="radio" name="geo_q${index}" value="${val}"> ${optObj.text}</label>`;
         });
         geoHTML += `</div></div>`;
       });
@@ -401,7 +427,7 @@
         if (selected) {
           answeredCount++;
           if (selected.value === 'correct') {
-            score++; // 1 відповідь = 1 бал
+            score++;
           }
         }
       }
@@ -414,7 +440,6 @@
         return;
       }
 
-      // Зберігаємо результати в localStorage для передачі на головну сторінку
       localStorage.setItem(`nmt_${type}_score`, score);
       localStorage.setItem(`nmt_${type}_total`, totalCount);
 
