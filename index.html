@@ -424,15 +424,15 @@
       </div>
     </div>
 
-    <div class="section-title">Віртуальні екскурсії</div>
+    <div class="section-title">Віртуальні екскурсії та медіа</div>
     <div class="grid-3-tours">
       <a href="https://izi.travel/uk" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
         <div class="icon">🗺️</div>
         <span>AUDIO & 3D Тури</span>
       </a>
-      <a href="https://www.airpano.com/" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
-        <div class="icon">✈️</div>
-        <span>Панорами 360°</span>
+      <a href="https://youtube.com/@realnaistoriia?si=BKC5gf1P0DXU0ChB" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
+        <div class="icon" style="color: #ff0000;"><i class="fa-brands fa-youtube"></i></div>
+        <span>Рельна історія</span>
       </a>
       <a href="https://sketchfab.com/tags/history" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
         <div class="icon">🏺</div>
@@ -720,12 +720,10 @@
         return;
       }
 
-      // Гнучкий пошук: розбиваємо запит на окремі слова
       const keywords = query.split(/\s+/);
 
       const filtered = siteSearchDatabase.filter(item => {
         const itemText = (item.title + " " + item.description).toLowerCase();
-        // Перевіряємо, чи містяться всі введені слова у тексті елемента
         return keywords.every(kw => itemText.includes(kw));
       });
 
