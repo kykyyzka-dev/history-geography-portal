@@ -88,6 +88,106 @@
       color: #64748b;
       font-size: 14px;
     }
+
+    /* Стилі для інтерактивної таблиці рейтингу учнів замість кнопок */
+    .leaderboard-section {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 25px auto 0 auto;
+      text-align: left;
+      border: 1px solid #e2e8f0;
+    }
+    .leaderboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+    .leaderboard-header h3 {
+      font-size: 18px;
+      color: #1e293b;
+      font-weight: 800;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .user-login-bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .user-login-input {
+      padding: 6px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+    }
+    .user-login-btn {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .user-login-btn:hover {
+      background: #1d4ed8;
+    }
+    .leaderboard-list {
+      max-height: 250px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .leaderboard-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      transition: transform 0.2s;
+    }
+    .leaderboard-item.current-user {
+      background: #eff6ff;
+      border-color: #3b82f6;
+    }
+    .student-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #334155;
+    }
+    .student-rank {
+      font-weight: 800;
+      color: #64748b;
+      width: 24px;
+    }
+    .student-rank.top-1 { color: #eab308; }
+    .student-rank.top-2 { color: #94a3b8; }
+    .student-rank.top-3 { color: #b45309; }
+    .student-score {
+      background: #2563eb;
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13px;
+    }
   </style>
 </head>
 <body>
@@ -127,12 +227,20 @@
         <div id="searchResults" class="search-results-dropdown"></div>
       </div>
       
-      <div class="hero-buttons" style="margin-top: 25px;">
-        <a href="history.html" class="btn-card btn-blue">📜 Історія</a>
-        <a href="geography.html" class="btn-card btn-green">🌍 Географія</a>
-        <a href="nmt.html" class="btn-card btn-orange">🎓 НМТ</a>
-        <a href="methodology.html" class="btn-card btn-purple">💼 Методична скарбничка</a>
+      <!-- ТАБЛИЦЯ АКТИВНОСТІ УЧНІВ (РЕЙТИНГ ЗАМІСТЬ КНОПОК) -->
+      <div class="leaderboard-section">
+        <div class="leaderboard-header">
+          <h3><i class="fas fa-medal" style="color: #2563eb;"></i> Рейтинг активності учнів</h3>
+          <div class="user-login-bar" id="authBox">
+            <input type="text" id="studentNameInput" class="user-login-input" placeholder="Введіть ваше ПІБ..." maxlength="25">
+            <button class="user-login-btn" onclick="registerStudent()">Увійти</button>
+          </div>
+        </div>
+        <div id="leaderboardList" class="leaderboard-list">
+          <!-- Динамічно заповнюється скриптом -->
+        </div>
       </div>
+
     </div>
 
     <div class="hero-author">
@@ -152,13 +260,13 @@
       <div class="info-card">
         <h4>📜 Історичний факт</h4>
         <p id="event-content">Завантаження...</p>
-        <button onclick="openModal('event')" class="btn-link">Детальніше →</button>
+        <button onclick="openModal('event'); addPoints(5);" class="btn-link">Детальніше → (+5 балів)</button>
       </div>
 
       <div class="info-card">
         <h4>🌍 Цікаво про географію</h4>
         <p id="geo-content">Завантаження...</p>
-        <button onclick="openModal('geo')" class="btn-link">Читати більше →</button>
+        <button onclick="openModal('geo'); addPoints(5);" class="btn-link">Читати більше → (+5 балів)</button>
       </div>
 
       <!-- Динамічний експрес-тест -->
@@ -166,19 +274,19 @@
         <h4>🧠 Перевір себе</h4>
         <p id="quiz-question" class="quiz-question" style="font-weight: 600; margin-bottom: 8px;">Завантаження...</p>
         <div id="quiz-options" class="quiz-options" style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; font-size: 13px;"></div>
-        <button class="quiz-btn" onclick="checkQuickQuiz()" style="background: #2563eb; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer;">Перевірити</button>
+        <button class="quiz-btn" onclick="checkQuickQuiz()" style="background: #2563eb; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer;">Перевірити (+10 балів)</button>
         <div id="quick-quiz-result" class="quiz-result" style="margin-top: 8px; display: none; font-size: 12px; padding: 6px; border-radius: 6px;"></div>
       </div>
     </div>
 
     <div class="section-title">Навчальні розділи</div>
     <div class="grid-6">
-      <div class="category-card"><div class="icon">🏰</div><span>Історія України</span></div>
-      <div class="category-card"><div class="icon">🏛️</div><span>Всесвітня історія</span></div>
-      <div class="category-card"><div class="icon">🌐</div><span>Географія</span></div>
-      <div class="category-card"><div class="icon">🗺️</div><span>Інтерактивні карти</span></div>
-      <div class="category-card"><div class="icon">📝</div><span>Онлайн-тести</span></div>
-      <div class="category-card"><div class="icon">📅</div><span>Цікаві факти</span></div>
+      <div class="category-card" onclick="addPoints(3)"><div class="icon">🏰</div><span>Історія України</span></div>
+      <div class="category-card" onclick="addPoints(3)"><div class="icon">🏛️</div><span>Всесвітня історія</span></div>
+      <div class="category-card" onclick="addPoints(3)"><div class="icon">🌐</div><span>Географія</span></div>
+      <div class="category-card" onclick="addPoints(3)"><div class="icon">🗺️</div><span>Інтерактивні карти</span></div>
+      <div class="category-card" onclick="addPoints(5)"><div class="icon">📝</div><span>Онлайн-тести</span></div>
+      <div class="category-card" onclick="addPoints(3)"><div class="icon">📅</div><span>Цікаві факти</span></div>
     </div>
   </main>
 
@@ -227,6 +335,94 @@
       { title: "Олешківські піски", description: "Піщаний масив в Україні.", url: "geography.html" },
       { title: "Мертве море", description: "Найнижча точка суші на Землі та солоне озеро.", url: "geography.html" }
     ];
+
+    // Симуляція списку учнів та їх балів у localStorage
+    let studentsData = JSON.parse(localStorage.getItem('portal_students_scores')) || [
+      { name: "Олександр Шевченко", score: 45 },
+      { name: "Софія Мельник", score: 38 },
+      { name: "Максим Бондаренко", score: 25 },
+      { name: "Анна Коваленко", score: 19 }
+    ];
+
+    let currentStudent = localStorage.getItem('portal_current_student') || null;
+
+    function renderLeaderboard() {
+      // Сортування за балами від найбільшого до найменшого
+      studentsData.sort((a, b) => b.score - a.score);
+      
+      const listContainer = document.getElementById('leaderboardList');
+      listContainer.innerHTML = '';
+
+      studentsData.forEach((student, index) => {
+        let rankClass = '';
+        if (index === 0) rankClass = 'top-1';
+        else if (index === 1) rankClass = 'top-2';
+        else if (index === 2) rankClass = 'top-3';
+
+        const isMe = student.name === currentStudent ? 'current-user' : '';
+
+        listContainer.innerHTML += `
+          <div class="leaderboard-item ${isMe}">
+            <div class="student-info">
+              <span class="student-rank ${rankClass}">#${index + 1}</span>
+              <span>${student.name} ${isMe ? '(Ви)' : ''}</span>
+            </div>
+            <span class="student-score">${student.score} балів</span>
+          </div>
+        `;
+      });
+
+      // Зміна панелі авторизації, якщо учень вже увійшов
+      const authBox = document.getElementById('authBox');
+      if (currentStudent) {
+        authBox.innerHTML = `
+          <span style="font-size: 13px; font-weight: 600; color: #1e293b;">👤 ${currentStudent}</span>
+          <button class="user-login-btn" style="background: #ef4444;" onclick="logoutStudent()">Вийти</button>
+        `;
+      }
+    }
+
+    function registerStudent() {
+      const input = document.getElementById('studentNameInput');
+      const name = input.value.trim();
+      if (!name) {
+        alert('Будь ласка, введіть ваше імʼя та прізвище!');
+        return;
+      }
+
+      currentStudent = name;
+      localStorage.setItem('portal_current_student', currentStudent);
+
+      // Перевіряємо, чи є вже такий учень у списку
+      let existing = studentsData.find(s => s.name === currentStudent);
+      if (!existing) {
+        studentsData.push({ name: currentStudent, score: 5 }); // Бонус за вхід
+      }
+      localStorage.setItem('portal_students_scores', JSON.stringify(studentsData));
+      renderLeaderboard();
+    }
+
+    function logoutStudent() {
+      currentStudent = null;
+      localStorage.removeItem('portal_current_student');
+      location.reload();
+    }
+
+    function addPoints(points) {
+      if (!currentStudent) {
+        alert('Щоб отримувати бали за активність, будь ласка, введіть своє ПІБ у полі зверху та натисніть «Увійти»!');
+        return;
+      }
+
+      let student = studentsData.find(s => s.name === currentStudent);
+      if (student) {
+        student.score += points;
+      } else {
+        studentsData.push({ name: currentStudent, score: points });
+      }
+      localStorage.setItem('portal_students_scores', JSON.stringify(studentsData));
+      renderLeaderboard();
+    }
 
     // Розширений список історичних фактів
     const keyEvents = [
@@ -285,15 +481,12 @@
     let currentQuiz = null;
 
     function loadCards() {
-      // Рандомний вибір факту з історії
       currentEvent = keyEvents[Math.floor(Math.random() * keyEvents.length)];
       document.getElementById('event-content').innerHTML = `<strong>${currentEvent.title}</strong> — ${currentEvent.short}`;
 
-      // Рандомний вибір факту з географії
       currentGeo = geoFacts[Math.floor(Math.random() * geoFacts.length)];
       document.getElementById('geo-content').innerHTML = `<strong>${currentGeo.title}</strong> — ${currentGeo.short}`;
 
-      // Рандомний вибір тесту
       currentQuiz = quickQuizzes[Math.floor(Math.random() * quickQuizzes.length)];
       document.getElementById('quiz-question').textContent = currentQuiz.question;
 
@@ -307,9 +500,9 @@
         `;
       });
 
-      // Очищення попереднього результату
       const result = document.getElementById('quick-quiz-result');
       result.style.display = 'none';
+      renderLeaderboard();
     }
 
     function openModal(type) {
@@ -358,6 +551,7 @@
         result.style.backgroundColor = '#dcfce7';
         result.style.color = '#15803d';
         result.textContent = `Правильно! ${currentQuiz.explanation}`;
+        addPoints(10); // Нагорода за правильний тест
       } else {
         result.style.backgroundColor = '#fee2e2';
         result.style.color = '#b91c1c';
@@ -400,7 +594,6 @@
       }
     });
 
-    // Закриття випадаючого списку при кліку за межами пошуку
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.search-wrapper')) {
         searchResultsDropdown.style.display = 'none';
