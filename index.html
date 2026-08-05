@@ -7,9 +7,88 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <!-- Підключення іконок соцмереж -->
+  <!-- Підключення іконок соцмереж та пошуку -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css?v=3">
+  <style>
+    /* Стилі для пошукової панелі та випадаючих результатів */
+    .search-wrapper {
+      max-width: 600px;
+      margin: 20px auto 0 auto;
+      position: relative;
+    }
+    .search-bar-box {
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 4px 15px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      transition: border-color 0.3s;
+    }
+    .search-bar-box:focus-within {
+      border-color: #2563eb;
+    }
+    .search-bar-box i {
+      color: #94a3b8;
+      font-size: 18px;
+      margin-right: 10px;
+    }
+    .search-input-field {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      padding: 10px 0;
+      color: #1e293b;
+      background: transparent;
+    }
+    .search-results-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+      z-index: 100;
+      max-height: 300px;
+      overflow-y: auto;
+      display: none;
+      border: 1px solid #e2e8f0;
+      text-align: left;
+    }
+    .search-result-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s;
+    }
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+    .search-result-item:hover {
+      background: #f8fafc;
+    }
+    .search-result-title {
+      font-weight: 700;
+      color: #1e293b;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    .search-result-desc {
+      font-size: 12px;
+      color: #64748b;
+    }
+    .search-no-results {
+      padding: 15px;
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
 
@@ -39,7 +118,16 @@
       <p class="subtitle">Авторський освітній портал Сергія Мовчана</p>
       <p class="quote">“Пізнаємо минуле — будуємо майбутнє!”</p>
       
-      <div class="hero-buttons">
+      <!-- Інтерактивний рядок пошуку по сайту та темах -->
+      <div class="search-wrapper">
+        <div class="search-bar-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="siteSearchInput" class="search-input-field" placeholder="Пошук по темах, розділах та матеріалах..." autocomplete="off">
+        </div>
+        <div id="searchResults" class="search-results-dropdown"></div>
+      </div>
+      
+      <div class="hero-buttons" style="margin-top: 25px;">
         <a href="history.html" class="btn-card btn-blue">📜 Історія</a>
         <a href="geography.html" class="btn-card btn-green">🌍 Географія</a>
         <a href="nmt.html" class="btn-card btn-orange">🎓 НМТ</a>
@@ -111,7 +199,7 @@
         <i class="fa-brands fa-facebook-f"></i>
       </a>
     </div>
-    <p style="font-size: 13px; color: #94a3b8; margin: 0;">© Сергій Мовчан • Освітній портал «Історія і географія БЕЖ МЕЖ»</p>
+    <p style="font-size: 13px; color: #94a3b8; margin: 0;">© Сергій Мовчан • Освітній портал «Історія і географія БЕЗ МЕЖ»</p>
   </footer>
 
   <!-- Спливаюче модальне вікно -->
@@ -124,6 +212,22 @@
   </div>
 
   <script>
+    // База даних тем та матеріалів для пошуку по сайту
+    const siteSearchDatabase = [
+      { title: "📜 Історія", description: "Головна сторінка розділу історії, теорія та практичні завдання.", url: "history.html" },
+      { title: "🌍 Географія", description: "Матеріали з географії, материки, океани та цікаві об'єкти.", url: "geography.html" },
+      { title: "🎓 НМТ", description: "Підготовка до національного мультипредметного тесту, тести та поради.", url: "nmt.html" },
+      { title: "💼 Методична скарбничка", description: "Цифрові інструменти, Kahoot, Wordwall, LearningApps для вчителів.", url: "methodology.html" },
+      { title: "Бій під Крутами (1918)", description: "Історичний факт про бій під станцією Крути.", url: "history.html" },
+      { title: "Акт Злуки УНР та ЗУНР (1919)", description: "Урочисте проголошення соборності українських земель.", url: "history.html" },
+      { title: "Прийняття Конституції України (1996)", description: "Основний Закон України та правові засади держави.", url: "history.html" },
+      { title: "Хрещення Русі (988)", description: "Князь Володимир Великий та запровадження християнства.", url: "history.html" },
+      { title: "Амазонка — річка без мостів", description: "Географічний факт про найповноводнішу річку планети.", url: "geography.html" },
+      { title: "Гора Еверест (Джомолунгма)", description: "Найвища вершина світу у Гімалаях.", url: "geography.html" },
+      { title: "Олешківські піски", description: "Піщаний масив в Україні.", url: "geography.html" },
+      { title: "Мертве море", description: "Найнижча точка суші на Землі та солоне озеро.", url: "geography.html" }
+    ];
+
     // Розширений список історичних фактів
     const keyEvents = [
       { title: "Бій під Крутами (1918 рік)", short: "Студенти та курсанти стримали наступ більшовицьких військ на Київ.", full: "29 січня 1918 року біля залізничної станції Крути близько 500 українських студентів, юнаків та козаків протистояли 4-тисячній більшовицькій армії Муравйова.\n\nЗавдяки цьому затримано наступ ворога на 4 дні, що дало змогу УНР підписати Берестейський мирний договір." },
@@ -260,6 +364,48 @@
         result.textContent = `Невірно. ${currentQuiz.explanation}`;
       }
     }
+
+    // Живий пошук по сайту
+    const searchInput = document.getElementById('siteSearchInput');
+    const searchResultsDropdown = document.getElementById('searchResults');
+
+    searchInput.addEventListener('input', function() {
+      const query = this.value.trim().toLowerCase();
+      
+      if (query.length === 0) {
+        searchResultsDropdown.style.display = 'none';
+        searchResultsDropdown.innerHTML = '';
+        return;
+      }
+
+      const filtered = siteSearchDatabase.filter(item => 
+        item.title.toLowerCase().includes(query) || item.description.toLowerCase().includes(query)
+      );
+
+      if (filtered.length > 0) {
+        let html = '';
+        filtered.forEach(item => {
+          html += `
+            <a href="${item.url}" class="search-result-item">
+              <div class="search-result-title">${item.title}</div>
+              <div class="search-result-desc">${item.description}</div>
+            </a>
+          `;
+        });
+        searchResultsDropdown.innerHTML = html;
+        searchResultsDropdown.style.display = 'block';
+      } else {
+        searchResultsDropdown.innerHTML = `<div class="search-no-results">Нічого не знайдено за вашим запитом</div>`;
+        searchResultsDropdown.style.display = 'block';
+      }
+    });
+
+    // Закриття випадаючого списку при кліку за межами пошуку
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.search-wrapper')) {
+        searchResultsDropdown.style.display = 'none';
+      }
+    });
 
     document.addEventListener("DOMContentLoaded", loadCards);
   </script>
