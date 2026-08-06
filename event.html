@@ -7,26 +7,46 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: #1e293b; line-height: 1.6; }
+
+    header {
+      background-color: #ffffff;
+      padding: 12px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .logo-group { display: flex; align-items: center; gap: 12px; }
+    .logo-badge { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; font-weight: 800; padding: 8px 12px; border-radius: 50%; font-size: 14px; }
+    .logo-text { font-weight: 800; font-size: 15px; color: #0f172a; line-height: 1.2; }
+    .logo-text span { color: #d97706; display: block; }
+
+    .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+    .back-link { display: inline-block; margin-bottom: 20px; color: #2563eb; text-decoration: none; font-weight: 700; font-size: 14px; }
+    
+    .event-card-full { background: #fff; border-radius: 16px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+    .event-badge { background: #e0f2fe; color: #0369a1; font-weight: 700; padding: 4px 12px; border-radius: 6px; font-size: 13px; display: inline-block; margin-bottom: 12px; }
+    .event-title { font-size: 28px; font-weight: 900; color: #0f172a; margin-bottom: 16px; line-height: 1.2; }
+    .event-details { font-size: 15px; color: #334155; margin-bottom: 24px; white-space: pre-line; }
+    
+    .notes-box { background: #f8fafc; border-left: 4px solid #3b82f6; padding: 15px; border-radius: 4px; font-size: 13px; color: #475569; }
+  </style>
 </head>
 <body>
 
   <header>
-    <div class="header-left">
-      <a href="index.html" class="back-btn">
-        ← На головну
-      </a>
-      <a href="index.html" class="logo-group">
-        <img src="logo.png" alt="Логотип" class="logo-img">
-        <div class="logo-text">
-          Історія і географія
-          <span>БЕЗ МЕЖ</span>
-        </div>
-      </a>
+    <div class="logo-group">
+      <div class="logo-badge">SM</div>
+      <div class="logo-text">Історія і географія<span>БЕЗ МЕЖ</span></div>
     </div>
   </header>
 
-  <main class="container" style="margin-top: 100px;">
+  <main class="container">
+    <a href="index.html" class="back-link">← Повернутися на головну</a>
+
     <article class="event-card-full">
       <span class="event-badge" id="event-date">...</span>
       <h1 class="event-title" id="event-title">Завантаження події...</h1>
@@ -144,7 +164,7 @@
       const urlParams = new URLSearchParams(window.location.search);
       const eventId = urlParams.get('id');
 
-      const data = eventsDetails[eventId] || eventsDetails["01-22"];
+      const data = eventsDetails[eventId] || eventsDetails["01-22"]; // Дефолтна подія, якщо ID не знайдено
 
       document.getElementById('page-title').textContent = `${data.title} — Історія і географія БЕЗ МЕЖ`;
       document.getElementById('event-date').textContent = data.dateStr;
