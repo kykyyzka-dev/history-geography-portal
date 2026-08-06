@@ -565,8 +565,8 @@
         </div>
         <div>
           <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-            <button onclick="checkCountryGame(true)" style="flex: 1; background: #16a34a; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;">✅ Правда</button>
-            <button onclick="checkCountryGame(false)" style="flex: 1; background: #dc2626; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;">❌ Брехня</button>
+            <button id="btn-true" onclick="checkCountryGame(true)" style="flex: 1; background: #16a34a; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;">✅ Правда</button>
+            <button id="btn-false" onclick="checkCountryGame(false)" style="flex: 1; background: #dc2626; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;">❌ Брехня</button>
           </div>
           <div id="country-game-result" style="font-size: 12px; padding: 6px; border-radius: 6px; display: none;"></div>
         </div>
@@ -1159,19 +1159,26 @@
 
     let currentEvent, currentGeo, currentCountryGame;
 
+    function loadNextCountryGame() {
+      currentCountryGame = countriesGameData[Math.floor(Math.random() * countriesGameData.length)];
+      document.getElementById('country-game-text').innerHTML = `<strong>📍 ${currentCountryGame.country}:</strong> ${currentCountryGame.text}`;
+      const resDiv = document.getElementById('country-game-result');
+      if (resDiv) resDiv.style.display = 'none';
+      
+      const btnTrue = document.getElementById('btn-true');
+      const btnFalse = document.getElementById('btn-false');
+      if (btnTrue) btnTrue.disabled = false;
+      if (btnFalse) btnFalse.disabled = false;
+    }
+
     function loadCards() {
-      // Випадковий вибір з величезних масивів при кожному завантаженні/перезавантаженні сторінки
       currentEvent = keyEvents[Math.floor(Math.random() * keyEvents.length)];
       currentGeo = geoFacts[Math.floor(Math.random() * geoFacts.length)];
-      currentCountryGame = countriesGameData[Math.floor(Math.random() * countriesGameData.length)];
-
+      
       document.getElementById('event-content').innerHTML = `<strong>${currentEvent.title}</strong> — ${currentEvent.short}`;
       document.getElementById('geo-content').innerHTML = `<strong>${currentGeo.title}</strong> — ${currentGeo.short}`;
-      document.getElementById('country-game-text').innerHTML = `<strong>📍 ${currentCountryGame.country}:</strong> ${currentCountryGame.text}`;
       
-      const resDiv = document.getElementById('country-game-result');
-      if(resDiv) resDiv.style.display = 'none';
-
+      loadNextCountryGame();
       renderLeaderboard();
       loadNmtResults();
       renderChat();
@@ -1179,6 +1186,11 @@
     }
 
     function checkCountryGame(userAnswer) {
+      const btnTrue = document.getElementById('btn-true');
+      const btnFalse = document.getElementById('btn-false');
+      btnTrue.disabled = true;
+      btnFalse.disabled = true;
+
       const resDiv = document.getElementById('country-game-result');
       resDiv.style.display = 'block';
       if (userAnswer === currentCountryGame.isTrue) {
@@ -1191,6 +1203,10 @@
         resDiv.style.color = '#b91c1c';
         resDiv.textContent = '❌ Помилка!';
       }
+
+      setTimeout(() => {
+        loadNextCountryGame();
+      }, 1500);
     }
 
     function openModal(type) {
