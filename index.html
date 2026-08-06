@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Підключення іконок соцмереж та пошуку -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
   <style>
     /* Плавні анімації появи та ефекти */
     @keyframes fadeInUp {
@@ -39,6 +39,20 @@
 
     .user-login-btn {
       animation: pulseGlow 2.5s infinite;
+    }
+
+    /* Збільшене та виразне фото автора у круглому форматі */
+    .hero-author img {
+      width: 260px !important;
+      height: 260px !important;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid #ffffff;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease;
+    }
+    .hero-author img:hover {
+      transform: scale(1.03);
     }
 
     /* Стилі для пошукової панелі та випадаючих результатів */
