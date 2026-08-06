@@ -602,7 +602,7 @@
       <div class="kids-club-grid">
         <!-- Блок 1: Інтерактивний чат / Стіна коментарів -->
         <div class="chat-box">
-          <div style="font-weight: 800; color: #0369a1; font-size: 14px; margin-bottom: 8px; display: flex; align- items: center; gap: 6px;">
+          <div style="font-weight: 800; color: #0369a1; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
             <i class="fas fa-comments"></i> Стіна думок та вражень
           </div>
           <div class="chat-messages" id="chatMessages"></div>
@@ -655,6 +655,91 @@
     </div>
   </div>
 
+  <!-- FIREBASE SCRIPTS -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getDatabase, ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // Вставлені авторизаційні ключі проєкту
+    const firebaseConfig = {
+      apiKey: "AIzaSyAF2acxaXKOH4e4RoAUQcqMgX4s65xttSw",
+      authDomain: "movchan-portal.firebaseapp.com",
+      databaseURL: "https://movchan-portal-default-rtdb.firebaseio.com",
+      projectId: "movchan-portal",
+      storageBucket: "movchan-portal.firebasestorage.app",
+      messagingSenderId: "535915495927",
+      appId: "1:535915495927:web:71f899ea2876ee129c2ef2",
+      measurementId: "G-8XBVKRZRS1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+    const provider = new GoogleAuthProvider();
+
+    window.loginWithGoogle = function() {
+      signInWithPopup(auth, provider).catch(error => alert("Помилка входу: " + error.message));
+    };
+
+    window.logoutGoogle = function() {
+      signOut(auth);
+    };
+
+    onAuthStateChanged(auth, (user) => {
+      const authBox = document.getElementById('authBox');
+      if (user) {
+        window.currentStudent = user.displayName;
+        set(ref(database, 'users/' + user.uid), {
+          name: user.displayName,
+          score: 5
+        });
+        authBox.innerHTML = `
+          <span style="font-size: 13px; font-weight: 600; color: #1e293b;">👤 ${user.displayName}</span>
+          <button class="user-login-btn" style="background: #ef4444;" onclick="logoutGoogle()">Вийти</button>
+        `;
+      } else {
+        window.currentStudent = null;
+        authBox.innerHTML = `
+          <button class="user-login-btn" onclick="loginWithGoogle()"><i class="fa-brands fa-google"></i> Увійти через Google</button>
+        `;
+      }
+    });
+
+    // Синхронізація рейтингу з Firebase
+    const leaderboardRef = ref(database, 'users');
+    onValue(leaderboardRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        window.studentsData = Object.values(data);
+        renderLeaderboard();
+      }
+    });
+
+    // Синхронізація чату з Firebase
+    const chatRef = ref(database, 'chat');
+    onValue(chatRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        window.chatData = Object.values(data);
+        renderChat();
+      }
+    });
+
+    window.sendChatMessage = function() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const userName = window.currentStudent ? window.currentStudent : "Дослідник (🦁)";
+      push(ref(database, 'chat'), {
+        author: userName,
+        text: text
+      });
+      input.value = '';
+    };
+  </script>
+
   <script>
     function setupTravelerAnimation() {
       const traveler = document.getElementById('traveler');
@@ -692,12 +777,13 @@
       { author: "Олександр (🚀)", text: "Я пройшов тестування й отримав 10 балів!" }
     ];
 
-    let chatData = JSON.parse(localStorage.getItem('portal_chat_messages')) || defaultChatMessages;
+    window.chatData = JSON.parse(localStorage.getItem('portal_chat_messages')) || defaultChatMessages;
 
     function renderChat() {
       const chatContainer = document.getElementById('chatMessages');
+      if (!chatContainer) return;
       chatContainer.innerHTML = '';
-      chatData.forEach(msg => {
+      window.chatData.forEach(msg => {
         chatContainer.innerHTML += `
           <div class="chat-message-item">
             <div class="chat-message-author">${msg.author}</div>
@@ -706,21 +792,6 @@
         `;
       });
       chatContainer.scrollTop = chatContainer.scrollHeight;
-    }
-
-    function sendChatMessage() {
-      const input = document.getElementById('chatInput');
-      const text = input.value.trim();
-      if (!text) return;
-
-      const userName = currentStudent ? currentStudent : "Дослідник (🦁)";
-      chatData.push({ author: userName, text: text });
-      
-      if (chatData.length > 20) chatData.shift();
-      localStorage.setItem('portal_chat_messages', JSON.stringify(chatData));
-      
-      input.value = '';
-      renderChat();
     }
 
     /* МІНІ-ГРА: ВЧИТЕЛЬ-РАНЕР (CANVAS) */
@@ -870,20 +941,21 @@
       }
     }
 
-    let studentsData = JSON.parse(localStorage.getItem('portal_students_scores')) || [
+    window.studentsData = JSON.parse(localStorage.getItem('portal_students_scores')) || [
       { name: "Олександр Шевченко", score: 0 },
       { name: "Софія Мельник", score: 0 },
       { name: "Максим Бондаренко", score: 0 }
     ];
-    let currentStudent = localStorage.getItem('portal_current_student') || null;
+    window.currentStudent = localStorage.getItem('portal_current_student') || null;
 
     function renderLeaderboard() {
-      studentsData.sort((a, b) => b.score - a.score);
+      window.studentsData.sort((a, b) => b.score - a.score);
       const listContainer = document.getElementById('leaderboardList');
+      if (!listContainer) return;
       listContainer.innerHTML = '';
-      studentsData.forEach((student, index) => {
+      window.studentsData.forEach((student, index) => {
         let rankClass = index === 0 ? 'top-1' : index === 1 ? 'top-2' : index === 2 ? 'top-3' : '';
-        const isMe = student.name === currentStudent ? 'current-user' : '';
+        const isMe = student.name === window.currentStudent ? 'current-user' : '';
         listContainer.innerHTML += `
           <div class="leaderboard-item ${isMe}">
             <div class="student-info">
@@ -894,41 +966,14 @@
           </div>
         `;
       });
-
-      const authBox = document.getElementById('authBox');
-      if (currentStudent) {
-        authBox.innerHTML = `
-          <span style="font-size: 13px; font-weight: 600; color: #1e293b;">👤 ${currentStudent}</span>
-          <button class="user-login-btn" style="background: #ef4444;" onclick="logoutStudent()">Вийти</button>
-        `;
-      }
-    }
-
-    function registerStudent() {
-      const input = document.getElementById('studentNameInput');
-      const name = input.value.trim();
-      if (!name) return alert('Будь ласка, введіть ваше імʼя та прізвище!');
-      currentStudent = name;
-      localStorage.setItem('portal_current_student', currentStudent);
-      if (!studentsData.find(s => s.name === currentStudent)) {
-        studentsData.push({ name: currentStudent, score: 5 });
-      }
-      localStorage.setItem('portal_students_scores', JSON.stringify(studentsData));
-      renderLeaderboard();
-    }
-
-    function logoutStudent() {
-      currentStudent = null;
-      localStorage.removeItem('portal_current_student');
-      location.reload();
     }
 
     function addPoints(points) {
-      if (!currentStudent) return alert('Введіть ПІБ у полі зверху та натисніть «Увійти», щоб зберігати бали!');
-      let student = studentsData.find(s => s.name === currentStudent);
+      if (!window.currentStudent) return alert('Увійдіть у систему за допомогою Google, щоб зберігати бали!');
+      let student = window.studentsData.find(s => s.name === window.currentStudent);
       if (student) student.score += points;
-      else studentsData.push({ name: currentStudent, score: points });
-      localStorage.setItem('portal_students_scores', JSON.stringify(studentsData));
+      else window.studentsData.push({ name: window.currentStudent, score: points });
+      localStorage.setItem('portal_students_scores', JSON.stringify(window.studentsData));
       renderLeaderboard();
       
       // Розблоковуємо динозаврика/вчителя за будь-яку навчальну активність
