@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Підключення іконок -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=13">
   
   <style>
     /* --- АНІМАЦІЯ fadeInUp (для контенту) --- */
@@ -45,125 +45,125 @@
     /* --- СТИЛІ ДЛЯ НАВІГАЦІЙНОЇ ПАНЕЛІ ТА АНІМАЦІЇ --- */
     header {
       position: relative; /* Для позиціонування мандрівника */
-      padding-bottom: 30px; /* Більше місця під меню */
+      padding-bottom: 20px; /* Місце для мандрівника під меню */
     }
 
-    /* --- АНІМАЦІЯ МАНДРІВНИКА З КОМПАСОМ (КОНТРАСТНА) --- */
+    /* --- АНІМАЦІЯ МАНДРІВНИКА (НОВА ЛЮДСЬКА ФІГУРА, БІЛА) --- */
     .traveler-container {
       position: absolute;
       bottom: 0;
-      left: 10%; /* Початкова позиція */
-      width: 45px; /* Трохи більший розмір */
-      height: 55px;
+      left: 10%; /* Початкова позиція (зліва) */
+      width: 45px; /* Розмір людини */
+      height: 52px;
       z-index: 10;
+      transform-origin: bottom center;
+      /* Анімація ходьби (переміщення) */
       animation: walkAcross 25s linear infinite;
     }
 
-    /* Стилі для людини (SVG) — КОНТРАСТНИЙ КОЛІР */
+    /* Стилі для людини (SVG) — БІЛИЙ КОЛІР */
     .traveler-svg {
       width: 100%;
       height: 100%;
-      fill: #ffffff; /* Яскравий білий колір */
+    }
+
+    /* Анімація кроків (покачування) */
+    .traveler-body {
+      animation: stepSway 0.6s ease-in-out infinite alternate;
       transform-origin: bottom center;
     }
 
-    /* Анімація кроків (покачування) — БІЛЬШ ПЛАВНА */
-    .traveler-body {
-      animation: stepSway 0.6s ease-in-out infinite alternate;
-    }
-
-    /* Анімація компаса (обертання) — ЯСКРАВИЙ КОЛІР */
+    /* Анімація компаса (обертання при зупинці) */
     .traveler-compass {
       transform-origin: center;
       animation: rotateCompass 2s linear infinite;
       animation-play-state: paused; /* Спочатку зупинено */
     }
-    .traveler-compass-needle {
-      stroke: #38bdf8; /* Блакитний колір стрілок для контрасту */
-    }
 
-    /* --- ОНОВЛЕНІ КЛЮЧОВІ КАДРИ (ПЛАВНА ЗУПИНКА) --- */
+    /* Ключові кадри переміщення (ходьба, зупинка, ходьба) */
     @keyframes walkAcross {
-      0% { left: 10%; transform: scaleX(1); }
+      0% { left: 10%; transform: scaleX(1); } /* Йде вправо */
       15% { left: 35%; }
-      25% { left: 35%; } /* Плавна зупинка 1 (10% часу) */
+      25% { left: 35%; } /* Зупинка 1 (шукає шлях) */
       40% { left: 65%; }
-      50% { left: 65%; } /* Плавна зупинка 2 */
+      50% { left: 65%; } /* Зупинка 2 */
       65% { left: 90%; transform: scaleX(1); }
-      66% { left: 90%; transform: scaleX(-1); } /* Поворот */
+      66% { left: 90%; transform: scaleX(-1); } /* Поворот вліво */
       80% { left: 10%; }
-      90% { left: 10%; } /* Плавна зупинка 3 */
-      100% { left: 10%; transform: scaleX(1); } /* Поворот */
+      90% { left: 10%; } /* Зупинка 3 */
+      100% { left: 10%; transform: scaleX(1); } /* Поворот вправо */
     }
 
+    /* Ключові кадри кроків */
     @keyframes stepSway {
-      from { transform: rotate(-6deg); }
-      to { transform: rotate(6deg); }
+      from { transform: rotate(-5deg) translateY(0px); }
+      to { transform: rotate(5deg) translateY(-2px); }
     }
 
+    /* Ключові кадри обертання компаса */
     @keyframes rotateCompass {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    /* Клас для плавної зупинки кроків і запуску компаса */
+    /* Клас для зупинки анімації кроків і запуску компаса */
     .traveler-container.paused .traveler-body {
-      animation-name: stopSway;
-      animation-duration: 0.5s;
-      animation-iteration-count: 1;
-      animation-fill-mode: forwards;
+      animation-play-state: paused;
+      transform: rotate(0deg); /* Вирівнюємо при зупинці */
     }
     .traveler-container.paused .traveler-compass {
       animation-play-state: running;
     }
 
-    /* Ключові кадри для плавної зупинки кроків */
-    @keyframes stopSway {
-      to { transform: rotate(0deg); }
-    }
-
-    /* --- СТИЛІ БАНЕРА (ВИПРАВЛЕНО ДЛЯ ТЕЛЕФОНІВ) --- */
+    /* --- СТИЛІ БАНЕРА (ВИПРАВЛЕНО, НЕ ОБРІЗАЄТЬСЯ, БЕЗ ЗАОКРУГЛЕНЬ) --- */
     .mountain-banner {
       position: relative;
-      background: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.7)), url('hero-banner.jpeg') center/cover no-repeat;
-      min-height: 480px;
-      border-radius: 20px;
-      margin: 20px auto;
-      max-width: 1200px;
+      /* Використовуємо cover з фокусом на центрі, але збільшуємо висоту,
+         щоб обличчя та низ фото (книги) повністю вміщувалися */
+      background: linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.65)), 
+                  url('hero-banner.jpeg') center center / cover no-repeat;
+      
+      /* Прибираємо заокруглення кутів */
+      border-radius: 0; 
+      margin: 0 auto 20px auto;
+      max-width: 100%; /* Банер на всю ширину */
+      width: 100%;
+      
+      /* Оптимальна висота, щоб фотографія не обрізалася */
+      min-height: auto;
+      padding: 90px 20px; /* Збільшені відступи для розміщення фото */
+      
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 40px 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      border: none;
       overflow: hidden;
     }
 
-    /* --- СТИЛІ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ (ВИПРАВЛЕННЯ БАНЕРА) --- */
+    /* --- СТИЛІ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ (БАНЕР ТА МАНДРІВНИК) --- */
     @media (max-width: 850px) {
       .mountain-banner {
-        background-size: contain; /* Зображення повністю вміщується */
-        background-position: center top; /* Центрування по горизонталі, верх по вертикалі */
-        min-height: 320px; /* Зменшена висота для мобільних */
-        padding: 20px 10px;
+        padding: 50px 15px; /* Зменшені відступи */
+        background-position: center top; /* На мобільних фокусуємося на верху */
       }
       .mountain-banner h1 {
-        font-size: clamp(22px, 4vw, 32px);
+        font-size: clamp(24px, 5vw, 34px);
       }
       .mountain-banner .subtitle {
-        font-size: clamp(14px, 2.2vw, 18px);
+        font-size: clamp(14px, 2.5vw, 18px);
       }
       .search-wrapper {
         margin-top: 15px;
       }
       header {
-        padding-bottom: 20px;
+        padding-bottom: 15px;
       }
       .traveler-container {
-        width: 35px;
-        height: 45px;
+        width: 35px; /* Менша людина на мобільних */
+        height: 40px;
       }
     }
 
@@ -461,29 +461,41 @@
       </ul>
     </nav>
 
-    <!-- АНІМАЦІЯ МАНДРІВНИКА (SVG, КОНТРАСТНА) -->
+    <!-- АНІМАЦІЯ МАНДРІВНИКА (НОВА ЛЮДСЬКА ФІГУРА, SVG) -->
     <div class="traveler-container" id="traveler">
-      <svg class="traveler-svg" viewBox="0 0 100 120">
-        <!-- Тіло та голова (будуть покачуватися) -->
+      <svg class="traveler-svg" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g class="traveler-body">
-          <circle cx="50" cy="25" r="15"/> <!-- Голова -->
-          <path d="M30 40 h40 v40 h-40 z"/> <!-- Тулуб -->
-          <path d="M35 80 v30 h10 v-30 M55 80 v30 h10 v-30" stroke-width="2"/> <!-- Ноги -->
+          <!-- Капелюх та голова (будуть покачуватися) -->
+          <path d="M 22 16 C 22 10, 34 10, 34 16 Z" fill="#ffffff" />
+          <path d="M 16 16 C 16 14, 40 14, 40 16 C 40 18, 16 18, 16 16 Z" fill="#ffffff" />
+          <circle cx="28" cy="20" r="4.5" fill="#ffffff" />
           
-          <!-- Рука з компасом (сама рука) -->
-          <path d="M70 45 v20 h15" stroke-width="3" fill="none" stroke="#ffffff"/>
+          <!-- Тулуб та рюкзак -->
+          <path d="M 22 25 L 34 25 L 32 44 L 24 44 Z" fill="#ffffff" />
+          <rect x="16" y="26" width="7" height="14" rx="2" fill="#ffffff" /> <!-- Рюкзак -->
           
-          <!-- Компас (буде обертатися) -->
-          <g class="traveler-compass" transform="translate(85, 65)">
-            <circle cx="0" cy="0" r="10" fill="none" stroke="#ffffff" stroke-width="2"/>
-            <path d="M0 -7 v14 M-7 0 h14 M-4 -4 l8 8 M-4 4 l8 -8" class="traveler-compass-needle" stroke-width="1.5"/> <!-- Стрілки -->
-          </g>
+          <!-- Ноги (в русі) -->
+          <path d="M 24 44 L 20 62 L 15 62" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M 31 44 L 35 62 L 41 62" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+          
+          <!-- Опущена ліва рука -->
+          <path d="M 23 26 L 19 37" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+          
+          <!-- ПІДНЯТА ПРАВА РУКА ВГОРУ (тримає компас) -->
+          <path d="M 33 26 L 40 18 L 38 7" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+        
+        <!-- КОМПАС (у верхній точці, буде обертатися) -->
+        <g class="traveler-compass" transform="translate(38, 5)">
+          <circle cx="0" cy="0" r="5.5" stroke="#38bdf8" stroke-width="1.5" fill="#1e293b" />
+          <line class="traveler-compass-needle" x1="0" y1="-3.5" x2="0" y2="3.5" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" />
+          <line class="traveler-compass-needle" x1="-3.5" y1="0" x2="3.5" y2="0" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round" />
         </g>
       </svg>
     </div>
   </header>
 
-  <!-- Головний банер (СТАТИЧНИЙ, ВИПРАВЛЕНО ДЛЯ ТЕЛЕФОНІВ) -->
+  <!-- Головний банер (ВИПРАВЛЕНО, НЕ ОБРІЗАЄТЬСЯ, БЕЗ ЗАОКРУГЛЕНЬ) -->
   <section class="mountain-banner">
     <div class="hero-text-content" style="width: 100%; max-width: 800px;">
       <h1>ІСТОРІЯ І ГЕОГРАФІЯ <span>БЕЗ МЕЖ</span></h1>
@@ -602,8 +614,8 @@
       const totalAnimationTime = 25000; // 25 секунд (має збігатися з CSS walkAcross)
       
       // Відсотки часу, коли відбуваються зупинки (з CSS walkAcross)
-      const pauseTimes = [0.15, 0.40, 0.80]; // Зупинка 1 (35%), Зупинка 2 (65%), Зупинка 3 (10%)
-      const pauseDurationPercent = 0.10; // Тривалість зупинки 10% часу (більш реалістично)
+      const pauseTimes = [0.25, 0.50, 0.90]; // Зупинка 1 (35%), Зупинка 2 (65%), Зупинка 3 (10%)
+      const pauseDurationPercent = 0.05; // Тривалість зупинки 5% часу
 
       function checkPause() {
         const elapsedTime = (new Date() - startTime) % totalAnimationTime;
@@ -798,7 +810,7 @@
 
     const geoFacts = [
       { title: "Амазонка — річка без жодного мосту", short: "Найповноводніша річка планети. Вона не має жодного мосту через свій розлив.", full: "Амазонка скидає в Атлантичний океан близько 20% усієї прісної води річок планети.\n\nГоловна причина відсутності мостів — густі непрохідні джунглі та масштабні сезонні розливи." },
-      { title: "Гора Еверест (Джомолунгма)", short: "Найвища вершина світу (8848,86 м), яка щороку зростає.", full: "Еверест розташований у Гімалаях на кордоні Непалу та Китаю.\n\nЧерез зіткнення тектонічних плит вершина зростає приблизно на 4 міліметри на рік." },
+      { title: "Гора Еверест (Джомолунгма)", short: "Найвища вершина світу (8848,86 м), яка щороку зростає.", full: "Еверест розташований у Гімалаях на кордоні Непалу та Китаю.\n\nЧерез зіткнення тектонічних плит вершина зростає примерно на 4 міліметри на рік." },
       { title: "Олешківські піски", short: "Один із найбільших піщаних масивів у Європі, розташований в Україні.", full: "Олешківські піски часто називають українською пустелею. Вони виникли на місці колишнього русла Дніпра внаслідок випасання величезних отар овець у XIX столітті." },
       { title: "Мертве море", short: "Найнижча точка суші на Землі та найсолоніше озеро світу.", full: "Озеро розташоване на 430 метрів нижче рівня моря. Солоність води сягає 34%, що робить утримання людини на поверхні води природним явищем." }
     ];
