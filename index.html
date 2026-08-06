@@ -212,8 +212,8 @@
       background: #ffffff;
       border-radius: 10px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      z-index: 100;
-      max-height: 300px;
+      z-index: 1000;
+      max-height: 250px;
       overflow-y: auto;
       display: none;
       border: 1px solid #e2e8f0;
@@ -721,13 +721,11 @@
       const hours = now.getHours();
       const minutes = now.getMinutes();
 
-      // Вираховуємо час до найближчої неділі 23:59
       let daysUntilSunday = (7 - day) % 7;
       let nextSunday = new Date(now);
       nextSunday.setDate(now.getDate() + daysUntilSunday);
       nextSunday.setHours(23, 59, 0, 0);
 
-      // Якщо сьогодні неділя і вже минула 23:59, або якщо наступив новий тиждень, ціль ссувається на наступну неділю
       if (now > nextSunday) {
         nextSunday.setDate(nextSunday.getDate() + 7);
       }
@@ -743,13 +741,11 @@
         timerBadge.innerHTML = `<i class="fa-regular fa-clock"></i> До оновлення: ${d}д ${h}г ${m}хв ${s}с`;
       }
 
-      // Перевірка чи настав час скидання (Неділя, 23:59:00 - 23:59:59)
       if (day === 0 && hours === 23 && minutes === 59) {
         const resetFlagRef = ref(database, 'system/lastResetWeek');
         get(resetFlagRef).then((snapshot) => {
           const currentWeekKey = `${now.getFullYear()}-W${Math.ceil(now.getDate() / 7)}`;
           if (!snapshot.exists() || snapshot.val() !== currentWeekKey) {
-            // Анулюємо бали користувачів та видаляємо повідомлення
             remove(ref(database, 'users'));
             remove(ref(database, 'chat'));
             set(resetFlagRef, currentWeekKey);
@@ -1229,6 +1225,13 @@
         resDiv.style.color = '#b91c1c';
         resDiv.textContent = '❌ Помилка!';
       }
+
+      // Автоматичне перемикання на наступну країну через 1.5 секунди
+      setTimeout(() => {
+        currentCountryGame = countriesGameData[Math.floor(Math.random() * countriesGameData.length)];
+        document.getElementById('country-game-text').innerHTML = `<strong>📍 ${currentCountryGame.country}:</strong> ${currentCountryGame.text}`;
+        resDiv.style.display = 'none';
+      }, 1500);
     }
 
     function openModal(type) {
@@ -1241,7 +1244,7 @@
       document.getElementById('info-modal').style.display = 'none';
     }
 
-    // ВИПРАВЛЕНИЙ ПОШУК (коректна робота з пробілами та словами)
+    // ПОШУК (з виправленим скролом та відображенням)
     document.addEventListener("DOMContentLoaded", () => {
       loadCards();
       setupTravelerAnimation();
@@ -1250,7 +1253,6 @@
       const searchResults = document.getElementById('searchResults');
 
       if (searchInput && searchResults) {
-        // Збираємо всі можливі теми/факти для пошуку
         const searchableItems = [
           ...keyEvents.map(e => ({ title: e.title, desc: e.short, url: 'history.html' })),
           ...geoFacts.map(g => ({ title: g.title, desc: g.short, url: 'geography.html' })),
@@ -1261,7 +1263,6 @@
         ];
 
         searchInput.addEventListener('input', (e) => {
-          // Коректно обробляємо рядок пошуку з пробілами: перетворюємо в нижній регістр і розбиваємо на окремі слова (токени)
           const query = e.target.value.trim().toLowerCase();
           if (!query) {
             searchResults.style.display = 'none';
@@ -1270,8 +1271,6 @@
           }
 
           const queryWords = query.split(/\s+/);
-
-          // Фільтруємо елементи: слово має відповідати всім введеним термінам
           const filtered = searchableItems.filter(item => {
             const combinedText = (item.title + " " + item.desc).toLowerCase();
             return queryWords.every(word => combinedText.includes(word));
@@ -1291,7 +1290,6 @@
           }
         });
 
-        // Закриття випадаючого списку при кліку поза ним
         document.addEventListener('click', (e) => {
           if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
             searchResults.style.display = 'none';
