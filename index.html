@@ -403,7 +403,7 @@
       cursor: pointer;
     }
 
-    /* ГРА ДИНОЗАВРИК (DINO RUNNER) */
+    /* ГРА ВЧИТЕЛЬ-РАНЕР */
     .dino-game-card {
       background: #ffffff;
       border-radius: 14px;
@@ -602,7 +602,7 @@
       <div class="kids-club-grid">
         <!-- Блок 1: Інтерактивний чат / Стіна коментарів -->
         <div class="chat-box">
-          <div style="font-weight: 800; color: #0369a1; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+          <div style="font-weight: 800; color: #0369a1; font-size: 14px; margin-bottom: 8px; display: flex; align- items: center; gap: 6px;">
             <i class="fas fa-comments"></i> Стіна думок та вражень
           </div>
           <div class="chat-messages" id="chatMessages"></div>
@@ -612,10 +612,10 @@
           </div>
         </div>
 
-        <!-- Блок 2: Гра Динозаврик (з відокремленим рекордом та блокуванням) -->
+        <!-- Блок 2: Гра Вчитель-Ранер (замість динозавра фото вчителя) -->
         <div class="dino-game-card">
           <div class="dino-controls">
-            <span>🦖 Дино-Ранер</span>
+            <span>🏃 Вчитель-Ранер</span>
             <span>Очки: <strong id="dinoScore">0</strong> | Рекорд: <strong id="dinoHighScore">0</strong></span>
           </div>
 
@@ -688,7 +688,7 @@
 
     /* ЛОГІКА КЛУБУ ДОСЛІДНИКІВ */
     const defaultChatMessages = [
-      { author: "Софія (🦉)", text: "Привіт усім! Хто скільки очок набрав у динозаврику?" },
+      { author: "Софія (🦉)", text: "Привіт усім! Хто скільки очок набрав у грі з вчителем?" },
       { author: "Олександр (🚀)", text: "Я пройшов тестування й отримав 10 балів!" }
     ];
 
@@ -723,16 +723,20 @@
       renderChat();
     }
 
-    /* МІНІ-ГРА: ДИНОЗАВРИК (CANVAS) */
+    /* МІНІ-ГРА: ВЧИТЕЛЬ-РАНЕР (CANVAS) */
     let canvas = document.getElementById('dinoCanvas');
     let ctx = canvas.getContext('2d');
     let dinoGameRunning = false;
     let dinoScore = 0;
-    let dinoY = 135;
+    let dinoY = 130;
     let dinoDY = 0;
     let isJumping = false;
     let cactusX = 320;
     let dinoAnimationId;
+
+    // Спрайт вчителя замість динозавра
+    const teacherImg = new Image();
+    teacherImg.src = 'teacher.png';
 
     // Рекорд гри та стан блокування
     let dinoHighScore = parseInt(localStorage.getItem('dino_high_score')) || 0;
@@ -760,7 +764,7 @@
     }
 
     function startDinoGame() {
-      if (!isGameUnlocked) return; // Не запускати, якщо заблоковано
+      if (!isGameUnlocked) return;
 
       if (dinoGameRunning) {
         if (!isJumping) {
@@ -771,7 +775,7 @@
       }
       dinoGameRunning = true;
       dinoScore = 0;
-      dinoY = 135;
+      dinoY = 130;
       dinoDY = 0;
       cactusX = 320;
       document.getElementById('dinoScore').textContent = '0';
@@ -788,23 +792,20 @@
       ctx.fillStyle = '#64748b';
       ctx.fillRect(0, 160, canvas.width, 2);
 
-      // Фізика Динозаврика
+      // Фізика руху Вчителя
       dinoY += dinoDY;
-      if (dinoY < 135) {
+      if (dinoY < 130) {
         dinoDY += 0.6; // гравітація
       } else {
-        dinoY = 135;
+        dinoY = 130;
         dinoDY = 0;
         isJumping = false;
       }
 
-      // Малювання Динозаврика (розвернутого управо)
-      ctx.save();
-      ctx.translate(56, dinoY);
-      ctx.scale(-1, 1);
-      ctx.font = '26px Inter';
-      ctx.fillText('🦖', 0, 0);
-      ctx.restore();
+      // Малювання фото вчителя (розмір 35x35 px)
+      const teacherWidth = 35;
+      const teacherHeight = 35;
+      ctx.drawImage(teacherImg, 30, dinoY - 5, teacherWidth, teacherHeight);
 
       // Рух Кактуса
       cactusX -= 4 + Math.floor(dinoScore / 100);
@@ -817,7 +818,7 @@
       ctx.fillText('🌵', cactusX, 158);
 
       // Перевірка зіткнення (Game Over)
-      if (cactusX > 25 && cactusX < 50 && dinoY > 115) {
+      if (cactusX > 20 && cactusX < 55 && dinoY > 115) {
         dinoGameRunning = false;
 
         // Перевірка рекорду
@@ -835,7 +836,6 @@
         ctx.fillText(`Ваш результат: ${dinoScore} очок`, 95, 95);
         ctx.fillText('Тисни кнопку щоб спробувати знову', 50, 115);
 
-        // НЕ додаємо бали гри до навчального рейтингу
         return;
       }
 
@@ -931,7 +931,7 @@
       localStorage.setItem('portal_students_scores', JSON.stringify(studentsData));
       renderLeaderboard();
       
-      // Розблоковуємо Динозаврика за будь-яку навчальну активність
+      // Розблоковуємо динозаврика/вчителя за будь-яку навчальну активність
       unlockDinoGame();
     }
 
