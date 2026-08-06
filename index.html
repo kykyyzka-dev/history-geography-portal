@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Підключення іконок -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=14">
+  <link rel="stylesheet" href="style.css?v=15">
   
   <style>
     html {
@@ -612,7 +612,7 @@
           </div>
         </div>
 
-        <!-- Блок 2: Гра Вчитель-Ранер (замість динозавра фото вчителя) -->
+        <!-- Блок 2: Гра Вчитель-Ранер -->
         <div class="dino-game-card">
           <div class="dino-controls">
             <span>🏃 Вчитель-Ранер</span>
@@ -661,7 +661,6 @@
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { getDatabase, ref, set, get, update, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-    // Вставлені авторизаційні ключі проєкту (з актуальним databaseURL)
     const firebaseConfig = {
       apiKey: "AIzaSyAF2acxaXKOH4e4RoAUQcqMgX4s65xttSw",
       authDomain: "movchan-portal.firebaseapp.com",
@@ -715,7 +714,6 @@
       }
     });
 
-    // Синхронізація рейтингу з Firebase
     const leaderboardRef = ref(database, 'users');
     onValue(leaderboardRef, (snapshot) => {
       const data = snapshot.val();
@@ -725,7 +723,6 @@
       }
     });
 
-    // Синхронізація чату з Firebase
     const chatRef = ref(database, 'chat');
     onValue(chatRef, (snapshot) => {
       const data = snapshot.val();
@@ -748,7 +745,6 @@
       input.value = '';
     };
 
-    // Оновлена функція додавання балів у Firebase
     window.addPointsToFirebase = function(points) {
       if (!window.currentUserUid) return alert('Увійдіть у систему за допомогою Google, щоб зберігати бали!');
       
@@ -797,7 +793,6 @@
       requestAnimationFrame(checkPause);
     }
 
-    /* ЛОГІКА КЛУБУ ДОСЛІДНИКІВ */
     const defaultChatMessages = [
       { author: "Софія (🦉)", text: "Привіт усім! Хто скільки очок набрав у грі з вчителем?" },
       { author: "Олександр (🚀)", text: "Я пройшов тестування й отримав 10 балів!" }
@@ -831,15 +826,15 @@
     let cactusX = 320;
     let dinoAnimationId;
 
-    // Спрайт вчителя замість динозавра
+    // Виправлене завантаження картинки вчителя зіставне з правильним розширенням
     const teacherImg = new Image();
     teacherImg.src = 'teacher.PNG';
+    let isImageLoaded = false;
+    teacherImg.onload = () => { isImageLoaded = true; };
 
-    // Рекорд гри та стан блокування
     let dinoHighScore = parseInt(localStorage.getItem('dino_high_score')) || 0;
     let isGameUnlocked = false;
 
-    // Розблокування гри після навчальної активності
     function unlockDinoGame() {
       if (isGameUnlocked) return;
       isGameUnlocked = true;
@@ -882,29 +877,30 @@
     function gameLoop() {
       if (!dinoGameRunning) return;
 
-      // Очищення екрана
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Земля
       ctx.fillStyle = '#64748b';
       ctx.fillRect(0, 160, canvas.width, 2);
 
-      // Фізика руху Вчителя
       dinoY += dinoDY;
       if (dinoY < 130) {
-        dinoDY += 0.6; // гравітація
+        dinoDY += 0.6;
       } else {
         dinoY = 130;
         dinoDY = 0;
         isJumping = false;
       }
 
-      // Малювання фото вчителя (розмір 35x35 px)
+      // Малювання вчителя або прямокутника, якщо картинка ще вантажиться
       const teacherWidth = 35;
       const teacherHeight = 35;
-      ctx.drawImage(teacherImg, 30, dinoY - 5, teacherWidth, teacherHeight);
+      if (isImageLoaded) {
+        ctx.drawImage(teacherImg, 30, dinoY - 5, teacherWidth, teacherHeight);
+      } else {
+        ctx.fillStyle = '#2563eb';
+        ctx.fillRect(30, dinoY - 5, teacherWidth, teacherHeight);
+      }
 
-      // Рух Кактуса
       cactusX -= 4 + Math.floor(dinoScore / 100);
       if (cactusX < -20) {
         cactusX = 320 + Math.random() * 50;
@@ -914,11 +910,9 @@
       ctx.font = '26px Inter';
       ctx.fillText('🌵', cactusX, 158);
 
-      // Перевірка зіткнення (Game Over)
       if (cactusX > 20 && cactusX < 55 && dinoY > 115) {
         dinoGameRunning = false;
 
-        // Перевірка рекорду
         if (dinoScore > dinoHighScore) {
           dinoHighScore = dinoScore;
           localStorage.setItem('dino_high_score', dinoHighScore);
@@ -996,24 +990,41 @@
       unlockDinoGame();
     }
 
+    // ВИПРАВЛЕННЯ: Додано кілька варіантів, щоб при перезавантаженні сторінки факти випадково змінювалися
     const keyEvents = [
-      { title: "Бій під Крутами (1918 рік)", short: "Студенти стримали наступ більшовицьких військ на Київ.", full: "29 січня 1918 року біля залізничної станції Крути близько 500 українських студентів стримали наступ ворога." }
-    ];
-    const geoFacts = [
-      { title: "Амазонка — річка без мостів", short: "Найповноводніша річка планети не має жодного мосту.", full: "Головна причина — густі непрохідні джунглі та сезонні розливи." }
-    ];
-    const countriesGameData = [
-      { country: "Франція", text: "Ейфелева вежа влітку стає вищою приблизно на 15 см через теплове розширення.", isTrue: true }
+      { title: "Бій під Крутами (1918 рік)", short: "Студенти стримали наступ більшовицьких військ на Київ.", full: "29 січня 1918 року біля залізничної станції Крути близько 500 українських студентів стримали наступ ворога." },
+      { title: "Проголошення Незалежності України (1991 рік)", short: "Верховна Рада ухвалила Акту проголошення незалежності України.", full: "24 серпня 1991 року позачергова сесія Верховної Ради УРСР ухвалила Акт проголошення незалежності України." },
+      { title: "Конотопська битва (1659 рік)", short: "Блискуча перемога козацького війська на чолі з гетьманом Іваном Виговським.", full: "У липні 1659 року українське козацтво разом із кримськими татарами завдало нищівної поразки московському війську під Конотопом." }
     ];
 
-    let currentEvent = keyEvents[0];
-    let currentGeo = geoFacts[0];
-    let currentCountryGame = countriesGameData[0];
+    const geoFacts = [
+      { title: "Амазонка — річка без мостів", short: "Найповноводніша річка планети не має жодного мосту.", full: "Головна причина — густі непрохідні джунглі та сезонні розливи вздовж усього русла." },
+      { title: "Найглибше озеро у світі", short: "Озеро Байкал містить близько 20% світових запаси прісної води.", full: "Байкал — найдавніше та найглибше озеро планети, розташоване у Східному Сибіру." },
+      { title: "Пустеля Сахара колись була зеленою", short: "Тисячоліття тому на місці пісків шуміли савани та річки.", full: "Завдяки змінам клімату та циклом нахилу земної осі Сахара періодично перетворювалася на квітучий регіон." }
+    ];
+
+    const countriesGameData = [
+      { country: "Франція", text: "Ейфелева вежа влітку стає вищою приблизно на 15 см через теплове розширення.", isTrue: true },
+      { country: "Австралія", text: "У цій країні офіційно заборонено тримати вдома ведмедів коал.", isTrue: true },
+      { country: "Японія", text: "На території Японії розташовано рівно 10 діючих вулканів і жодного сплячого.", isTrue: false }
+    ];
+
+    let currentEvent, currentGeo, currentCountryGame;
 
     function loadCards() {
+      // Випадковий вибір з масивів при кожному завантаженні/перезавантаженні сторінки
+      currentEvent = keyEvents[Math.floor(Math.random() * keyEvents.length)];
+      currentGeo = geoFacts[Math.floor(Math.random() * geoFacts.length)];
+      currentCountryGame = countriesGameData[Math.floor(Math.random() * countriesGameData.length)];
+
       document.getElementById('event-content').innerHTML = `<strong>${currentEvent.title}</strong> — ${currentEvent.short}`;
       document.getElementById('geo-content').innerHTML = `<strong>${currentGeo.title}</strong> — ${currentGeo.short}`;
       document.getElementById('country-game-text').innerHTML = `<strong>📍 ${currentCountryGame.country}:</strong> ${currentCountryGame.text}`;
+      
+      // Скидання результату міні-гри при оновленні
+      const resDiv = document.getElementById('country-game-result');
+      if(resDiv) resDiv.style.display = 'none';
+
       renderLeaderboard();
       loadNmtResults();
       renderChat();
