@@ -128,8 +128,9 @@
       text-align: center;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       border: none;
-      /* Змінено з hidden на visible, щоб випадаючі елементи не обрізалися */
       overflow: visible; 
+      /* Забезпечуємо, щоб банер не створював ізольований контекст, який ховає випадаючий список нижче */
+      z-index: 50; 
     }
 
     @media (max-width: 850px) {
@@ -176,6 +177,7 @@
       width: 100%;
       margin: 0 auto;
       position: relative;
+      z-index: 100000; /* Гарантуємо максимальний пріоритет для пошуку */
     }
     .search-bar-box {
       display: flex;
@@ -213,7 +215,7 @@
       background: #ffffff;
       border-radius: 10px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-      z-index: 99999;
+      z-index: 100001; /* Перевищує будь-які інші елементи на сторінці */
       max-height: 280px;
       overflow-y: auto;
       display: none;
@@ -242,6 +244,8 @@
       margin: 25px auto;
       text-align: left;
       border: 1px solid #e2e8f0;
+      position: relative;
+      z-index: 1;
     }
     .leaderboard-header {
       display: flex;
@@ -325,6 +329,8 @@
       margin: 20px auto;
       text-align: left;
       border: 1px solid #e2e8f0;
+      position: relative;
+      z-index: 1;
     }
     .nmt-results-widget h3 {
       font-size: 18px;
