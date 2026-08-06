@@ -129,7 +129,6 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       border: none;
       overflow: visible; 
-      /* Забезпечуємо, щоб банер не створював ізольований контекст, який ховає випадаючий список нижче */
       z-index: 50; 
     }
 
@@ -177,7 +176,7 @@
       width: 100%;
       margin: 0 auto;
       position: relative;
-      z-index: 100000; /* Гарантуємо максимальний пріоритет для пошуку */
+      z-index: 100000;
     }
     .search-bar-box {
       display: flex;
@@ -215,7 +214,7 @@
       background: #ffffff;
       border-radius: 10px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-      z-index: 100001; /* Перевищує будь-які інші елементи на сторінці */
+      z-index: 100001;
       max-height: 280px;
       overflow-y: auto;
       display: none;
@@ -344,7 +343,7 @@
     .nmt-results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
     .nmt-result-card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; font-size: 14px; color: #334155; }
 
-    /* Спеціальний блок: КЛУБ ДОСЛІДНИКІВ (В САМОМУ НИЗУ) */
+    /* Спеціальний блок: КЛУБ ДОСЛІДНИКІВ */
     .kids-club-section {
       background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
       border: 2px dashed #0284c7;
@@ -724,7 +723,7 @@
     // ПЕРЕВІРКА ТА ЩОТИЖНЕВЕ СКИДАННЯ БАЛІВ І ПОВІДОМЛЕНЬ (НЕДІЛЯ о 23:59)
     function checkWeeklyReset() {
       const now = new Date();
-      const day = now.getDay(); // 0 - неділя
+      const day = now.getDay();
       const hours = now.getHours();
       const minutes = now.getMinutes();
 
@@ -1012,8 +1011,14 @@
       dinoAnimationId = requestAnimationFrame(gameLoop);
     }
 
+    // ВИПРАВЛЕННЯ: Додано перевірку, щоб пробіл блокувався лише поза полями введення (input/textarea)
     document.addEventListener('keydown', (e) => {
       if (e.code === 'Space') {
+        const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+        if (activeTag === 'input' || activeTag === 'textarea') {
+          return; // Дозволити нормальне введення пробілів у полях
+        }
+
         const kidsSection = document.getElementById('kids-club');
         const rect = kidsSection.getBoundingClientRect();
         if (rect.top < window.innerHeight && rect.bottom > 0) {
@@ -1069,7 +1074,6 @@
       unlockDinoGame();
     }
 
-    /* --- БАЗИ ДАНИХ (30 історичних, 30 географічних, 60 країн) --- */
     const keyEvents = [
       { title: "Бій під Крутами (1918)", short: "Студенти стримали наступ більшовицьких військ на Київ.", full: "29 січня 1918 року біля залізничної станції Крути близько 500 українських студентів і курсантів прийняли нерівний бій з багатотисячною армією." },
       { title: "Проголошення Незалежності (1991)", short: "Верховна Рада ухвалила Акт проголошення незалежності України.", full: "24 серпня 1991 року позачергова сесія Верховної Ради УРСР урочисто ухвалила історичний документ — Акт проголошення незалежності України." },
