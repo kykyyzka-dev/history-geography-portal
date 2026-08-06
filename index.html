@@ -575,7 +575,7 @@
 
     <div class="section-title">Віртуальні екскурсії та медіа</div>
     <div class="grid-3-tours">
-      <a href="https://movchan-educatio.github.io/history-geography-portal/url?id=6" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
+      <a href="https://movchan-educatio.github.io/history-geography-portal/https://console.firebase.google.com/u/0/project/movchan-portal/database/backups" target="_blank" class="virtual-tour-card" onclick="addPoints(5)">
         <div class="icon">🗺️</div>
         <span>AUDIO & 3D Тури</span>
       </a>
@@ -659,13 +659,13 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getDatabase, ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDatabase, ref, set, get, update, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-    // Вставлені авторизаційні ключі проєкту
+    // Вставлені авторизаційні ключі проєкту (з актуальним databaseURL)
     const firebaseConfig = {
       apiKey: "AIzaSyAF2acxaXKOH4e4RoAUQcqMgX4s65xttSw",
       authDomain: "movchan-portal.firebaseapp.com",
-      databaseURL: "https://movchan-portal-default-rtdb.firebaseio.com",
+      databaseURL: "https://movchan-portal-default-rtdb.europe-west1.firebasedatabase.app",
       projectId: "movchan-portal",
       storageBucket: "movchan-portal.firebasestorage.app",
       messagingSenderId: "535915495927",
@@ -690,16 +690,25 @@
       const authBox = document.getElementById('authBox');
       if (user) {
         window.currentStudent = user.displayName;
-        set(ref(database, 'users/' + user.uid), {
-          name: user.displayName,
-          score: 5
+        window.currentUserUid = user.uid;
+        
+        const userRef = ref(database, 'users/' + user.uid);
+        get(userRef).then((snapshot) => {
+          if (!snapshot.exists()) {
+            set(userRef, {
+              name: user.displayName,
+              score: 5
+            });
+          }
         });
+
         authBox.innerHTML = `
           <span style="font-size: 13px; font-weight: 600; color: #1e293b;">👤 ${user.displayName}</span>
           <button class="user-login-btn" style="background: #ef4444;" onclick="logoutGoogle()">Вийти</button>
         `;
       } else {
         window.currentStudent = null;
+        window.currentUserUid = null;
         authBox.innerHTML = `
           <button class="user-login-btn" onclick="loginWithGoogle()"><i class="fa-brands fa-google"></i> Увійти через Google</button>
         `;
@@ -737,6 +746,23 @@
         text: text
       });
       input.value = '';
+    };
+
+    // Оновлена функція додавання балів у Firebase
+    window.addPointsToFirebase = function(points) {
+      if (!window.currentUserUid) return alert('Увійдіть у систему за допомогою Google, щоб зберігати бали!');
+      
+      const userRef = ref(database, 'users/' + window.currentUserUid);
+      get(userRef).then((snapshot) => {
+        let currentScore = 0;
+        if (snapshot.exists()) {
+          currentScore = snapshot.val().score || 0;
+        }
+        update(userRef, {
+          name: window.currentStudent,
+          score: currentScore + points
+        });
+      });
     };
   </script>
 
@@ -941,12 +967,7 @@
       }
     }
 
-    window.studentsData = JSON.parse(localStorage.getItem('portal_students_scores')) || [
-      { name: "Олександр Шевченко", score: 0 },
-      { name: "Софія Мельник", score: 0 },
-      { name: "Максим Бондаренко", score: 0 }
-    ];
-    window.currentStudent = localStorage.getItem('portal_current_student') || null;
+    window.studentsData = window.studentsData || [];
 
     function renderLeaderboard() {
       window.studentsData.sort((a, b) => b.score - a.score);
@@ -969,14 +990,9 @@
     }
 
     function addPoints(points) {
-      if (!window.currentStudent) return alert('Увійдіть у систему за допомогою Google, щоб зберігати бали!');
-      let student = window.studentsData.find(s => s.name === window.currentStudent);
-      if (student) student.score += points;
-      else window.studentsData.push({ name: window.currentStudent, score: points });
-      localStorage.setItem('portal_students_scores', JSON.stringify(window.studentsData));
-      renderLeaderboard();
-      
-      // Розблоковуємо динозаврика/вчителя за будь-яку навчальну активність
+      if (typeof window.addPointsToFirebase === 'function') {
+        window.addPointsToFirebase(points);
+      }
       unlockDinoGame();
     }
 
