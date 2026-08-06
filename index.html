@@ -9,12 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Підключення іконок -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=8">
-  
-  <!-- Підключення Three.js для 3D Глобуса -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="stylesheet" href="style.css?v=9">
   
   <style>
+    /* --- АНІМАЦІЯ fadeInUp (для контенту) --- */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -44,48 +42,99 @@
       animation: pulseGlow 2.5s infinite;
     }
 
-    /* --- ОНОВЛЕНІ СТИЛІ БАНЕРА (ВИПРАВЛЕННЯ КРИВИЗНИ) --- */
+    /* --- СТИЛІ ДЛЯ НАВІГАЦІЙНОЇ ПАНЕЛІ ТА АНІМАЦІЇ --- */
+    header {
+      position: relative; /* Для позиціонування мандрівника */
+      padding-bottom: 25px; /* Місце для мандрівника під меню */
+    }
+
+    /* --- АНІМАЦІЯ МАНДРІВНИКА З КОМПАСОМ --- */
+    .traveler-container {
+      position: absolute;
+      bottom: 0; /* Розміщуємо на нижній лінії хедера */
+      left: 10%; /* Початкова позиція (зліва) */
+      width: 40px; /* Розмір маленької людини */
+      height: 50px;
+      z-index: 10;
+      /* Анімація ходьби (переміщення) */
+      animation: walkAcross 20s linear infinite;
+    }
+
+    /* Стилі для людини (SVG) */
+    .traveler-svg {
+      width: 100%;
+      height: 100%;
+      fill: #334155; /* Колір людини */
+      transform-origin: bottom center;
+    }
+
+    /* Анімація кроків (покачування) */
+    .traveler-body {
+      animation: stepSway 0.5s ease-in-out infinite alternate;
+    }
+
+    /* Анімація компаса (обертання при зупинці) */
+    .traveler-compass {
+      transform-origin: center;
+      animation: rotateCompass 2s linear infinite;
+      animation-play-state: paused; /* Спочатку зупинено */
+    }
+
+    /* Ключові кадри переміщення (ходьба, зупинка, ходьба) */
+    @keyframes walkAcross {
+      0% { left: 10%; transform: scaleX(1); } /* Йде вправо */
+      20% { left: 30%; }
+      25% { left: 30%; } /* Зупинка 1 (5% часу) */
+      45% { left: 60%; }
+      50% { left: 60%; } /* Зупинка 2 */
+      70% { left: 90%; transform: scaleX(1); }
+      71% { left: 90%; transform: scaleX(-1); } /* Поворот вліво */
+      90% { left: 10%; }
+      95% { left: 10%; } /* Зупинка 3 */
+      100% { left: 10%; transform: scaleX(1); } /* Поворот вправо */
+    }
+
+    /* Ключові кадри кроків */
+    @keyframes stepSway {
+      from { transform: rotate(-5deg); }
+      to { transform: rotate(5deg); }
+    }
+
+    /* Ключові кадри обертання компаса */
+    @keyframes rotateCompass {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Клас для зупинки анімації кроків і запуску компаса */
+    .traveler-container.paused .traveler-body {
+      animation-play-state: paused;
+    }
+    .traveler-container.paused .traveler-compass {
+      animation-play-state: running;
+    }
+
+    /* --- ОНОВЛЕНІ СТИЛІ БАНЕРА (СТАТИЧНИЙ) --- */
     .mountain-banner {
       position: relative;
-      background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.8)), url('hero-banner.jpeg') center/cover no-repeat;
+      background: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.7)), url('hero-banner.jpeg') center/cover no-repeat;
       min-height: 480px;
       border-radius: 20px;
       margin: 20px auto;
-      max-width: 1100px; /* Трохи звузили, щоб банер був акуратнішим */
+      max-width: 1200px;
       display: flex;
-      flex-direction: row;
-      align-items: center; /* Вертикальне центрування */
-      justify-content: center; /* Центрування групи (глобус+текст) */
-      padding: 40px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(255, 255, 255, 0.15);
       overflow: hidden;
-      gap: 60px; /* Збільшений відступ між глобусом та текстом */
     }
-
-    /* Контейнер 3D Глобуса — ЗМЕНШЕНО РОЗМІР */
-    .globe-3d-wrapper {
-      width: 250px; /* Було 320px */
-      height: 250px; /* Було 320px */
-      flex-shrink: 0;
-      position: relative;
-    }
-    #globe3dCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .hero-text-content {
-      flex: 1;
-      text-align: left;
-      /* Відступ зверху, щоб ідеально вирівняти текст по центру глобуса */
-      margin-top: 20px;
-    }
-    /* --- КІНЕЦЬ ОНОВЛЕНИХ СТИЛІВ --- */
 
     .mountain-banner h1 {
-      font-size: clamp(26px, 4vw, 44px);
+      font-size: clamp(28px, 5vw, 48px);
       font-weight: 900;
       color: #ffffff;
       margin-bottom: 10px;
@@ -116,6 +165,7 @@
     .search-wrapper {
       max-width: 600px;
       width: 100%;
+      margin: 0 auto;
       position: relative;
     }
     .search-bar-box {
@@ -188,27 +238,6 @@
       text-align: center;
       color: #64748b;
       font-size: 14px;
-    }
-
-    /* Адаптивність банера для мобільних */
-    @media (max-width: 850px) {
-      .mountain-banner {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 15px;
-        gap: 20px; /* Зменшуємо gap для мобільних */
-      }
-      .globe-3d-wrapper {
-        width: 180px; /* Ще менший глобус для мобільних */
-        height: 180px;
-      }
-      .hero-text-content {
-        text-align: center;
-        margin-top: 0; /* Прибираємо margin-top на мобільних */
-      }
-      .search-wrapper {
-        margin: 0 auto;
-      }
     }
 
     /* Інтерактивна таблиця рейтингу учнів */
@@ -397,17 +426,32 @@
         <li><a href="methodology.html">Методична скарбничка</a></li>
       </ul>
     </nav>
+
+    <!-- АНІМАЦІЯ МАНДРІВНИКА (SVG) -->
+    <div class="traveler-container" id="traveler">
+      <svg class="traveler-svg" viewBox="0 0 100 120">
+        <!-- Тіло та голова (будуть покачуватися) -->
+        <g class="traveler-body">
+          <circle cx="50" cy="25" r="15"/> <!-- Голова -->
+          <path d="M30 40 h40 v40 h-40 z"/> <!-- Тулуб -->
+          <path d="M35 80 v30 h10 v-30 M55 80 v30 h10 v-30" stroke-width="2"/> <!-- Ноги -->
+          
+          <!-- Рука з компасом (сама рука) -->
+          <path d="M70 45 v20 h15" stroke-width="3" fill="none"/>
+          
+          <!-- Компас (буде обертатися) -->
+          <g class="traveler-compass" transform="translate(85, 65)">
+            <circle cx="0" cy="0" r="10" fill="none" stroke-width="2"/>
+            <path d="M0 -7 v14 M-7 0 h14 M-4 -4 l8 8 M-4 4 l8 -8" stroke="#ef4444" stroke-width="1.5"/> <!-- Стрілки -->
+          </g>
+        </g>
+      </svg>
+    </div>
   </header>
 
-  <!-- Головний банер із 3D Глобусом зліва -->
+  <!-- Головний банер (СТАТИЧНИЙ, БЕЗ Three.js) -->
   <section class="mountain-banner">
-    <!-- Анімований 3D Глобус -->
-    <div class="globe-3d-wrapper">
-      <div id="globe3dCanvas"></div>
-    </div>
-
-    <!-- Текстовий блок -->
-    <div class="hero-text-content">
+    <div class="hero-text-content" style="width: 100%; max-width: 800px;">
       <h1>ІСТОРІЯ І ГЕОГРАФІЯ <span>БЕЗ МЕЖ</span></h1>
       <p class="subtitle">Авторський освітній портал Сергія Мовчана</p>
       <p class="quote">“Пізнаємо минуле — будуємо майбутнє!”</p>
@@ -517,116 +561,38 @@
 
   <script>
     /* =========================================
-       ІНІЦІАЛІЗАЦІЯ 3D ГЛОБУСА (Three.js)
+       СЦЕНАРІЙ ДЛЯ ЗУПИНКИ МАНДРІВНИКА (ШУКАННЯ)
        ========================================= */
-    function init3DGlobe() {
-      const container = document.getElementById('globe3dCanvas');
-      if (!container) return;
+    function setupTravelerAnimation() {
+      const traveler = document.getElementById('traveler');
+      const totalAnimationTime = 20000; // 20 секунд (має збігатися з CSS walkAcross)
+      
+      // Відсотки часу, коли відбуваються зупинки (з CSS walkAcross)
+      const pauseTimes = [0.20, 0.45, 0.90]; // Зупинка 1 (30%), Зупинка 2 (60%), Зупинка 3 (10%)
+      const pauseDurationPercent = 0.05; // Тривалість зупинки 5% часу
 
-      const width = container.clientWidth || 250;
-      const height = container.clientHeight || 250;
+      function checkPause() {
+        const elapsedTime = (new Date() - startTime) % totalAnimationTime;
+        const progress = elapsedTime / totalAnimationTime;
 
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-      camera.position.z = 210;
+        let shouldPause = false;
+        pauseTimes.forEach(startPercent => {
+          if (progress >= startPercent && progress < (startPercent + pauseDurationPercent)) {
+            shouldPause = true;
+          }
+        });
 
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      container.appendChild(renderer.domElement);
-
-      // Група для глобуса
-      const globeGroup = new THREE.Group();
-      scene.add(globeGroup);
-
-      // 1. Прозора сфера (основа)
-      const sphereGeo = new THREE.SphereGeometry(75, 32, 32);
-      const sphereMat = new THREE.MeshBasicMaterial({
-        color: 0x0284c7,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.18
-      });
-      const innerSphere = new THREE.Mesh(sphereGeo, sphereMat);
-      globeGroup.add(innerSphere);
-
-      // 2. Хмара точок (частинки)
-      const particleGeo = new THREE.BufferGeometry();
-      const particleCount = 750;
-      const positions = new Float32Array(particleCount * 3);
-
-      for (let i = 0; i < particleCount; i++) {
-        const phi = Math.acos(-1 + (2 * i) / particleCount);
-        const theta = Math.sqrt(particleCount * Math.PI) * phi;
-
-        const radius = 76;
-        positions[i * 3] = radius * Math.cos(theta) * Math.sin(phi);
-        positions[i * 3 + 1] = radius * Math.sin(theta) * Math.sin(phi);
-        positions[i * 3 + 2] = radius * Math.cos(phi);
-      }
-
-      particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      const particleMat = new THREE.PointsMaterial({
-        color: 0x38bdf8,
-        size: 2.1,
-        transparent: true,
-        opacity: 0.95
-      });
-      const pointCloud = new THREE.Points(particleGeo, particleMat);
-      globeGroup.add(pointCloud);
-
-      // 3. Сяюче кільце (орбіта)
-      const ringGeo = new THREE.RingGeometry(88, 90, 64);
-      const ringMat = new THREE.MeshBasicMaterial({ 
-        color: 0x38bdf8, 
-        side: THREE.DoubleSide, 
-        transparent: true, 
-        opacity: 0.35 
-      });
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.rotation.x = Math.PI / 3;
-      globeGroup.add(ring);
-
-      // Інтерактив (реакція на мишу)
-      let targetRotationX = 0;
-      let targetRotationY = 0;
-      let mouseX = 0;
-      let mouseY = 0;
-
-      document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX - window.innerWidth / 2) * 0.0004;
-        mouseY = (e.clientY - window.innerHeight / 2) * 0.0004;
-      });
-
-      function animateGlobe() {
-        requestAnimationFrame(animateGlobe);
-
-        // Постійне обертання
-        globeGroup.rotation.y += 0.0035;
-        ring.rotation.z -= 0.0015;
-
-        // Плавна паралакс-реакція
-        targetRotationX = mouseY * 0.4;
-        targetRotationY = mouseX * 0.4;
-
-        globeGroup.rotation.x += (targetRotationX - globeGroup.rotation.x) * 0.05;
-        globeGroup.rotation.z += (targetRotationY - globeGroup.rotation.z) * 0.05;
-
-        renderer.render(scene, camera);
-      }
-
-      animateGlobe();
-
-      // Оновлення при зміні розміру вікна
-      window.addEventListener('resize', () => {
-        const newW = container.clientWidth;
-        const newH = container.clientHeight;
-        if (newW && newH) {
-          camera.aspect = newW / newH;
-          camera.updateProjectionMatrix();
-          renderer.setSize(newW, newH);
+        if (shouldPause) {
+          traveler.classList.add('paused');
+        } else {
+          traveler.classList.remove('paused');
         }
-      });
+
+        requestAnimationFrame(checkPause);
+      }
+
+      const startTime = new Date();
+      requestAnimationFrame(checkPause);
     }
 
     /* =========================================
@@ -798,14 +764,14 @@
 
     const geoFacts = [
       { title: "Амазонка — річка без жодного мосту", short: "Найповноводніша річка планети. Вона не має жодного мосту через свій розлив.", full: "Амазонка скидає в Атлантичний океан близько 20% усієї прісної води річок планети.\n\nГоловна причина відсутності мостів — густі непрохідні джунглі та масштабні сезонні розливи." },
-      { title: "Гора Еверест (Джомолунгма)", short: "Найвища вершина світу (8848,86 м), яка щороку зростає.", full: "Еверест розташований у Гімалаях на кордоні Непалу та Китаю.\n\nЧерез зіткнення тектонічних плит вершина зростає примерно на 4 міліметри на рік." },
+      { title: "Гора Еверест (Джомолунгма)", short: "Найвища вершина світу (8848,86 м), яка щороку зростає.", full: "Еверест розташований у Гімалаях на кордоні Непалу та Китаю.\n\nЧерез зіткнення тектонічних плит вершина зростає приблизно на 4 міліметри на рік." },
       { title: "Олешківські піски", short: "Один із найбільших піщаних масивів у Європі, розташований в Україні.", full: "Олешківські піски часто називають українською пустелею. Вони виникли на місці колишнього русла Дніпра внаслідок випасання величезних отар овець у XIX столітті." },
       { title: "Мертве море", short: "Найнижча точка суші на Землі та найсолоніше озеро світу.", full: "Озеро розташоване на 430 метрів нижче рівня моря. Солоність води сягає 34%, що робить утримання людини на поверхні води природним явищем." }
     ];
 
     const countriesGameData = [
       { country: "Франція", text: "Ейфелева вежа влітку стає вищою приблизно на 15 сантиметрів через теплове розширення металу.", isTrue: true },
-      { country: "Японія", text: "У Японії налічується понад 6 800 островів, а найбільшим із них є острів Хонсю.", isTrue: true },
+      { country: "Японія", text: "У Японії налічується понад 6 800 островів, а найбільшим із них є остров Хонсю.", isTrue: true },
       { country: "Канада", text: "Канада має більше озер, ніж решта країн світу разом узяті.", isTrue: true },
       { country: "Італія", text: "Рим є єдиним містом у світі, всередині якого повністю розташована інша незалежна держава (Ватикан).", isTrue: true },
       { country: "Австралія", text: "Кенгуру та страуси ему зображені на офіційному гербі Австралії тому, що вони не вміють ходити назад.", isTrue: true },
@@ -923,7 +889,7 @@
     // Запуск функцій після завантаження DOM
     document.addEventListener("DOMContentLoaded", () => {
       loadCards();
-      init3DGlobe();
+      setupTravelerAnimation(); // Запускаємо мандрівника
     });
   </script>
 </body>
