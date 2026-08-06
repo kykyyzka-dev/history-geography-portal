@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Підключення іконок -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=15">
+  <link rel="stylesheet" href="style.css?v=16">
   
   <style>
     html {
@@ -128,7 +128,8 @@
       text-align: center;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       border: none;
-      overflow: hidden;
+      /* Змінено з hidden на visible, щоб випадаючі елементи не обрізалися */
+      overflow: visible; 
     }
 
     @media (max-width: 850px) {
@@ -211,12 +212,12 @@
       width: 100%;
       background: #ffffff;
       border-radius: 10px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      z-index: 1000;
-      max-height: 250px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      z-index: 99999;
+      max-height: 280px;
       overflow-y: auto;
       display: none;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #cbd5e1;
       text-align: left;
     }
     .search-result-item {
@@ -1226,7 +1227,6 @@
         resDiv.textContent = '❌ Помилка!';
       }
 
-      // Автоматичне перемикання на наступну країну через 1.5 секунди
       setTimeout(() => {
         currentCountryGame = countriesGameData[Math.floor(Math.random() * countriesGameData.length)];
         document.getElementById('country-game-text').innerHTML = `<strong>📍 ${currentCountryGame.country}:</strong> ${currentCountryGame.text}`;
@@ -1244,7 +1244,7 @@
       document.getElementById('info-modal').style.display = 'none';
     }
 
-    // ПОШУК (з виправленим скролом та відображенням)
+    // ПОШУК
     document.addEventListener("DOMContentLoaded", () => {
       loadCards();
       setupTravelerAnimation();
