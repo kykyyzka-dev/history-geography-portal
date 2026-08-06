@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Підключення іконок -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="style.css?v=10">
   
   <style>
     /* --- АНІМАЦІЯ fadeInUp (для контенту) --- */
@@ -45,76 +45,84 @@
     /* --- СТИЛІ ДЛЯ НАВІГАЦІЙНОЇ ПАНЕЛІ ТА АНІМАЦІЇ --- */
     header {
       position: relative; /* Для позиціонування мандрівника */
-      padding-bottom: 25px; /* Місце для мандрівника під меню */
+      padding-bottom: 30px; /* Більше місця під меню */
     }
 
-    /* --- АНІМАЦІЯ МАНДРІВНИКА З КОМПАСОМ --- */
+    /* --- АНІМАЦІЯ МАНДРІВНИКА З КОМПАСОМ (КОНТРАСТНА) --- */
     .traveler-container {
       position: absolute;
-      bottom: 0; /* Розміщуємо на нижній лінії хедера */
-      left: 10%; /* Початкова позиція (зліва) */
-      width: 40px; /* Розмір маленької людини */
-      height: 50px;
+      bottom: 0;
+      left: 10%; /* Початкова позиція */
+      width: 45px; /* Трохи більший розмір */
+      height: 55px;
       z-index: 10;
-      /* Анімація ходьби (переміщення) */
-      animation: walkAcross 20s linear infinite;
+      animation: walkAcross 25s linear infinite;
     }
 
-    /* Стилі для людини (SVG) */
+    /* Стилі для людини (SVG) — КОНТРАСТНИЙ КОЛІР */
     .traveler-svg {
       width: 100%;
       height: 100%;
-      fill: #334155; /* Колір людини */
+      fill: #ffffff; /* Яскравий білий колір */
       transform-origin: bottom center;
     }
 
-    /* Анімація кроків (покачування) */
+    /* Анімація кроків (покачування) — БІЛЬШ ПЛАВНА */
     .traveler-body {
-      animation: stepSway 0.5s ease-in-out infinite alternate;
+      animation: stepSway 0.6s ease-in-out infinite alternate;
     }
 
-    /* Анімація компаса (обертання при зупинці) */
+    /* Анімація компаса (обертання) — ЯСКРАВИЙ КОЛІР */
     .traveler-compass {
       transform-origin: center;
       animation: rotateCompass 2s linear infinite;
       animation-play-state: paused; /* Спочатку зупинено */
     }
+    .traveler-compass-needle {
+      stroke: #38bdf8; /* Блакитний колір стрілок для контрасту */
+    }
 
-    /* Ключові кадри переміщення (ходьба, зупинка, ходьба) */
+    /* --- ОНОВЛЕНІ КЛЮЧОВІ КАДРИ (ПЛАВНА ЗУПИНКА) --- */
     @keyframes walkAcross {
-      0% { left: 10%; transform: scaleX(1); } /* Йде вправо */
-      20% { left: 30%; }
-      25% { left: 30%; } /* Зупинка 1 (5% часу) */
-      45% { left: 60%; }
-      50% { left: 60%; } /* Зупинка 2 */
-      70% { left: 90%; transform: scaleX(1); }
-      71% { left: 90%; transform: scaleX(-1); } /* Поворот вліво */
-      90% { left: 10%; }
-      95% { left: 10%; } /* Зупинка 3 */
-      100% { left: 10%; transform: scaleX(1); } /* Поворот вправо */
+      0% { left: 10%; transform: scaleX(1); }
+      15% { left: 35%; }
+      25% { left: 35%; } /* Плавна зупинка 1 (10% часу) */
+      40% { left: 65%; }
+      50% { left: 65%; } /* Плавна зупинка 2 */
+      65% { left: 90%; transform: scaleX(1); }
+      66% { left: 90%; transform: scaleX(-1); } /* Поворот */
+      80% { left: 10%; }
+      90% { left: 10%; } /* Плавна зупинка 3 */
+      100% { left: 10%; transform: scaleX(1); } /* Поворот */
     }
 
-    /* Ключові кадри кроків */
     @keyframes stepSway {
-      from { transform: rotate(-5deg); }
-      to { transform: rotate(5deg); }
+      from { transform: rotate(-6deg); }
+      to { transform: rotate(6deg); }
     }
 
-    /* Ключові кадри обертання компаса */
     @keyframes rotateCompass {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    /* Клас для зупинки анімації кроків і запуску компаса */
+    /* Клас для плавної зупинки кроків і запуску компаса */
     .traveler-container.paused .traveler-body {
-      animation-play-state: paused;
+      animation-name: stopSway;
+      animation-duration: 0.5s;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
     }
     .traveler-container.paused .traveler-compass {
       animation-play-state: running;
     }
 
-    /* --- ОНОВЛЕНІ СТИЛІ БАНЕРА (СТАТИЧНИЙ) --- */
+    /* Ключові кадри для плавної зупинки кроків */
+    @keyframes stopSway {
+      to { transform: rotate(0deg); }
+    }
+
+    /* --- СТИЛІ БАНЕРА (ВИПРАВЛЕНО ДЛЯ ТЕЛЕФОНІВ) --- */
     .mountain-banner {
       position: relative;
       background: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.7)), url('hero-banner.jpeg') center/cover no-repeat;
@@ -131,6 +139,32 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(255, 255, 255, 0.15);
       overflow: hidden;
+    }
+
+    /* --- СТИЛІ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ (ВИПРАВЛЕННЯ БАНЕРА) --- */
+    @media (max-width: 850px) {
+      .mountain-banner {
+        background-size: contain; /* Зображення повністю вміщується */
+        background-position: center top; /* Центрування по горизонталі, верх по вертикалі */
+        min-height: 320px; /* Зменшена висота для мобільних */
+        padding: 20px 10px;
+      }
+      .mountain-banner h1 {
+        font-size: clamp(22px, 4vw, 32px);
+      }
+      .mountain-banner .subtitle {
+        font-size: clamp(14px, 2.2vw, 18px);
+      }
+      .search-wrapper {
+        margin-top: 15px;
+      }
+      header {
+        padding-bottom: 20px;
+      }
+      .traveler-container {
+        width: 35px;
+        height: 45px;
+      }
     }
 
     .mountain-banner h1 {
@@ -427,7 +461,7 @@
       </ul>
     </nav>
 
-    <!-- АНІМАЦІЯ МАНДРІВНИКА (SVG) -->
+    <!-- АНІМАЦІЯ МАНДРІВНИКА (SVG, КОНТРАСТНА) -->
     <div class="traveler-container" id="traveler">
       <svg class="traveler-svg" viewBox="0 0 100 120">
         <!-- Тіло та голова (будуть покачуватися) -->
@@ -437,19 +471,19 @@
           <path d="M35 80 v30 h10 v-30 M55 80 v30 h10 v-30" stroke-width="2"/> <!-- Ноги -->
           
           <!-- Рука з компасом (сама рука) -->
-          <path d="M70 45 v20 h15" stroke-width="3" fill="none"/>
+          <path d="M70 45 v20 h15" stroke-width="3" fill="none" stroke="#ffffff"/>
           
           <!-- Компас (буде обертатися) -->
           <g class="traveler-compass" transform="translate(85, 65)">
-            <circle cx="0" cy="0" r="10" fill="none" stroke-width="2"/>
-            <path d="M0 -7 v14 M-7 0 h14 M-4 -4 l8 8 M-4 4 l8 -8" stroke="#ef4444" stroke-width="1.5"/> <!-- Стрілки -->
+            <circle cx="0" cy="0" r="10" fill="none" stroke="#ffffff" stroke-width="2"/>
+            <path d="M0 -7 v14 M-7 0 h14 M-4 -4 l8 8 M-4 4 l8 -8" class="traveler-compass-needle" stroke-width="1.5"/> <!-- Стрілки -->
           </g>
         </g>
       </svg>
     </div>
   </header>
 
-  <!-- Головний банер (СТАТИЧНИЙ, БЕЗ Three.js) -->
+  <!-- Головний банер (СТАТИЧНИЙ, ВИПРАВЛЕНО ДЛЯ ТЕЛЕФОНІВ) -->
   <section class="mountain-banner">
     <div class="hero-text-content" style="width: 100%; max-width: 800px;">
       <h1>ІСТОРІЯ І ГЕОГРАФІЯ <span>БЕЗ МЕЖ</span></h1>
@@ -565,11 +599,11 @@
        ========================================= */
     function setupTravelerAnimation() {
       const traveler = document.getElementById('traveler');
-      const totalAnimationTime = 20000; // 20 секунд (має збігатися з CSS walkAcross)
+      const totalAnimationTime = 25000; // 25 секунд (має збігатися з CSS walkAcross)
       
       // Відсотки часу, коли відбуваються зупинки (з CSS walkAcross)
-      const pauseTimes = [0.20, 0.45, 0.90]; // Зупинка 1 (30%), Зупинка 2 (60%), Зупинка 3 (10%)
-      const pauseDurationPercent = 0.05; // Тривалість зупинки 5% часу
+      const pauseTimes = [0.15, 0.40, 0.80]; // Зупинка 1 (35%), Зупинка 2 (65%), Зупинка 3 (10%)
+      const pauseDurationPercent = 0.10; // Тривалість зупинки 10% часу (більш реалістично)
 
       function checkPause() {
         const elapsedTime = (new Date() - startTime) % totalAnimationTime;
