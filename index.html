@@ -565,8 +565,8 @@
         </div>
         <div>
           <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-            <button id="btn-true" onclick="checkCountryGame(true)" style="flex: 1; background: #16a34a; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;">✅ Правда</button>
-            <button id="btn-false" onclick="checkCountryGame(false)" style="flex: 1; background: #dc2626; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;">❌ Брехня</button>
+            <button onclick="checkCountryGame(true)" style="flex: 1; background: #16a34a; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;">✅ Правда</button>
+            <button onclick="checkCountryGame(false)" style="flex: 1; background: #dc2626; color: #fff; border: none; padding: 8px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 13px;">❌ Брехня</button>
           </div>
           <div id="country-game-result" style="font-size: 12px; padding: 6px; border-radius: 6px; display: none;"></div>
         </div>
@@ -659,7 +659,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getDatabase, ref, set, get, update, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    import { getDatabase, ref, set, get, update, onValue, push, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAF2acxaXKOH4e4RoAUQcqMgX4s65xttSw",
@@ -729,6 +729,9 @@
       if (data) {
         window.chatData = Object.values(data);
         renderChat();
+      } else {
+        window.chatData = [];
+        renderChat();
       }
     });
 
@@ -760,6 +763,73 @@
         });
       });
     };
+
+    // ФУНКЦІЯ АВТОМАТИЧНОГО ОБНУЛЕННЯ ЩОНЕДІЛІ О 23:59
+    function initWeeklyResetCheck() {
+      setInterval(() => {
+        const now = new Date();
+        const day = now.getDay(); // 0 - неділя
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+
+        // Перевіряємо чи настала неділя 23:59
+        if (day === 0 && hours === 23 && minutes === 59) {
+          const lastResetKey = 'last_reset_week_' + now.toDateString();
+          if (!localStorage.getItem(lastResetKey)) {
+            // Онулюємо бали користувачів в базі
+            get(ref(database, 'users')).then((snapshot) => {
+              if (snapshot.exists()) {
+                const users = snapshot.val();
+                Object.keys(users).forEach(uid => {
+                  update(ref(database, 'users/' + uid), { score: 0 });
+                });
+              }
+            });
+            // Видаляємо повідомлення чату
+            remove(ref(database, 'chat'));
+            
+            localStorage.setItem(lastResetKey, 'true');
+          }
+        }
+      }, 10000); // Перевірка кожні 10 секунд
+    }
+    initWeeklyResetCheck();
+
+    // ТАЙМЕР ЗІ ЗБІЛЬШЕНИМ ЗОБРАЖЕННЯМ ДО ОНОВЛЕННЯ ТИЖНЯ
+    function updateResetTimerBadge() {
+      const timerElement = document.getElementById('weekResetTimer');
+      if (!timerElement) return;
+
+      const now = new Date();
+      const target = new Date();
+      // Шукаємо наступну неділю 23:59:59
+      let dayOfWeek = now.getDay();
+      let daysUntilSunday = (0 - dayOfWeek + 7) % 7;
+      if (daysUntilSunday === 0 && (now.getHours() > 23 || (now.getHours() === 23 && now.getMinutes() >= 59))) {
+        daysUntilSunday = 7;
+      }
+      target.setDate(now.getDate() + daysUntilSunday);
+      target.setHours(23, 59, 59, 0);
+
+      const diff = target - now;
+      if (diff <= 0) {
+        timerElement.textContent = "🔄 Оновлення...";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      let timeString = "⏳ До оновлення: ";
+      if (days > 0) timeString += `${days}д `;
+      timeString += `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      
+      timerElement.textContent = timeString;
+    }
+    setInterval(updateResetTimerBadge, 1000);
+    updateResetTimerBadge();
   </script>
 
   <script>
@@ -798,12 +868,16 @@
       { author: "Олександр (🚀)", text: "Я пройшов тестування й отримав 10 балів!" }
     ];
 
-    window.chatData = JSON.parse(localStorage.getItem('portal_chat_messages')) || defaultChatMessages;
+    window.chatData = window.chatData || defaultChatMessages;
 
     function renderChat() {
       const chatContainer = document.getElementById('chatMessages');
       if (!chatContainer) return;
       chatContainer.innerHTML = '';
+      if (!window.chatData || window.chatData.length === 0) {
+        chatContainer.innerHTML = `<div style="text-align:center; color:#94a3b8; font-size:12px; padding:20px;">Стіна поки чиста. Будьте першими!</div>`;
+        return;
+      }
       window.chatData.forEach(msg => {
         chatContainer.innerHTML += `
           <div class="chat-message-item">
@@ -1159,26 +1233,18 @@
 
     let currentEvent, currentGeo, currentCountryGame;
 
-    function loadNextCountryGame() {
-      currentCountryGame = countriesGameData[Math.floor(Math.random() * countriesGameData.length)];
-      document.getElementById('country-game-text').innerHTML = `<strong>📍 ${currentCountryGame.country}:</strong> ${currentCountryGame.text}`;
-      const resDiv = document.getElementById('country-game-result');
-      if (resDiv) resDiv.style.display = 'none';
-      
-      const btnTrue = document.getElementById('btn-true');
-      const btnFalse = document.getElementById('btn-false');
-      if (btnTrue) btnTrue.disabled = false;
-      if (btnFalse) btnFalse.disabled = false;
-    }
-
     function loadCards() {
       currentEvent = keyEvents[Math.floor(Math.random() * keyEvents.length)];
       currentGeo = geoFacts[Math.floor(Math.random() * geoFacts.length)];
-      
+      currentCountryGame = countriesGameData[Math.floor(Math.random() * countriesGameData.length)];
+
       document.getElementById('event-content').innerHTML = `<strong>${currentEvent.title}</strong> — ${currentEvent.short}`;
       document.getElementById('geo-content').innerHTML = `<strong>${currentGeo.title}</strong> — ${currentGeo.short}`;
+      document.getElementById('country-game-text').innerHTML = `<strong>📍 ${currentCountryGame.country}:</strong> ${currentCountryGame.text}`;
       
-      loadNextCountryGame();
+      const resDiv = document.getElementById('country-game-result');
+      if(resDiv) resDiv.style.display = 'none';
+
       renderLeaderboard();
       loadNmtResults();
       renderChat();
@@ -1186,11 +1252,6 @@
     }
 
     function checkCountryGame(userAnswer) {
-      const btnTrue = document.getElementById('btn-true');
-      const btnFalse = document.getElementById('btn-false');
-      btnTrue.disabled = true;
-      btnFalse.disabled = true;
-
       const resDiv = document.getElementById('country-game-result');
       resDiv.style.display = 'block';
       if (userAnswer === currentCountryGame.isTrue) {
@@ -1203,10 +1264,6 @@
         resDiv.style.color = '#b91c1c';
         resDiv.textContent = '❌ Помилка!';
       }
-
-      setTimeout(() => {
-        loadNextCountryGame();
-      }, 1500);
     }
 
     function openModal(type) {
