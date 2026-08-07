@@ -1011,19 +1011,21 @@
       dinoAnimationId = requestAnimationFrame(gameLoop);
     }
 
-    // ВИПРАВЛЕННЯ: Додано перевірку, щоб пробіл блокувався лише поза полями введення (input/textarea)
+    // ВИПРАВЛЕННЯ: Перевірка, щоб пробіл блокувався лише поза полями введення
     document.addEventListener('keydown', (e) => {
       if (e.code === 'Space') {
         const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
         if (activeTag === 'input' || activeTag === 'textarea') {
-          return; // Дозволити нормальне введення пробілів у полях
+          return;
         }
 
         const kidsSection = document.getElementById('kids-club');
-        const rect = kidsSection.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          e.preventDefault();
-          startDinoGame();
+        if (kidsSection) {
+          const rect = kidsSection.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            e.preventDefault();
+            startDinoGame();
+          }
         }
       }
     });
