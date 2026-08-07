@@ -34,7 +34,7 @@
       100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
     }
 
-    .hero-text-content, .info-card, .leaderboard-section, .nmt-results-widget, .virtual-tour-card, .kids-club-section {
+    .hero-text-content, .info-card, .leaderboard-section, .nmt-results-widget, .virtual-tour-card, .kids-club-section, .target-audience-section {
       animation: fadeInUp 0.6s ease-out both;
     }
 
@@ -232,6 +232,63 @@
     .search-result-item:hover { background: #f8fafc; padding-left: 20px; }
     .search-result-title { font-weight: 700; color: #1e293b; font-size: 14px; margin-bottom: 2px; }
     .search-result-desc { font-size: 12px; color: #64748b; }
+
+    /* Блок «Для кого призначений наш портал» */
+    .target-audience-section {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      max-width: 1200px;
+      margin: 25px auto;
+      text-align: left;
+      border: 1px solid #e2e8f0;
+      position: relative;
+      z-index: 1;
+    }
+    .target-audience-section h3 {
+      font-size: 22px;
+      color: #1e293b;
+      font-weight: 800;
+      margin-top: 0;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+    .target-audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .audience-card {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .audience-card h4 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 0;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .audience-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #334155;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .audience-card ul li {
+      margin-bottom: 8px;
+    }
+    .audience-card ul li:last-child {
+      margin-bottom: 0;
+    }
 
     /* Таблиця рейтингу */
     .leaderboard-section {
@@ -528,6 +585,34 @@
   <!-- Основний контент -->
   <main class="main-container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
     
+    <!-- БЛОК: ДЛЯ КОГО ПРИЗНАЧЕНИЙ НАШ ПОРТАЛ -->
+    <section class="target-audience-section">
+      <h3>Для кого призначений наш портал?</h3>
+      <div class="target-audience-grid">
+        <div class="audience-card">
+          <h4>🎓 Учням та випускникам</h4>
+          <ul>
+            <li>Готуйтеся до НМТ з історії та географії за допомогою інтерактивних тестів.</li>
+            <li>Закріплюйте знання у формі гри: відгадуйте факти, змагайтеся в рейтингу та розблоковуйте розваги.</li>
+            <li>Досліджуйте світ через 3D-артефакти та віртуальні аудіотури.</li>
+          </ul>
+        </div>
+        <div class="audience-card">
+          <h4>👩‍🏫 Вчителям та педагогам</h4>
+          <ul>
+            <li>Знаходьте натхнення та готові матеріали у «Методичній скарбничці».</li>
+            <li>Використовуйте інтерактивні елементи сайту для урізноманітнення уроків та підвищення мотивації учнів.</li>
+          </ul>
+        </div>
+        <div class="audience-card">
+          <h4>🧭 Всім допитливим і любителям мандрів</h4>
+          <ul>
+            <li>Відкривайте для себе щодня цікаві історичні факти, інтерактивні вікторини та віртуальні екскурсії.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- ВІДЖЕТ РЕЗУЛЬТАТІВ НМТ -->
     <div class="nmt-results-widget">
       <h3><i class="fas fa-graduation-cap" style="color: #2563eb;"></i> Ваші результати тестування НМТ</h3>
@@ -1183,133 +1268,91 @@
       { country: "Марокко", text: "У Марокко розташована одна з найспекотніших пустель світу — Сахара.", isTrue: true },
       { country: "Україна", text: "Географічний центр Європи офіційно розташований на Закарпатті біля Ділового.", isTrue: true },
       { country: "Австрія", text: "Відень неодноразово очолював рейтинги найкращих для життя міст планети.", isTrue: true },
-      { country: "Бельгія", text: "Бельгія славиться виробництвом понад 1000 сортів унікального шоколаду та смаколиків.", isTrue: true },
-      { country: "Чехія", text: "Празький град вважається найбільшим стародавнім замком у світі.", isTrue: true },
-      { country: "Угорщина", text: "Будапешт славиться своїми численними термальними джерелами та купальнями.", isTrue: true },
-      { country: "Польща", text: "У Польщі розташована унікальна соляна шахта у Величці з підземними храмами.", isTrue: true },
-      { country: "Словаччина", text: "Словаччина має найбільшу кількість замків і фортець на душу населення.", isTrue: true },
-      { country: "Румунія", text: "Замок Бран у Румунії всесвітньо відомий як легендарний замок Дракули.", isTrue: true },
-      { country: "Болгарія", text: "Болгарія є одним із найбільших світових виробників рожевої олії.", isTrue: true },
-      { country: "Хорватія", text: "Узбережжя Хорватії налічує понад тисячу мальовничих островів та рифів.", isTrue: true },
-      { country: "Грузія", text: "Грузія вважається однією з колисок світового виноробства з багатовіковими традиціями.", isTrue: true },
-      { country: "Вірменія", text: "Єреван є одним із найдавніших безперервно населених міст світу.", isTrue: true },
-      { country: "Азербайджан", text: "Баку називають 'містом вітрів' через постійні сильні повітряні потоки з Каспію.", isTrue: true },
-      { country: "Казахстан", text: "Казахстан є найбільшою країною у світі серед тих, що не мають виходу до океану.", isTrue: true },
-      { country: "Узбекистан", text: "Через Узбекистан колись пролягали ключові маршрути Великого Шовкового шляху.", isTrue: true },
-      { country: "ОАЕ", text: "У Дубаї розташована найвища будівля у світі — хмарочос Бурдж-Халіфа.", isTrue: true },
-      { country: "Саудівська Аравія", text: "У Саудівській Аравії немає жодної постійної природної повноводної річки.", isTrue: true },
-      { country: "Сенегал", text: "У Сенегалі є унікальне Рожеве озеро, вода якого має природний яскравий колір.", isTrue: true },
-      { country: "Мадагаскар", text: "Дерева баобаби є символом цього острова завдяки своїй дивній формі.", isTrue: true },
-      { country: "Антарктида", text: "Антарктида є єдиним материком без корінного постійного населення.", isTrue: true },
-      { country: "Малайзія", text: "Столиця Малайзії Куала-Лумпур відома своїми вежами-близнюками Петронас.", isTrue: true },
-      { country: "Сінгапур", text: "Сінгапур є містом-державою з однією з найсуворіших систем екологічних штрафів.", isTrue: true }
+      { country: "Бельгія", text: "Бельгія є світовою столицею шоколаду та має тисячі сортів пива.", isTrue: true }
     ];
 
-    let currentEvent, currentGeo, currentCountryGame;
+    let currentCountryGameIndex = 0;
 
-    function loadCards() {
-      currentEvent = keyEvents[Math.floor(Math.random() * keyEvents.length)];
-      currentGeo = geoFacts[Math.floor(Math.random() * geoFacts.length)];
-      currentCountryGame = countriesGameData[Math.floor(Math.random() * countriesGameData.length)];
-
-      document.getElementById('event-content').innerHTML = `<strong>${currentEvent.title}</strong> — ${currentEvent.short}`;
-      document.getElementById('geo-content').innerHTML = `<strong>${currentGeo.title}</strong> — ${currentGeo.short}`;
-      document.getElementById('country-game-text').innerHTML = `<strong>📍 ${currentCountryGame.country}:</strong> ${currentCountryGame.text}`;
-      
-      const resDiv = document.getElementById('country-game-result');
-      if(resDiv) resDiv.style.display = 'none';
-
-      renderLeaderboard();
+    function initPageData() {
+      setupTravelerAnimation();
       loadNmtResults();
-      renderChat();
       updateDinoHighScoreUI();
+
+      // Завантаження випадкового факту історії
+      const randomHist = keyEvents[Math.floor(Math.random() * keyEvents.length)];
+      const histElement = document.getElementById('event-content');
+      if (histElement) {
+        histElement.innerHTML = `<strong>${randomHist.title}</strong><br>${randomHist.short}`;
+        window.currentHistFact = randomHist;
+      }
+
+      // Завантаження випадкового факту географії
+      const randomGeo = geoFacts[Math.floor(Math.random() * geoFacts.length)];
+      const geoElement = document.getElementById('geo-content');
+      if (geoElement) {
+        geoElement.innerHTML = `<strong>${randomGeo.title}</strong><br>${randomGeo.short}`;
+        window.currentGeoFact = randomGeo;
+      }
+
+      // Завантаження гри "Правда чи Брехня"
+      currentCountryGameIndex = Math.floor(Math.random() * countriesGameData.length);
+      const gameItem = countriesGameData[currentCountryGameIndex];
+      const gameTextElem = document.getElementById('country-game-text');
+      if (gameTextElem) {
+        gameTextElem.innerHTML = `🏳️ <strong>${gameItem.country}:</strong> ${gameItem.text}`;
+      }
     }
 
     function checkCountryGame(userAnswer) {
-      const resDiv = document.getElementById('country-game-result');
-      resDiv.style.display = 'block';
-      if (userAnswer === currentCountryGame.isTrue) {
-        resDiv.style.backgroundColor = '#dcfce7';
-        resDiv.style.color = '#15803d';
-        resDiv.textContent = '🎉 Правильно! (+10 балів)';
-        addPoints(10);
+      const gameItem = countriesGameData[currentCountryGameIndex];
+      const resultElem = document.getElementById('country-game-result');
+      if (!resultElem) return;
+
+      resultElem.style.display = 'block';
+      if (userAnswer === gameItem.isTrue) {
+        resultElem.style.background = '#dcfce7';
+        resultElem.style.color = '#15803d';
+        resultElem.innerHTML = '🎉 Правильно! Ви отримуєте +5 балів!';
+        addPoints(5);
       } else {
-        resDiv.style.backgroundColor = '#fee2e2';
-        resDiv.style.color = '#b91c1c';
-        resDiv.textContent = '❌ Помилка!';
+        resultElem.style.background = '#fee2e2';
+        resultElem.style.color = '#b91c1c';
+        resultElem.innerHTML = '❌ Неправильно! Спробуйте ще раз.';
       }
 
       setTimeout(() => {
-        currentCountryGame = countriesGameData[Math.floor(Math.random() * countriesGameData.length)];
-        document.getElementById('country-game-text').innerHTML = `<strong>📍 ${currentCountryGame.country}:</strong> ${currentCountryGame.text}`;
-        resDiv.style.display = 'none';
-      }, 1500);
+        currentCountryGameIndex = Math.floor(Math.random() * countriesGameData.length);
+        const nextItem = countriesGameData[currentCountryGameIndex];
+        const gameTextElem = document.getElementById('country-game-text');
+        if (gameTextElem) {
+          gameTextElem.innerHTML = `🏳️ <strong>${nextItem.country}:</strong> ${nextItem.text}`;
+        }
+        resultElem.style.display = 'none';
+      }, 3000);
     }
 
     function openModal(type) {
-      document.getElementById('modal-title').textContent = type === 'event' ? currentEvent.title : currentGeo.title;
-      document.getElementById('modal-text').textContent = type === 'event' ? currentEvent.full : currentGeo.full;
-      document.getElementById('info-modal').style.display = 'flex';
+      const modal = document.getElementById('info-modal');
+      const titleElem = document.getElementById('modal-title');
+      const textElem = document.getElementById('modal-text');
+
+      if (type === 'event' && window.currentHistFact) {
+        titleElem.textContent = window.currentHistFact.title;
+        textElem.textContent = window.currentHistFact.full;
+      } else if (type === 'geo' && window.currentGeoFact) {
+        titleElem.textContent = window.currentGeoFact.title;
+        textElem.textContent = window.currentGeoFact.full;
+      }
+
+      if (modal) modal.style.display = 'flex';
     }
 
     function closeModal() {
-      document.getElementById('info-modal').style.display = 'none';
+      const modal = document.getElementById('info-modal');
+      if (modal) modal.style.display = 'none';
     }
 
-    // ПОШУК
-    document.addEventListener("DOMContentLoaded", () => {
-      loadCards();
-      setupTravelerAnimation();
-
-      const searchInput = document.getElementById('siteSearchInput');
-      const searchResults = document.getElementById('searchResults');
-
-      if (searchInput && searchResults) {
-        const searchableItems = [
-          ...keyEvents.map(e => ({ title: e.title, desc: e.short, url: 'history.html' })),
-          ...geoFacts.map(g => ({ title: g.title, desc: g.short, url: 'geography.html' })),
-          { title: "НМТ Тестування з історії та географії", desc: "Перевірте свої знання та отримайте результати.", url: "nmt.html" },
-          { title: "Методична скарбничка", desc: "Корисні матеріали для вчителів та учнів.", url: "methodology.html" },
-          { title: "Віртуальні 3D тури та аудіо", desc: "Подорожуйте цікавими історичними місцями.", url: "tours.html" },
-          { title: "Артефакти 3D", desc: "Огляд музейних експонатів у форматі 3D.", url: "artifacts.html" }
-        ];
-
-        searchInput.addEventListener('input', (e) => {
-          const query = e.target.value.trim().toLowerCase();
-          if (!query) {
-            searchResults.style.display = 'none';
-            searchResults.innerHTML = '';
-            return;
-          }
-
-          const queryWords = query.split(/\s+/);
-          const filtered = searchableItems.filter(item => {
-            const combinedText = (item.title + " " + item.desc).toLowerCase();
-            return queryWords.every(word => combinedText.includes(word));
-          });
-
-          if (filtered.length > 0) {
-            searchResults.innerHTML = filtered.map(item => `
-              <a href="${item.url}" class="search-result-item">
-                <div class="search-result-title">${item.title}</div>
-                <div class="search-result-desc">${item.desc}</div>
-              </a>
-            `).join('');
-            searchResults.style.display = 'block';
-          } else {
-            searchResults.innerHTML = `<div style="padding: 12px 16px; font-size: 13px; color: #64748b;">Нічого не знайдено за вашим запитом</div>`;
-            searchResults.style.display = 'block';
-          }
-        });
-
-        document.addEventListener('click', (e) => {
-          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-            searchResults.style.display = 'none';
-          }
-        });
-      }
-    });
+    window.addEventListener('DOMContentLoaded', initPageData);
   </script>
 </body>
 </html>
-
